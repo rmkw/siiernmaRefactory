@@ -1,0 +1,530 @@
+<ng-container *ngIf="loading; else content">
+
+  <div class="d-flex justify-content-center maginTop">
+    <div class="spinner-grow m-2" style="color: #113250; width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="spinner-grow m-2" style="color: #113250; width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="spinner-grow m-2" style="color: #113250; width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center m-2">
+    <div class="">
+      <h4>Cargando...</h4>
+    </div>
+  </div>
+
+</ng-container>
+
+
+
+<ng-template #content>
+
+  <div class="container-fluid">
+
+  <div class="row">
+    <div class="col">
+      <div *ngFor="let dg of productsById; let i = index">
+
+        <div class="row">
+          <div class="col">
+            <div class="card2 shadow-sm  bg-body-tertiary rounded m-0 mt-2">
+              <h3 style="color: #113250;">{{ dg.dg_prod == 1 ? 'Dirección General de Geografía y Medio Ambiente': (dg.dg_prod == 2 ? 'Dirección General de Estadísticas Sociodemográficas': (
+              dg.dg_prod == 3 ? 'Dirección General de Estadísticas Económicas': (dg.dg_prod == 4 ? 'Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia':(
+              dg.dg_prod == 5 ? 'Dirección General de Integración, Análisis e Investigación':''))))}}.
+              </h3>
+            </div>
+
+            <div class="card1 shadow-sm  bg-body-tertiary rounded">
+
+
+              <h4>{{ dg.nom_producto }}.</h4>
+              <!-- TODO: <h6 class="ms-0">{{ dg.nom_prod }}.</h6> -->
+
+              <div class="card card-body" (click)="$event.stopPropagation()">
+
+                <div class="row">
+
+                  <div class="col-md-3 col-12">
+                    <span>Producto de tipo: </span>
+                    <span class="badge">
+                      {{ dg.tipo_prod__1 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 0 ? 'Geográfico' :
+                      '') }}
+                      {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 0 && dg.tipo_prod__2 == 1 ? 'Estadístico' :
+                      '') }}
+                      {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '') }}
+                    </span>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                    <span>Cobertura del producto: </span>
+                    <span class="badge me-1" *ngIf="dg.cobertura_geo__1 == 1">{{ dg.cobertura_geo__1 == 1 ? 'Nacional' : '' }}</span>
+                    <span class="badge me-1" *ngIf="dg.cobertura_geo__2 == 1">{{ dg.cobertura_geo__2 == 1 ? 'Estatal' : '' }}</span>
+                    <span class="badge me-1" *ngIf="dg.cobertura_geo__3 == 1">{{ dg.cobertura_geo__3 == 1 ? 'Municipal' : '' }}</span>
+                    <span class="badge me-1" *ngIf="dg.cobertura_geo__4 == 1">{{ dg.cobertura_geo__4 == 1 ? 'Regional' : '' }}</span>
+                    <span class="badge" *ngIf="dg.cobertura_geo__5 == 1">{{ dg.cobertura_geo__5 == 1 ? 'Otra: ' + dg.o_cobertura : '' }}</span>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                      <span>Año de publicación: </span>
+                      <span class="badge">{{ dg.a_publicacion}}{{dg.a_publicacion2 ? (' - ' + dg.a_publicacion2): ''}}</span>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                      <span>Año de referencia: </span>
+                      <span class="badge">{{ dg.a_referencia }}{{dg.a_referencia2 ? (' - ' + dg.a_referencia2) : ''}}</span>
+                  </div>
+
+                </div>
+
+                <div class="row mt-2">
+
+
+                  <div class="col-md-3 col-12">
+
+
+                    <span>El producto se fragmenta:</span>
+                    <span class="badge m-1">{{ dg.fragmenta == 1 ? 'Sí' : (dg.fragmenta == 2 ? 'No' : '')
+                      }}</span>
+
+
+
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                    <span *ngIf="dg.fragmenta == 1">Número de fragmentos: </span>
+                    <span class="badge m-1">{{ dg.n_fragmenta }}</span>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                    <span *ngIf="dg.actualizacion == 1">
+                      <span>Se actualiza: </span>
+                      <span class="badge">
+                        {{ dg.p_actualizacion == 1 ? 'Mensual' : (dg.p_actualizacion == 2 ? 'Anual' : '') }}
+                        {{ dg.p_actualizacion == 3 ? 'Bienal' : (dg.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                        {{ dg.p_actualizacion == 5 ? 'Quinquenal' : (dg.p_actualizacion == 6 ? 'Irregular' : '') }}
+                        {{ dg.p_actualizacion == 7 ? ''+ dg.o_periodo : ''}}
+                      </span>
+                    </span>
+                    <span *ngIf="dg.actualizacion == 2">
+                      <span>Se actualiza: </span>
+                      <span class="badge">No</span>
+                    </span>
+                  </div>
+
+
+                  <div class="col-md-3 col-12">
+                    <span *ngIf="dg.escala">Escala geográfica: </span>
+                    <div *ngIf="dg.escala == 14">
+                      <span class="badge">{{ dg.o_escala }}</span>
+                    </div>
+                    <span *ngIf="dg.escala">
+                      <span class="badge">{{ dg.escala == 14 ? '' : getEscalasText(dg.escala) }}</span>
+                    </span>
+                    <span *ngIf="!dg.escala">
+                      <span> Ninguna escala geográfica. </span>
+                    </span>
+                  </div>
+
+                </div>
+
+                <div class="row mt-2">
+
+                  <div class="col-md-3 col-12">
+                    <span *ngIf="dg.liga">
+                      <span>Ligas de acceso: </span>
+                      <a (click)="$event.stopPropagation()" target="_blank" [href]="dg.liga">enlace.</a>
+                    </span>
+                  </div>
+
+                  <div class="col-md-6 col-12">
+                    <span *ngIf="dg.metodologia == 1">
+                      <span *ngIf="dg.metodologia == 1">Cuenta con metodologia: </span>
+                      <a (click)="$event.stopPropagation()" [href]="dg.liga_metodologia" target="_blank">enlace.</a>
+                    </span>
+                    <span *ngIf="dg.metodologia == 2">
+                      <span>No cuenta con metodologia</span>
+                    </span>
+                  </div>
+
+                  <div class="col-12">
+                    <hr class="m-2">
+                    <span>Tipo(s) de soporte del producto:</span>
+                    <div class="row mt-2">
+
+                      <div class="col" *ngIf="dg?.tipo_soporte__1 == 1">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{ dg.tipo_soporte__1 == 1
+                            ? 'Datos Geográficos' : ''}}
+                          </li>
+                          <li *ngIf="dg.tipo_soporte__1 == 1" class="list-group-item">
+                            <span> En formato: </span>
+
+                            <span class="badge me-1" *ngIf="dg.formato_geo__1 == 1">
+                              {{ dg.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_geo__2 == 1">
+                              {{ dg.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''}}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_geo__3 == 1">
+                              {{ dg.formato_geo__3 == 1 ? 'GeoPDF' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_geo__4 == 1">
+                              {{ dg.formato_geo__4 == 1 ? 'PDF' : '' }}
+
+                            </span>
+                            <span class="badge" *ngIf="dg.formato_geo__5 == 1">
+                              {{ dg.formato_geo__5 == 1 ? 'Otro: ' + dg.o_formato_geo : '' }}
+
+                            </span>
+
+                          </li>
+
+
+                        </ul>
+
+
+                      </div>
+
+                      <div class="col" *ngIf="(dg?.tipo_soporte__1 == 1 || dg?.tipo_soporte__1 == 0) && dg?.tipo_soporte__2 == 1 ">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{
+                            dg.tipo_soporte__2 == 1
+                            ? 'Tabulado' : ''
+                            }}
+                          </li>
+                          <li class="list-group-item">
+                            <strong> En formato: </strong>
+
+                            <span class="badge me-1" *ngIf="dg.formato_tab__1 == 1">
+                              {{ dg.formato_tab__1 == 1 ? '.dbf' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_tab__2 == 1">
+                              {{ dg.formato_tab__2 == 1 ? '.csv' : ''}}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_tab__3 == 1">
+                              {{ dg.formato_tab__3 == 1 ? '.txt' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_tab__4 == 1">
+                              {{ dg.formato_tab__4 == 1 ? '.xlsx' : '' }}
+
+                            </span>
+                            <span class="badge" *ngIf="dg.formato_tab__5 == 1">
+                              {{ dg.formato_tab__5 == 1 ? 'Otro: ' + dg.o_formato_tab : '' }}
+
+                            </span>
+
+
+                          </li>
+
+                        </ul>
+
+
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+                      <div class="col" *ngIf="dg.tipo_soporte__3">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{
+                            dg.tipo_soporte__3 == 1
+                            ? 'Publicaciones' : ''
+                            }}
+                          </li>
+                        </ul>
+
+                      </div>
+                      <div class="col" *ngIf="dg.tipo_soporte__4">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{
+                            dg.tipo_soporte__4 == 1
+                            ? 'Otro: ' + dg.o_soporte : ''
+                            }}
+                          </li>
+                        </ul>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!--TODO: variables -->
+        <div class="row">
+          <div class="col">
+            <ng-container *ngIf="secuenciaVAR && secuenciaVAR.length > 0; else nosecuenciaVAR">
+              <div class="card1 shadow-sm p-2 mb-0 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+                <h4 style="color: #113250;">Variables detectadas.</h4>
+                <div class="" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+                  <div class="row">
+                    <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <div class="card card-body" (click)="$event.stopPropagation()">
+                              <div class="row">
+                                <div class="col-md-3 col-12" *ngFor="let item of secuenciaVAR">
+                                  <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-primary-emphasis bg-primary-subtle p-1 m-1">
+                                      {{item.nom_var}}
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #nosecuenciaVAR>
+              <div class="card1 shadow-sm p-2 mb-0 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+                <h4 style="color: #113250;">Ninguna variable detectada.</h4>
+                <div class="" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+                  <div class="row">
+                    <div class="col">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <!--TODO: programas de información -->
+        <div class="row">
+          <div class="col">
+
+            <ng-container *ngIf="pi && pi.length > 0; else noPi">
+              <div class="card1 shadow-sm p-2 mb-0 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+              <h4 style="color: #113250;">Programas de información detectados.</h4>
+              <div class="" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+                <div class="row">
+                  <div class="col">
+                      <div class="row" *ngFor="let item of pi">
+                        <div class="col">
+                          <div class="card card-body">
+                            <div class="row">
+                              <div class="col-md-4 col-12">
+                                <strong style="color: #113250;">Unidad Administrativa responsable del PI:</strong>
+                                <br>
+                                <span for=""> {{getDireccionGeneralText(item.dg_pi)}}</span>
+                              </div>
+                              <div class="col-md-4 col-12">
+                                <strong style="color: #113250;">Programa de Información (PI):</strong>
+                                <br>
+                                <span for=""> {{getProgInfoText(item.nom_pi)}}</span>
+                              </div>
+                              <div class="col-md-4 col-12">
+                                <strong style="color: #113250;">Programa de Información (PI):</strong>
+                                <br>
+                                <span for=""> {{getProgInfoText(item.nom_pi)}}</span>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+
+            <ng-template #noPi>
+              <div class="card1 shadow-sm p-2 mb-0 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+                <h4 style="color: #113250;">Ningún programa de información detectado.</h4>
+                <div class="" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+                  <div class="row">
+                    <div class="col">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+
+          </div>
+        </div>
+
+        <!--TODO: Actividades Estadísticas o Geográficas -->
+        <div class="row">
+          <div class="col">
+            <ng-container *ngIf="aegSecuencia && aegSecuencia.length > 0; else noaegSecuencia">
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Actividades Estadísticas o Geográficas:</h4>
+                  <div class="row" *ngFor="let item of aegSecuencia">
+                    <div class="col">
+                      <div class="card card-body">
+                        <div class="row">
+                          <div class="col-md-4 col-12">
+                            <strong>Dirección General responsable de la AEG: </strong>
+                            <br>
+                            <span for=""> {{getDga_PprodText(item.dg_aeg)}}.</span>
+                          </div>
+                          <div class="col-md-4 col-12">
+                            <strong>Actividad Estadística o Geográfica para la UA: </strong>
+                            <br>
+                            <span for=""> {{getAEG_2Text(item.nom_aeg)}}.</span>
+                          </div>
+                          <div class="col-md-4 col-12">
+                            <strong>Dirección General Adjunta responsable de la AEG: </strong>
+                            <br>
+                            <span for=""> {{getAEG_ProdText(item.dga_aeg)}}.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </ng-container>
+            <ng-template #noaegSecuencia>
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Ninguna Actividad Estadística o Geográfica detectada.</h4>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+
+        <!--TODO: Marco para el Desarrollo de las Estadísticas Ambientales -->
+        <div class="row">
+          <div class="col">
+            <ng-container *ngIf="mdeas && mdeas.length > 0; else nomdeas">
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Relación con el Marco para el Desarrollo de las Estadísticas Ambientales (MDEA):</h4>
+                  <div class="row" *ngFor="let item of mdeas">
+                    <div class="col">
+                      <div class="card card-body mb-2">
+                        <div class="row">
+                          <div class="col-md-4 col-12">
+                            <strong style="color: #113250;">Componente: </strong>
+                            <br>
+                            <span for=""> {{getComponenteText(item.comp_mdea)}}</span>
+                          </div>
+                          <div class="col-md-4 col-12">
+                            <strong style="color: #113250;">Subcomponente: </strong>
+                            <br>
+                            <span for=""> {{getSubcomponenteText(item.subcomp_mdea)}}</span>
+                          </div>
+                          <div class="col-md-4 col-12">
+                            <strong style="color: #113250;">Tópico: </strong>
+                            <br>
+                            <span for=""> {{getTopicoText(item.topico_mdea)}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </ng-container>
+            <ng-template #nomdeas>
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Ninguna relación con el Marco para el Desarrollo de las Estadísticas Ambientales.</h4>
+              </div>
+            </ng-template>
+
+          </div>
+        </div>
+
+
+        <!--TODO: Relación con los Objetivos del Desarrollo Sostenible -->
+        <div class="row">
+          <div class="col">
+            <ng-container *ngIf="ODSes && ODSes.length > 0; else noODSes">
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Relación con los Objetivos del Desarrollo Sostenible (ODS):</h4>
+                  <div class="row" *ngFor="let item of ODSes">
+                    <div class="col">
+                      <div class="card card-body mb-2">
+                        <div class="row">
+                          <div class="col-md-6 col-12">
+                            <strong style="color: #113250;">Objetivo: </strong>
+                            <br>
+                            <span class=""> {{getObjetivODSText(item.obj_ods)}}</span>
+                          </div>
+                          <div class="col-md-6 col-12">
+                            <strong style="color: #113250;">Meta: </strong>
+                            <br>
+                            <span for=""> {{getMetaODSText(item.meta_ods)}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </ng-container>
+            <ng-template #noODSes>
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Ninguna relación con los Objetivos del Desarrollo Sostenible (ODS).</h4>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <!--TODO: Relación con algún Programa Sectorial (PS): -->
+        <div class="row mb-2">
+          <div class="col">
+            <ng-container *ngIf="PSes && PSes.length > 0; else noPSes">
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Relación con algún Programa Sectorial (PS):</h4>
+                  <div class="row" *ngFor="let item of PSes">
+                    <div class="col">
+                      <div class="card card-body mb-2">
+                        <div class="row">
+                          <div class="col-md-6 col-12">
+                            <strong style="color: #113250;">Programa Sectorial: </strong>
+                            <br>
+                            <span>{{getps2023Text(item.prog_ps)}}</span>
+
+
+                          </div>
+                          <div class="col-md-6 col-12">
+                            <div *ngIf="item.indicador_ps">
+                              <strong style="color: #113250;">Indicador que corresponde al PS: </strong>
+                              <br>
+                              <span> {{getIndicadoresPS2023Text(item.indicador_ps)}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </ng-container>
+            <ng-template #noPSes>
+              <div class="card1 shadow-sm  bg-body-tertiary rounded">
+                <h4 style="color: #113250;">Ninguna relación con algún Programa Sectorial (PS).</h4>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
+</ng-template>
+
+

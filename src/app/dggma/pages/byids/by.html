@@ -1,0 +1,840 @@
+
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+      <div *ngFor="let dg of productsById; let i = index">
+
+
+
+
+        <div class="card1 shadow-sm  bg-body-tertiary rounded">
+          <h3>{{ dg.dg_prod == 1 ? 'Dirección General de Geografía y Medio Ambiente': (dg.dg_prod == 2 ? 'Dirección General de Estadísticas Sociodemográficas': (
+            dg.dg_prod == 3 ? 'Dirección General de Estadísticas Económicas': (dg.dg_prod == 4 ? 'Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia':(
+            dg.dg_prod == 5 ? 'Dirección General de Integración, Análisis e Investigación':''))))}}.</h3>
+          <h4>{{ dg.nom_producto }}.</h4>
+          <h6 class="h666">{{ dg.nom_prod }}.</h6>
+
+          <div class="" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+            <div class="row">
+              <div class="col">
+                <div class="card card-body" (click)="$event.stopPropagation()">
+
+                  <div class="row">
+                    <div class="col">
+                      <strong>Producto de tipo: </strong>
+                      <span class="badge">
+                        {{ dg.tipo_prod__1 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 0 ? 'Geográfico' :
+                        '') }}
+                        {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 0 && dg.tipo_prod__2 == 1 ? 'Estadístico' :
+                        '') }}
+                        {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '') }}
+                      </span>
+
+                    </div>
+
+                    <div class="col">
+                      <strong *ngIf="dg.escala">Escala geográfica: </strong>
+                      <span *ngIf="dg.escala == 14">
+                        <span class="badge">{{ dg.o_escala }}</span>
+                      </span>
+                      <span *ngIf="dg.escala">
+                        <span class="badge">{{ dg.escala == 14 ? '' : getEscalasText(dg.escala) }}</span>
+                      </span>
+                      <span *ngIf="!dg.escala">
+                        <strong> Ninguna escala geográfica. </strong>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          <strong>El producto se fragmenta:</strong>
+                          <span class="badge m-1">{{ dg.fragmenta == 1 ? 'Sí' : (dg.fragmenta == 2 ? 'No' : '')
+                            }}</span>
+                          <br>
+                          <strong *ngIf="dg.fragmenta == 1">Número de fragmentos en que se divide el producto: </strong>
+                          <span class="badge m-1">{{ dg.n_fragmenta }}</span>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <strong>Cobertura del producto: </strong>
+
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__1 == 1">
+                            {{ dg.cobertura_geo__1 == 1 ? 'Nacional' : '' }}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__2 == 1">
+                            {{ dg.cobertura_geo__2 == 1 ? 'Estatal' : ''}}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__3 == 1">
+                            {{ dg.cobertura_geo__3 == 1 ? 'Municipal' : '' }}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__4 == 1">
+                            {{ dg.cobertura_geo__4 == 1 ? 'Regional' : '' }}
+
+                          </span>
+                          <span class="badge" *ngIf="dg.cobertura_geo__5 == 1">
+                            {{ dg.cobertura_geo__5 == 1 ? 'Otra: ' + dg.o_cobertura : '' }}
+
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <span>
+                            <strong>Año de referencia: </strong>
+                            <span class="badge">{{ dg.a_referencia }}{{dg.a_referencia2 ? (' - ' + dg.a_referencia2) :
+                              ''}}</span>
+                          </span>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <span>
+                            <strong>Año de publicación: </strong>
+
+                            <span class="badge">{{ dg.a_publicacion}}{{dg.a_publicacion2 ? (' - ' + dg.a_publicacion2):
+                              ''}}</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <span *ngIf="dg.actualizacion == 1">
+                        <strong>Se actualiza: </strong>
+                        <span class="badge">
+                          {{ dg.p_actualizacion == 1 ? 'Mensual' : (dg.p_actualizacion == 2 ? 'Anual' : '') }}
+                          {{ dg.p_actualizacion == 3 ? 'Bienal' : (dg.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                          {{ dg.p_actualizacion == 5 ? 'Quinquenal' : (dg.p_actualizacion == 6 ? 'Irregular' : '') }}
+                          {{ dg.p_actualizacion == 7 ? ''+ dg.o_periodo : ''}}
+                        </span>
+                      </span>
+                      <span *ngIf="dg.actualizacion == 2">
+                        <strong>Se actualiza: </strong>
+                        <span class="badge">No</span>
+                      </span>
+                      <br>
+                      <span *ngIf="dg.liga">
+                        <strong>Ligas de acceso: </strong>
+                        <a (click)="$event.stopPropagation()" target="_blank" [href]="dg.liga">enlace.</a>
+                      </span>
+                      <br>
+                      <span *ngIf="dg.metodologia == 1">
+                        <strong *ngIf="dg.metodologia == 1">Cuenta con metodologia: </strong>
+                        <a (click)="$event.stopPropagation()" [href]="dg.liga_metodologia" target="_blank">enlace.</a>
+                      </span>
+                      <span *ngIf="dg.metodologia == 2">
+                        <strong>No cuenta con metodologia</strong>
+                      </span>
+
+
+                    </div>
+
+
+
+                    <div class="col">
+                      <strong>Tipo(s) de soporte del producto:</strong>
+                      <div class="row">
+                        <div class="col" *ngIf="dg?.tipo_soporte__1 == 1">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{ dg.tipo_soporte__1 == 1
+                              ? 'Datos Geográficos' : ''}}
+                            </li>
+                            <li *ngIf="dg.tipo_soporte__1 == 1" class="list-group-item">
+                              <strong> En formato: </strong>
+
+                              <span class="badge me-1" *ngIf="dg.formato_geo__1 == 1">
+                                {{ dg.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__2 == 1">
+                                {{ dg.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''}}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__3 == 1">
+                                {{ dg.formato_geo__3 == 1 ? 'GeoPDF' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__4 == 1">
+                                {{ dg.formato_geo__4 == 1 ? 'PDF' : '' }}
+
+                              </span>
+                              <span class="badge" *ngIf="dg.formato_geo__5 == 1">
+                                {{ dg.formato_geo__5 == 1 ? 'Otro: ' + dg.o_formato_geo : '' }}
+
+                              </span>
+
+                            </li>
+
+
+                          </ul>
+
+
+                        </div>
+
+                        <div class="col"
+                          *ngIf="(dg?.tipo_soporte__1 == 1 || dg?.tipo_soporte__1 == 0) && dg?.tipo_soporte__2 == 1 ">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__2 == 1
+                              ? 'Tabulado' : ''
+                              }}
+                            </li>
+                            <li class="list-group-item">
+                              <strong> En formato: </strong>
+
+                              <span class="badge me-1" *ngIf="dg.formato_tab__1 == 1">
+                                {{ dg.formato_tab__1 == 1 ? '.dbf' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__2 == 1">
+                                {{ dg.formato_tab__2 == 1 ? '.csv' : ''}}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__3 == 1">
+                                {{ dg.formato_tab__3 == 1 ? '.txt' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__4 == 1">
+                                {{ dg.formato_tab__4 == 1 ? '.xlsx' : '' }}
+
+                              </span>
+                              <span class="badge" *ngIf="dg.formato_tab__5 == 1">
+                                {{ dg.formato_tab__5 == 1 ? 'Otro: ' + dg.o_formato_tab : '' }}
+
+                              </span>
+
+
+                            </li>
+
+                          </ul>
+
+
+                        </div>
+
+
+                      </div>
+                      <div class="row">
+                        <div class="col" *ngIf="dg.tipo_soporte__3">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__3 == 1
+                              ? 'Publicaciones' : ''
+                              }}
+                            </li>
+                          </ul>
+
+                        </div>
+                        <div class="col" *ngIf="dg.tipo_soporte__4">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__4 == 1
+                              ? 'Otro: ' + dg.o_soporte : ''
+                              }}
+                            </li>
+                          </ul>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card1 shadow-sm  bg-body-tertiary rounded">
+        <h3>VARIABLE</h3>
+        <h6 class="h666">Variables detectadas</h6>
+        <ng-container *ngIf="secuenciaVAR && secuenciaVAR.length > 0; else nosecuenciaVAR">
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+                <div class="row" *ngFor="let item of secuenciaVAR">
+                  <div class="col">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item text-primary-emphasis bg-primary-subtle p-1 m-1">
+                        {{item.nom_var}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #nosecuenciaVAR>
+          <div class="card card-body">
+            <h5>Ninguna variable detectada.</h5>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+
+
+
+
+    <div class="col-4">
+      <div class="card1 shadow-sm  bg-body-tertiary rounded">
+        <h3>PI</h3>
+        <h6 class="h666">Programas de información detectados</h6>
+        <ng-container *ngIf="pi && pi.length > 0; else noPi">
+          <div class="row" *ngFor="let item of pi">
+            <div class="col">
+              <div class="card card-body">
+                <div class="row">
+                  <div class="col">
+                    <strong>Unidad Administrativa responsable del PI:</strong>
+                    <br>
+                    <span for=""> {{getDireccionGeneralText(item.dg_pi)}}</span>
+                    <br>
+                    <strong>Programa de Información (PI):</strong>
+                    <br>
+                    <span for=""> {{getProgInfoText(item.nom_pi)}}</span>
+                    <br>
+                    <strong>Proceso de Producción del PI:</strong>
+                    <br>
+                    <span for=""> {{getProgInfoText(item.pp_pi)}}</span>
+                    <br>
+                    <strong>Dirección General Adjunta responsable del Programa de Información:</strong>
+                    <br>
+                    <span for=""> {{getDga_PprodText(item.dga_pi)}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noPi>
+          <div class="card card-body">
+            <h5>Ningún programa de información detectado.</h5>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+
+    <div class="col-4">
+      <div class="card1 shadow-sm  bg-body-tertiary rounded">
+        <h3>AEG</h3>
+        <h6 class="h666">Actividades Estadísticas o Geográficas:</h6>
+        <ng-container *ngIf="aegSecuencia && aegSecuencia.length > 0; else noaegSecuencia">
+          <div class="row" *ngFor="let item of aegSecuencia">
+            <div class="col">
+              <div class="card card-body">
+                <div class="row">
+                  <div class="col">
+                    <strong>Dirección General responsable de la AEG: </strong>
+                    <br>
+                    <span for=""> {{getDga_PprodText(item.dg_aeg)}}.</span>
+                    <br>
+                    <strong>Actividad Estadística o Geográfica para la UA: </strong>
+                    <br>
+                    <span for=""> {{getAEG_2Text(item.nom_aeg)}}.</span>
+                    <br>
+                    <strong>Dirección General Adjunta responsable de la AEG: </strong>
+                    <br>
+                    <span for=""> {{getAEG_ProdText(item.dga_aeg)}}.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noaegSecuencia>
+          <div class="card card-body">
+            <h5>Ninguna Actividades Estadísticas o Geográficas detectada.</h5>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+
+    <div class="col-4 mt-5">
+      <div class="card1 shadow-sm  bg-body-tertiary rounded">
+        <h3>MDEA</h3>
+        <h6 class="h666">Relación con el Marco para el Desarrollo de las Estadísticas Ambientales:</h6>
+        <ng-container *ngIf="mdeas && mdeas.length > 0; else nomdeas">
+          <div class="row" *ngFor="let item of mdeas">
+            <div class="col">
+              <div class="card card-body mb-2">
+                <div class="row">
+                  <div class="col">
+                    <strong>Componente: </strong>
+                    <span for=""> {{getComponenteText(item.comp_mdea)}}</span>
+                    <br>
+                    <strong>Subcomponente: </strong>
+                    <span for=""> {{getSubcomponenteText(item.subcomp_mdea)}}</span>
+                    <br>
+                    <strong>Topico: </strong>
+                    <span for=""> {{getTopicoText(item.topico_mdea)}}</span>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #nomdeas>
+          <div class="card card-body">
+            <h5>Ninguna relación con el Marco para el Desarrollo de las Estadísticas Ambientales.</h5>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="col-4 mt-5">
+      <div class="card1 shadow-sm  bg-body-tertiary rounded">
+        <h3>ODS</h3>
+        <h6 class="h666">Relación con los Objetivos del Desarrollo Sostenible (ODS):</h6>
+        <ng-container *ngIf="ODSes && ODSes.length > 0; else noODSes">
+          <div class="row" *ngFor="let item of ODSes">
+            <div class="col">
+              <div class="card card-body mb-2">
+                <div class="row">
+                  <div class="col">
+                    <strong>Objetivo: </strong>
+                    <span class=""> {{getObjetivODSText(item.obj_ods)}}</span>
+                    <hr>
+                    <strong>Meta: </strong>
+                    <span for=""> {{getMetaODSText(item.meta_ods)}}</span>
+                    <br>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noODSes>
+          <div class="card card-body">
+            <h5>Ninguna relación con los Objetivos del Desarrollo Sostenible (ODS).</h5>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+
+    <div class="col-4 mt-5">
+      <div class="card1 shadow-sm  bg-body-tertiary rounded">
+        <h3>PS</h3>
+        <h6 class="h666">Relación con algún Programa Sectorial (PS):</h6>
+        <ng-container *ngIf="PSes && PSes.length > 0; else noPSes">
+          <div class="row" *ngFor="let item of PSes">
+            <div class="col">
+              <div class="card card-body mb-2">
+                <div class="row">
+                  <div class="col">
+                    <strong>Programa Sectorial: </strong>
+                    <span>{{getps2023Text(item.prog_ps)}}</span>
+                    <br>
+                    <div *ngIf="item.indicador_ps">
+                      <hr class="m-1">
+                      <strong>Indicador que corresponde al PS: </strong>
+                      <span> {{getIndicadoresPS2023Text(item.indicador_ps)}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noPSes>
+          <div class="card card-body">
+            <h5>Ninguna relación con algún Programa Sectorial (PS).</h5>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S_100px.png"
+  srcset="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S_100px.png 1x, https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S.png 2x"
+  width="841" height="100" style="max-height:100px;height:auto;" alt="Desarrollo Sostenible Logo"
+  data-retina_logo_url="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S.png"
+  class="fusion-standard-logo">
+
+
+  <div class="html5vid HasListener fullcoveredvideo videoisplaying"
+    style="position: absolute; top: 0px; left: -139.222px; width: 1244.44px; height: 700px; transform: matrix(1, 0, 0, 1, 0, 0);">
+    <video style="display: block;" class="" loop="" preload="undefined" width="100%" height="100%"
+      poster="/video/29062020/SDGi-Low.jpg">
+      <source src="/video/29062020/SDGi-Low.mp4" type="video/mp4">
+    </video>
+    <div class="tp-video-play-button"><i class="revicon-right-dir"></i>
+      <div class="tp-revstop"></div>
+      <div id="extwaiokist" style="display:none" v="fcoon" q="46ea187e" c="322.9" i="329" u="44.21" s="09032316"
+        sg="svr_04262315-ga_09032316-bai_08082317" d="1" w="false" e="" a="2" m="BMe=" vn="3gtra">
+        <div id="extwaigglbit" style="display:none" v="fcoon" q="46ea187e" c="322.9" i="329" u="44.21" s="09032316"
+          sg="svr_04262315-ga_09032316-bai_08082317" d="1" w="false" e="" a="2" m="BMe="></div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <main>
+
+    <div id="myCarousel" class="carousel carousel-dark slide mb-6" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <video autoplay="true" loop=""
+            src="https://cdn.hubblecontent.osi.office.net/videos/publish/01d87b62-62fc-488b-8880-2d4d8674a18f/1170533217.mp4"
+            poster="https://cdn.hubblecontent.osi.office.net/videos/publish/01d87b62-62fc-488b-8880-2d4d8674a18f/thumbnails/large.jpg"
+            preload="auto" disablepictureinpicture="" playsinline=""
+            style="width: 100%; height: 100%; object-fit: cover;"></video>
+          <div class="container">
+            <div class="carousel-caption text-end">
+
+              <img focusable="false" src="../../../../assets/inegilogowhite.png" alt="Mi SVG"
+                style="max-width: 500px; height: auto;  margin: 0 auto;">
+              <h1 style="color: white;">Products detected in the general directorates.</h1>
+              <p style="color: white;">Take a look at the products that were detected and listed by general directorates.
+              </p>
+              <p><a class="btn btn-lg btn-light" href="#">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-color: #e6e6e6;">
+
+          <img focusable="false" src="../../../../assets/mdea.png" alt="Mi SVG"
+            style="max-height: 100%; height: auto; display: block; margin: 0 auto; margin-right: 25rem; float: right;">
+
+          <div class="container">
+            <div class="carousel-caption text-start">
+              <h1 style="color: #007a98; max-width: 700px;">Relation with the products detected in the different
+                directions.</h1>
+              <p style="color: #007a98;">take a look to learn more.</p>
+              <p><a class="btn btn-lg custom-btn-color" href="#">Read more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-color: white; border-bottom: 1px solid #009edb;">
+          <img
+            src="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S_100px.png"
+            srcset="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S_100px.png 1x, https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S.png 2x"
+            width="841" height="100" preserveAspectRatio="xMidYMid slice" style="max-height:100px;height:auto;"
+            alt="Desarrollo Sostenible Logo"
+            style="max-height: 100px; height: auto; display: block; margin: 0 auto; margin-top: 7rem;"
+            data-retina_logo_url="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S.png">
+
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 style="color: #009edb;">Relation with the products detected in the different directions.</h1>
+              <p style="color: #009edb;">take a look to learn more.</p>
+              <p><a class="btn btn-lg custom-btn-color2" href="#">Learn more</a></p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+    <!-- Marketing messaging and featurettes
+      ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row justify-content-center align-items-center">
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="d-flex justify-content-center "> <!-- Agregamos estas clases para centrar verticalmente -->
+            <i class="bi bi-globe display-1" style="color: #113250;"></i>
+          </div>
+          <h3 class="fw-normal text-center">Dirección General de Geografía y Medio Ambiente.</h3>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          </div>
+
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="d-flex justify-content-center ">
+            <i class="bi bi-bar-chart display-1 " style="color: #113250;"></i>
+          </div>
+          <h3 class="fw-normal text-center">Dirección General de Estadísticas Sociodemográficas.</h3>
+
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          </div>
+
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="d-flex justify-content-center ">
+            <i class="bi bi-cash-stack display-1 " style="color: #113250;"></i>
+          </div>
+          <h3 class="fw-normal text-center">Dirección General de Estadísticas Económicas.</h3>
+          <div class="d-flex justify-content-center">
+
+            <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          </div>
+
+        </div>
+
+        <div class="mt-5"></div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="d-flex justify-content-center ">
+            <i class="bi bi-file-earmark-text display-1 " style="color: #113250;"></i>
+          </div>
+          <h3 class="fw-normal text-center " style="height: 6.4rem;">Dirección General de Integración, Análisis e
+            Investigación .</h3>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          </div>
+
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="d-flex justify-content-center ">
+            <i class="bi bi-bank display-1 " style="color: #113250;"></i>
+          </div>
+          <h3 class="fw-normal text-center ">Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia.
+          </h3>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-secondary custom-buttonMT mt-2" href="#">View products detected</button>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading fw-normal lh-1 mt-0" style="color: #113250;">Products detected in the general
+            directorates.</h2>
+          <!-- <p class="lead">"En nuestro sistema, hemos logrado un hito importante al detectar y asignar la mayoría de los
+                productos registrados por
+                el INEGI. Pero nuestra labor no se detiene allí. Hemos llevado a cabo una integración profunda, vinculando cada
+                uno de
+                estos productos con actividades estadísticas geográficas, programas de información y programas sectoriales. En
+                este
+                proceso, hemos asignado posibles variables que enriquecen la información de cada producto.
+              </p>
+              <p class="lead">
+                Pero lo que hace que nuestro sistema sea aún más poderoso es su conexión con el MDEA (Marco de Desarrollo
+                Estadístico) y
+                su alineación con los ODS (Objetivos de Desarrollo Sostenible). Estas conexiones estratégicas permiten una gestión
+                más
+                eficiente y una comprensión más profunda de la información estadística.
+              </p>
+              <p class="lead">
+                Bienvenido a un mundo de datos en constante evolución, donde la integración y la visión integral son nuestra
+                prioridad.
+                ¡Explora y descubre cómo nuestra plataforma transforma la forma en que comprendemos y utilizamos los datos
+                estadísticos!".
+              </p> -->
+          <p class="lead">
+            In our system, we have achieved an important milestone by detecting and assigning most of the products
+            registered by
+            INEGI. But our work does not stop there. We have carried out a deep integration, linking each of these
+            products with
+            geographic statistical activities , information programs and sectorial programs In this process, we have
+            assigned
+            possible variables that enrich the information of each product.
+          </p>
+          <p class="lead">
+            But what makes our system even more powerful is its connection to the MDEA (Development Statistical Framework)
+            and its
+            alignment with the SDGs (Sustainable Development Goals). These strategic connections allow for more efficient
+            management
+            and a deeper understanding of statistical information.
+          </p>
+          <p class="lead">
+            Welcome to an ever-evolving world of data, where integration and comprehensive insight are our priority.
+            Explore and
+            discover how our platform transforms the way we understand and use statistical data!".
+          </p>
+        </div>
+        <div class="col-md-5">
+          <img focusable="false" src="../../../../assets/INEGI_g.png" alt="Mi SVG"
+            style=" max-height: 500px; max-width: 500px; height: auto; display: block; margin: 0 auto; margin-top: 10rem;">
+        </div>
+      </div>
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading fw-normal lh-1" style="color: #113250;">Marco para el Desarrollo de las
+            Estadísticas Ambientales <br><span class="text-body-secondary">(MDEA 2013).</span></h2>
+          <!-- <p class="lead m-1">El uso del MDEA 2013 en los sistemas estadísticos nacionales promoverá el desarrollo en este campo de las estadísticas,
+              ya que es una herramienta flexible y multipropósito que puede ser adaptada para abordar intereses y prioridades
+              específicos de política ambiental de los países, y puede adaptarse según sus diferentes niveles de desarrollo
+              estadístico.</p> -->
+          <p class="lead m-1">
+            The use of the MDEA 2013 in national statistical systems will promote the development in this field of
+            statistics,
+            since it is a flexible and multipurpose tool that can be adapted to address interests and priorities
+            environmental policy of the countries, and can be adapted according to their different levels of development
+            statistical.
+          </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <img focusable="false" src="../../../../assets/mdea.png" alt="Mi SVG"
+            style="max-height: 500px; height: auto; display: block; margin: 0 auto; margin-right: 25rem;">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+      <div class="row featurette">
+        <div class="col-md-7 ">
+          <h2 class="featurette-heading fw-normal lh-1 mt-0" style="color: #113250;">Objetivos de Desarrollo Sostenible.
+            <span class="text-body-secondary">ODS.</span></h2>
+          <!-- <p class="lead">Los Objetivos de Desarrollo Sostenible (ODS), también conocidos como Objetivos Globales, fueron adoptados por las
+              Naciones Unidas en 2015 como un llamamiento universal para poner fin a la pobreza, proteger el planeta y garantizar que
+              para el 2030 todas las personas disfruten de paz y prosperidad.
+              </p>
+              <p class="lead">
+                Los ODS están diseñados para acabar con la pobreza, el hambre, el sida y la discriminación contra mujeres y niñas.
+              </p>
+              <p class="lead">
+                La creatividad, el conocimiento, la tecnología y los recursos financieros de toda la sociedad son necesarios para
+                alcanzar los ODS en todos los contextos.
+              </p> -->
+          <p class="lead m-1">
+            The Sustainable Development Goals (SDGs), also known as the Global Goals, were adopted by the
+            United Nations in 2015 as a universal call to end poverty, protect the planet and ensure that
+            by 2030 all people will enjoy peace and prosperity.
+          </p>
+          <p class="lead m-1">
+            The SDGs are designed to end poverty, hunger, AIDS and discrimination against women and girls.
+          </p>
+          <p class="lead m-1">
+            The creativity, knowledge, technology and financial resources of the whole society are necessary to
+            achieve the SDGs in all contexts.
+          </p>
+        </div>
+        <div class="col-md-5 ">
+
+          <div style="background-color: #113250; display: inline-block; padding: 10px; margin-left: 5rem;">
+            <img focusable="false" src="../../../../assets/logoODS_es.png" alt="Mi SVG"
+              style=" height: auto; display: block; margin: 0 auto;">
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+
+
+
+
+
+
+
+
+      <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+
+
+    <!-- FOOTER -->
+    <footer class="container">
+      <p class="float-end"><a href="#">Back to top</a></p>
+      <p>&copy; 2022–2023 Eje Temático del Agua, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+  </main>
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="carousel-item active">
+    <video autoplay="true" loop=""
+      src="https://cdn.hubblecontent.osi.office.net/videos/publish/01d87b62-62fc-488b-8880-2d4d8674a18f/1170533217.mp4"
+      poster="https://cdn.hubblecontent.osi.office.net/videos/publish/01d87b62-62fc-488b-8880-2d4d8674a18f/thumbnails/large.jpg"
+      preload="auto" disablepictureinpicture="" playsinline=""
+      style="width: 100%; height: 100%; object-fit: cover;"></video>
+    <div class="container">
+      <div class="carousel-caption text-end">
+        <h1 style="color: white;">Products detected in the general directorates.</h1>
+        <p style="color: white;">Take a look at the products that were detected and listed by general directorates.</p>
+        <p><a class="btn btn-lg btn-light" href="#">Learn more</a></p>
+      </div>
+    </div>
+  </div>

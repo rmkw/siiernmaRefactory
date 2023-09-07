@@ -1,0 +1,11 @@
+/* Estilos para versión móvil */
+.logo-mobile {
+  width: 30%;
+  /* Ajusta el tamaño como desees */
+}
+
+/* Estilos para versión de escritorio */
+.logo-desktop {
+  width: 8%;
+  /* Tamaño original del logo en la versión de escritorio */
+}

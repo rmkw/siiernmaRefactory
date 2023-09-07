@@ -1,0 +1,34 @@
+{
+  "u_admin": [
+  {
+    "id": 1,
+    "text": "Dirección General de Estadísticas Sociodemográficas",
+    "parentid": "",
+    "attachmentname": ""
+  },
+  {
+    "id": 2,
+    "text": "Dirección General de Estadísticas Económicas",
+    "parentid": "",
+    "attachmentname": ""
+  },
+  {
+    "id": 3,
+    "text": "Dirección General de Geografía y Medio Ambiente",
+    "parentid": "",
+    "attachmentname": ""
+  },
+  {
+    "id": 4,
+    "text": "Dirección General de Integración, Análisis e Investigación",
+    "parentid": "",
+    "attachmentname": ""
+  },
+  {
+    "id": 5,
+    "text": "Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia",
+    "parentid": "",
+    "attachmentname": ""
+  }
+]
+}
