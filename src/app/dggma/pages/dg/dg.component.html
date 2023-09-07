@@ -18,10 +18,10 @@
 
             <img focusable="false" src="../../../../assets/inegilogowhite.png" alt="Mi SVG"
               style="max-width: 500px; height: auto;  margin: 0 auto;">
-            <h1 style="color: white;">Products detected in the general directorates.</h1>
-            <p style="color: white;">Take a look at the products that were detected and listed by general directorates.
+            <h1 style="color: white;">Productos detectados en las direcciones generales.</h1>
+            <p style="color: white;">Échale un vistazo a los productos detectados y catalogados por direcciones generales.
             </p>
-            <p><a class="btn btn-lg btn-light" href="#">Learn more</a></p>
+            <button class="btn btn-lg btn-light" [routerLink]="['/dg/products']" href="#">Ver más</button>
           </div>
         </div>
       </div>
@@ -32,10 +32,10 @@
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1 style="color: #007a98; max-width: 700px;">Relation with the products detected in the different
-              directions.</h1>
-            <p style="color: #007a98;">take a look to learn more.</p>
-            <p><a class="btn btn-lg custom-btn-color" href="#">Read more</a></p>
+            <h1 style="color: #007a98; max-width: 700px;">Relación con los productos detectados en las diferentes
+            direcciones.</h1>
+            <p style="color: #007a98; margin-left: 5px;">Échale un vistazo para saber más.</p>
+            <button class="btn btn-lg custom-btn-color" style="margin-left: 5px;" href="#">Ver más</button>
           </div>
         </div>
       </div>
@@ -56,9 +56,9 @@
       <!-- <div class="carousel-caption" style="position: absolute;   background: rgba(255, 255, 255, 0.7); padding: 15px; border-radius: 5px; max-width: 80%;"> -->
       <div class="carousel-caption"
         style="position: absolute;">
-        <h1 style="color: #009edb;">Relation with the products detected in the different directions.</h1>
-        <p style="color: #009edb;">Take a look to learn more.</p>
-        <p><a class="btn btn-lg custom-btn-color2" href="#">Learn more</a></p>
+        <h1 style="color: #009edb;">Relación con los productos detectados en las diferentes direcciones.</h1>
+        <p style="color: #009edb;">Échale un vistazo para saber más.</p>
+        <button class="btn btn-lg custom-btn-color2" href="#">Ver más</button>
       </div>
     </div>
 
@@ -91,7 +91,7 @@
         </div>
         <h3 class="fw-normal text-center">Dirección General de Geografía y Medio Ambiente.</h3>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
 
       </div>
@@ -102,7 +102,7 @@
         <h3 class="fw-normal text-center">Dirección General de Estadísticas Sociodemográficas.</h3>
 
         <div class="d-flex justify-content-center">
-          <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
 
       </div>
@@ -113,7 +113,7 @@
         <h3 class="fw-normal text-center">Dirección General de Estadísticas Económicas.</h3>
         <div class="d-flex justify-content-center">
 
-          <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
 
       </div>
@@ -127,7 +127,7 @@
         <h3 class="fw-normal text-center " style="height: 6.4rem;">Dirección General de Integración, Análisis e
           Investigación .</h3>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-secondary mt-2" href="#">View products detected</button>
+          <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
 
       </div>
@@ -139,7 +139,7 @@
         <h3 class="fw-normal text-center ">Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia.
         </h3>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-secondary custom-buttonMT mt-2" href="#">View products detected</button>
+          <button class="btn btn-secondary custom-buttonMT mt-2" href="#">Ver productos detectados</button>
         </div>
 
       </div>
@@ -159,9 +159,8 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1 mt-0" style="color: #113250;">Products detected in the general
-          directorates.</h2>
-        <!-- <p class="lead">"En nuestro sistema, hemos logrado un hito importante al detectar y asignar la mayoría de los
+        <h2 class="featurette-heading fw-normal lh-1 mt-0" style="color: #113250;">Productos detectados en las direcciones generales.</h2>
+        <p class="lead">"En nuestro sistema, hemos logrado un hito importante al detectar y asignar la mayoría de los
                 productos registrados por
                 el INEGI. Pero nuestra labor no se detiene allí. Hemos llevado a cabo una integración profunda, vinculando cada
                 uno de
@@ -181,8 +180,8 @@
                 prioridad.
                 ¡Explora y descubre cómo nuestra plataforma transforma la forma en que comprendemos y utilizamos los datos
                 estadísticos!".
-              </p> -->
-        <p class="lead">
+              </p>
+        <!-- <p class="lead">
           In our system, we have achieved an important milestone by detecting and assigning most of the products
           registered by
           INEGI. But our work does not stop there. We have carried out a deep integration, linking each of these
@@ -202,7 +201,7 @@
           Welcome to an ever-evolving world of data, where integration and comprehensive insight are our priority.
           Explore and
           discover how our platform transforms the way we understand and use statistical data!".
-        </p>
+        </p> -->
       </div>
       <div class="col-md-5">
         <img focusable="false" src="../../../../assets/INEGI_g.png" alt="Mi SVG"
@@ -215,17 +214,17 @@
       <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading fw-normal lh-1" style="color: #113250;">Marco para el Desarrollo de las
           Estadísticas Ambientales <br><span class="text-body-secondary">(MDEA 2013).</span></h2>
-        <!-- <p class="lead m-1">El uso del MDEA 2013 en los sistemas estadísticos nacionales promoverá el desarrollo en este campo de las estadísticas,
+        <p class="lead m-1">El uso del MDEA 2013 en los sistemas estadísticos nacionales promueve el desarrollo en este campo de las estadísticas,
               ya que es una herramienta flexible y multipropósito que puede ser adaptada para abordar intereses y prioridades
               específicos de política ambiental de los países, y puede adaptarse según sus diferentes niveles de desarrollo
-              estadístico.</p> -->
-        <p class="lead m-1">
+              estadístico.</p>
+        <!-- <p class="lead m-1">
           The use of the MDEA 2013 in national statistical systems will promote the development in this field of
           statistics,
           since it is a flexible and multipurpose tool that can be adapted to address interests and priorities
           environmental policy of the countries, and can be adapted according to their different levels of development
           statistical.
-        </p>
+        </p> -->
       </div>
       <div class="col-md-5 order-md-1">
         <img focusable="false" src="../../../../assets/mdea.png" alt="Mi SVG"
@@ -239,18 +238,16 @@
         <h2 class="featurette-heading fw-normal lh-1 mt-0" style="color: #113250;">Objetivos de Desarrollo Sostenible.
           <span class="text-body-secondary">ODS.</span>
         </h2>
-        <!-- <p class="lead">Los Objetivos de Desarrollo Sostenible (ODS), también conocidos como Objetivos Globales, fueron adoptados por las
-              Naciones Unidas en 2015 como un llamamiento universal para poner fin a la pobreza, proteger el planeta y garantizar que
-              para el 2030 todas las personas disfruten de paz y prosperidad.
+        <p class="lead">Los Objetivos de Desarrollo Sostenible (ODS), fueron adoptados por las
+              Naciones Unidas en 2015 como un llamado universal para poner fin a la pobreza, proteger el planeta y garantizar que
+              para el 2030 todas las personas disfruten de un futuro fundamentado en la sostenibilidad.
               </p>
-              <p class="lead">
-                Los ODS están diseñados para acabar con la pobreza, el hambre, el sida y la discriminación contra mujeres y niñas.
-              </p>
+
               <p class="lead">
                 La creatividad, el conocimiento, la tecnología y los recursos financieros de toda la sociedad son necesarios para
                 alcanzar los ODS en todos los contextos.
-              </p> -->
-        <p class="lead m-1">
+              </p>
+        <!-- <p class="lead m-1">
           The Sustainable Development Goals (SDGs), also known as the Global Goals, were adopted by the
           United Nations in 2015 as a universal call to end poverty, protect the planet and ensure that
           by 2030 all people will enjoy peace and prosperity.
@@ -261,7 +258,7 @@
         <p class="lead m-1">
           The creativity, knowledge, technology and financial resources of the whole society are necessary to
           achieve the SDGs in all contexts.
-        </p>
+        </p> -->
       </div>
       <div class="col-md-5 ">
 
@@ -294,8 +291,81 @@
 
   <!-- FOOTER -->
   <footer class="container">
-    <p class="float-end"><a href="#"><i class="bi bi-arrow-up-square-fill" style="font-size: xx-large; color: #113250;"></i></a></p>
+    <p class="float-end">
+      <a href="#"><i class="bi bi-arrow-up-square-fill" style="font-size: xx-large; color: #113250;"></i></a></p>
+
+
+      <p>
+        <img src="./assets/INEGI_g.png" alt="Logo" style="max-height: 30px; " />
+        <svg id="un-emblem" style="max-height: 30px; margin-left: 20px;" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32">
+          <defs></defs>
+          <path class="cls-1"
+            d="M26.81,25c-1,.26-2,.35-3,.67,1.6-1.38,1.51-3.5,2.58-5.12a16.46,16.46,0,0,1,1-1.38c-.65,1.31-.37,3-1.12,4.27a5.55,5.55,0,0,1-1.16,1.39c.15,0,.28-.13.41-.22,1.21-1.21,2.8-1.55,4.12-2.54a4,4,0,0,0,1.24-1.56c-.25,2-2.25,3.9-4.13,4.5Z">
+          </path>
+          <path class="cls-1"
+            d="M31.18,16.86c-.59.85-1.31,1.63-1.86,2.49a4.82,4.82,0,0,0-.12-2.16,18.71,18.71,0,0,1-1-4.32l0-.58c.35,1.56,1.87,2.63,1.78,4.37a3.78,3.78,0,0,1-.18,1.15l0,0,.07-.08a17.15,17.15,0,0,1,.69-2.55,6.24,6.24,0,0,0,.87-3.7,6.29,6.29,0,0,1-.3,5.35Z">
+          </path>
+          <path class="cls-1"
+            d="M30.25,8a5.31,5.31,0,0,1,.49,5.08,8.88,8.88,0,0,0-.57,2.09c-.05-.13-.06-.3-.11-.44-.4-1.53-1.84-2.61-2.43-4.05a7.38,7.38,0,0,1-.44-1.47c.63,1.17,2.2,1.78,2.62,3.07a6,6,0,0,1,.27,1.09,0,0,0,0,0,0,0,14.82,14.82,0,0,1,.05-4,3.35,3.35,0,0,0-.48-2c.25.15.37.43.54.65Z">
+          </path>
+          <path class="cls-1"
+            d="M29.54,7.78c.26,1.19-.12,2.35.12,3.55h0c-.65-1.27-2-1.87-3-2.89a4.07,4.07,0,0,1-.92-2.12c.54,1.31,2,1.59,2.84,2.7a3.58,3.58,0,0,1,.55.89l0,0a24.61,24.61,0,0,1-1-3.29,2.56,2.56,0,0,0-1-1.24,3.31,3.31,0,0,1,2.29,2.43Z">
+          </path>
+          <path class="cls-1" d="M26.59,5A5,5,0,0,1,28,7.75l.14.32a11.89,11.89,0,0,1-3.07-3.26l-.94-1A8,8,0,0,1,26.59,5Z">
+          </path>
+          <path class="cls-1"
+            d="M7.56,4a14,14,0,0,0-2,2.51A18.1,18.1,0,0,1,3.65,8.26a12,12,0,0,1,.83-2.19A5.4,5.4,0,0,1,7.56,4Z"></path>
+          <path class="cls-1"
+            d="M3,6.56a2.83,2.83,0,0,1,1.5-1c-1.12.77-1,2.15-1.4,3.3-.11.42-.31.82-.41,1.25l0,0a3.86,3.86,0,0,1,.92-1.36C4.44,8,5.62,7.58,6,6.49,6,8,4.73,9.19,3.52,10a5.09,5.09,0,0,0-1.25,1.5c0-.38.06-.76,0-1.17C2.17,9,2.08,7.53,3,6.56Z">
+          </path>
+          <path class="cls-1"
+            d="M.74,11.07A5.23,5.23,0,0,1,2,7.64s0,0,.07,0c-.86,1.31-.15,3-.19,4.45l-.11,1.52s0,.06.06,0c.05-.17.06-.35.1-.53.2-1.23,1.27-2.1,2.2-3a2.39,2.39,0,0,0,.48-.71,6.36,6.36,0,0,1-.52,1.8c-.73,1.42-2.07,2.58-2.31,4.2C1.69,13.88.63,12.72.74,11.07Z">
+          </path>
+          <path class="cls-1"
+            d="M.09,13a6,6,0,0,1,.35-1.24c-.35,1.77.84,3,1.23,4.58A13.85,13.85,0,0,0,2.11,18s0,0,.05,0c-.58-1.63.26-3.14,1.1-4.42a4.24,4.24,0,0,0,.42-1.13,9.56,9.56,0,0,1-.2,2.35c-.2,1-.51,1.9-.78,2.84a4.46,4.46,0,0,0,0,1.88l-.08-.07C2,18.33.74,17.44.38,16.2A7,7,0,0,1,.09,13Z">
+          </path>
+          <path class="cls-1"
+            d="M0,16.43c.14,1.88,2.15,2.87,3.09,4.42a5.09,5.09,0,0,0,.71.93c0-.2-.23-.37-.3-.57A4,4,0,0,1,3.16,19a11.15,11.15,0,0,0,.34-2.85c.82,1.77.57,4,1,5.9.12.42.36.79.52,1.2-1.69-1.15-4-2.24-4.74-4.35A5.25,5.25,0,0,1,0,16.43Z">
+          </path>
+          <path class="cls-1"
+            d="M1,20.73c.94,2.13,3.3,2.3,4.88,3.6a3.93,3.93,0,0,0,.92.63l0,0a5.39,5.39,0,0,1-1-1.13c-.92-1.28-.6-3.09-1.29-4.47a10.43,10.43,0,0,1,1.58,2.39c.57,1.39.78,3,2.09,4-1.42-.47-3.07-.34-4.32-1.21A6,6,0,0,1,1,20.73Z">
+          </path>
+          <path class="cls-1"
+            d="M3.46,24.7c1.51,1.71,4,1.14,6,1.59a2.82,2.82,0,0,0,.84.11c-.24-.15-.57-.14-.83-.27-1.58-.55-1.81-2.26-2.66-3.41a24.18,24.18,0,0,1,3,2.65,5.25,5.25,0,0,0,2.51,1.11c-.22.08-.51.06-.75.12-1.65.41-3.48,1.07-5.23.48A5.09,5.09,0,0,1,3.46,24.7Z">
+          </path>
+          <path class="cls-1"
+            d="M23.93,28.7a5.09,5.09,0,0,1-4.8-1c-.54-.34-1-.83-1.71-.79a2.45,2.45,0,0,0-.71.07,13.11,13.11,0,0,1,3.58,2.49,5.18,5.18,0,0,1-.65.59,12.74,12.74,0,0,0-3.53-2.87,2.26,2.26,0,0,0-.73.31,10.88,10.88,0,0,0-2.91,2.6l-.68-.56a12.42,12.42,0,0,1,3.6-2.56c-1.29-.41-2.13.67-3.12,1.22a4.56,4.56,0,0,1-6.17-.75,4.43,4.43,0,0,0,3.94.34c1.66-.72,3.38-1.63,5.38-1.2.31,0,.62.32.91.05a6.39,6.39,0,0,1,4.45.56l1.32.53A4.37,4.37,0,0,0,26,27.27a4.62,4.62,0,0,1-2,1.43Z">
+          </path>
+          <path class="cls-1"
+            d="M25.75,26.94c-1.91.72-3.83-.16-5.66-.46l-.35,0h0a5.12,5.12,0,0,0,2.42-1.09,25,25,0,0,1,3.08-2.78c-.84,1.08-.93,2.62-2.33,3.32a8.9,8.9,0,0,1-1.14.44,12,12,0,0,0,1.48-.22c1.87-.29,4,0,5.32-1.59a5,5,0,0,1-2.82,2.43Z">
+          </path>
+          <path class="cls-1"
+            d="M29.21,21.58c-.75.49-1.52,1-2.24,1.51V23c1.11-1.84.57-4.38,1.25-6.4l.25-.68c-.14,1.26.41,2.33.37,3.6a4.05,4.05,0,0,1-.69,2.06h.07a25.75,25.75,0,0,1,1.6-2.15c1-1,2-1.93,2.12-3.24a5.58,5.58,0,0,1-2.73,5.38Z">
+          </path>
+          <path class="cls-1"
+            d="M26.2,9.37A11.39,11.39,0,0,0,16,2.9a12,12,0,0,0-5.15,1.22A11.42,11.42,0,0,0,9.59,23.77a11.43,11.43,0,0,0,17.36-6.43,11.25,11.25,0,0,0-.75-8Zm.53,4c0,.19,0,.43.09.58l-1.63,0a.22.22,0,0,1-.14.05l0-.07a9,9,0,0,0-.86-3.52c0-.49-.49-.82-.69-1.24-.36-.25-.47-.69-.89-.91-.08-.08-.11-.23-.23-.25l.19,0a12.48,12.48,0,0,0,1.13-1.21,11.18,11.18,0,0,1,3,6.58ZM22.12,19.5c-.14-.14-.15-.4-.4-.4-.08,0-.12.07-.12.14s0,.08,0,.11l-.51-.45a2.47,2.47,0,0,0,.61-.69,7.48,7.48,0,0,0,1-2.16.22.22,0,0,0,.26,0,.21.21,0,0,0,0-.26l-.19-.2a5.63,5.63,0,0,0,.08-1l.13,0c.53,0,1.06,0,1.57,0l-.08.09a8.39,8.39,0,0,1-2.27,5.4c.06-.2-.13-.37-.1-.58Zm-1.33,1.63c-.3-.27.18-.5.27-.75s-.35-.41-.57-.49-.07-.2-.08-.29a.94.94,0,0,0,.26-.32l0,.11.7.72a.36.36,0,0,0,.19.38c.08,0,.16,0,.23,0h0a8.18,8.18,0,0,1-1,.85l-.08.11c0-.11.19-.16.1-.3Zm-3.16-8.78c-.09,0-.19.1-.29.05a.7.7,0,0,0-.38-.26c-.11,0-.18.16-.31.09.2-.22.57-.26.72-.57a1.18,1.18,0,0,0,.07-.45c-.06-.07-.14-.13-.22-.07s-.37.23-.49.43l-.41-.14a10.93,10.93,0,0,0-.08-1.17,5.54,5.54,0,0,0,.68.14,5.79,5.79,0,0,1,1.62.74,1.2,1.2,0,0,0-.34.27c0,.1.11.07.15.14l.11,0c-.17.44-.76.37-.83.84ZM18.1,17c0,.2-.3.2-.43.34-.08,0,0-.11,0-.15s.24-.22.43-.19Zm3.21-5.43c.19,0,.3.26.49.3a3,3,0,0,1,.31.85c-.15.17-.16.55-.49.49-.08-.18.15-.29.1-.46s.15-.07.17-.15-.23-.14-.26-.31-.18-.09-.27-.12-.42.43-.48,0a.16.16,0,0,0,.06-.22c-.19-.1-.2-.36-.41-.46a4,4,0,0,0-.8-.06c-.17,0-.38-.16-.51,0s-.09.26-.11.4a.39.39,0,0,1-.15-.16c.5-.56,1.07-1.12,1.59-1.66l0-.07a6.74,6.74,0,0,1,.76,1c0,.22-.37.44,0,.58Zm1,3c-.1.31-.08.66-.16,1a.52.52,0,0,1-.05.16c-.1-.19-.17-.45-.4-.56s-.07-.36-.24-.48l-.18-.18a2.37,2.37,0,0,0,1,.08ZM19.93,9.81c-.3.34-.68.65-.94,1l0-.12a5,5,0,0,0-2.54-1l-.15,0V8.15L16.22,8A10.12,10.12,0,0,1,18,8.41a6.67,6.67,0,0,1,2,1.18l.14.06-.29.16Zm-1.55,8.39a5.36,5.36,0,0,1,1.42.32.4.4,0,0,0,.31-.09c0-.19.2-.27.18-.46s0-.38.16-.52a.79.79,0,0,0-.14-.57c-.12-.08-.24,0-.36,0s-.08.4-.32.34a.22.22,0,0,1-.24.06s-.06,0,0-.07c.17-.09.47,0,.49-.3.13-.11.32-.06.44-.19a1.94,1.94,0,0,1,.24-.38.61.61,0,0,0,0-.17c0,.08,0,.19.13.23s.19-.07.24-.15,0-.11.08-.07.34,0,.51,0a1.64,1.64,0,0,1,.45-.08,5,5,0,0,1-.83,1.75c-.14.17-.27.36-.42.53,0-.13,0-.31-.16-.43l-.07,0c-.09.18-.27.33-.25.54-.13.22-.48,0-.68.15s-.37-.16-.57-.22-.46-.1-.67-.2a.1.1,0,0,1,.07-.11ZM17.32,3.59a10.57,10.57,0,0,1,6,2.84l-.19.08a4.43,4.43,0,0,0-.86,1c0-.11-.18-.18-.23-.28a1.19,1.19,0,0,0-.6-.77c-.22,0-.27-.37-.54-.27-.23-.19-.51-.05-.73.06v0A8.44,8.44,0,0,0,16.6,5.19c-.06,0-.1.05-.16,0s0-.18,0-.26-.1-.13-.18-.08a.24.24,0,0,0-.05.14,7.8,7.8,0,0,0,0-1.56,8.93,8.93,0,0,0,1.1.14Zm-.43,2.27a9.17,9.17,0,0,1,2.75.79c.13.2.38.29.42.54-.13.34.46.34.19.69,0,.11.08.17.12.26s0,.24.1.3.29-.23.49-.15a.93.93,0,0,1,.32.8.55.55,0,0,0,.36.38c.33-.1.17.27.41.37s.39.37.68.34a8,8,0,0,1,.62.69.1.1,0,0,0,.07.11c.14,0,.22-.06.34-.07a8.1,8.1,0,0,1,.74,2.93l.05.11c-.55,0-1.1,0-1.66,0a1.73,1.73,0,0,0-.17-.92,1.13,1.13,0,0,0,.1-.58c0-.08-.11,0-.15,0a1.76,1.76,0,0,0-.3.62.92.92,0,0,0-.09.8l.07.07H21.7c.15-.1-.13-.28,0-.44l.29-.06c.09-.21.32-.36.31-.61a.54.54,0,0,0,.15-.56c-.14-.31.23-.63-.05-.92a.16.16,0,0,0-.14-.2c-.09,0-.19,0-.19-.12s.18-.16.15-.28-.18,0-.26,0,.23-.28,0-.41-.24.16-.39.1a.17.17,0,0,1-.05-.23l-.34-.42s-.13,0-.14-.06c0-.33-.38-.52-.41-.85-.13-.11,0-.32-.19-.42s-.19-.15-.32-.1a3.56,3.56,0,0,0-.5-.58.11.11,0,0,0-.12.05c0,.16.21.25.2.42a.06.06,0,0,0-.07,0,.82.82,0,0,0,.26.41,6.62,6.62,0,0,0-3-1.22,1.82,1.82,0,0,0-.65,0c.05-.49,0-1.05,0-1.58l-.06-.11a1.93,1.93,0,0,0,.68.1Zm-1,6.52.1.05c-.12,0-.25-.07-.35,0s0,.14,0,.2c.2.08.25.41.52.28.11,0,.25,0,.29.18s.19.35.41.29c0,.11,0,.29.08.38,0,.1-.16.14-.15.26a.11.11,0,0,0,0,.14c.21,0,.2.26.29.39a.38.38,0,0,0,.15.43,1.61,1.61,0,0,1-.19.53c-.22.11-.58-.16-.66.23-.12.14,0,.44-.26.45a1.78,1.78,0,0,1-1.25-.34c.23-.12.63,0,.71-.3a.19.19,0,0,0,.06-.21,1.12,1.12,0,0,0,.2-.38c-.08-.09,0-.13,0-.23-.23-.24-.55-.11-.84-.11s0,.29-.13.42-.23.25-.39.38a.29.29,0,0,1-.15-.25h0a.08.08,0,0,0,.06.1c.21,0,.15-.21.21-.32s.35-.32.1-.42c0-.06,0-.13,0-.16s-.21,0-.22.15a.23.23,0,0,1-.09.27h0a.12.12,0,0,0-.08-.14c-.13,0-.24.1-.37.07a3.32,3.32,0,0,1-.57.08c0-.11.15-.07.18-.18s.08-.27.16-.4.13,0,.18,0a.16.16,0,0,0,.16.07l.06-.1c.17.1.07.59.41.38a3.64,3.64,0,0,1,.1-.65c-.07-.18.12-.26.18-.38s.16-.18.23-.27a1.08,1.08,0,0,0,.72-.42c-.07-.14,0-.35-.14-.46.12,0,.32-.1.41,0ZM15.67,22.9l-.16-.11A8.91,8.91,0,0,1,10,20.44c.25,0,.35.31.63.23s.54-.28.87-.23a.48.48,0,0,0,.45-.15c.05-.17-.13-.25-.16-.39a6.56,6.56,0,0,0,3.65,1.37l.13-.06v1.5l.07.19ZM9.74,14.73l-.09-.14a.65.65,0,0,0,.55.05c-.28.09-.18.43-.28.64s.14.13.12.23-.15.22-.22.32a4.63,4.63,0,0,0-.08-1.11ZM8,16.68c-.15,0-.11.19-.18.27a7.53,7.53,0,0,0-.22-1.18l-.12-1-.07-.1a13.77,13.77,0,0,0,1.57,0l.12-.06a1.08,1.08,0,0,0,.12.83c-.06-.07-.15-.27-.3-.26s-.31.4-.6.41a1.14,1.14,0,0,0-.32.75c.1.11-.08.21,0,.34Zm1.16-2.62L9,14,7.48,14A9,9,0,0,1,9.1,9.33l.61-.78V8.45a11.31,11.31,0,0,0,1.19,1.19A6.83,6.83,0,0,0,9.11,13.9c0,.06,0,.12.07.16Zm6.43-6.6a2.93,2.93,0,0,0-.89.07,6.78,6.78,0,0,0-3.4,1.72l0-.11a9.18,9.18,0,0,0-1.14-1.06c.36-.21.68-.53,1-.77a8.69,8.69,0,0,1,4.43-1.48,11.45,11.45,0,0,0,0,1.63ZM13.07,16a.09.09,0,0,0,.14.07c.06-.09-.14-.23,0-.28.09.1,0,.27.1.39a.3.3,0,0,1,.05.22,3.87,3.87,0,0,0-.48.55c-.1-.25-.33-.46-.43-.72s-.25-.63-.41-.92c.14.17.5,0,.5.3,0,0,.06,0,.08,0s.05-.06.11,0,.16.08.06.15a.37.37,0,0,0,.27.25Zm1.68,4.42.27.12a7.07,7.07,0,0,1-2.89-1.29c-.15-.08-.24-.28-.42-.29a8.19,8.19,0,0,0,1.13-1.16,2.23,2.23,0,0,0,.71.6c.43.2.87.56,1.38.46a1.07,1.07,0,0,0-.42.28c-.07.15,0,.38-.25.45,0,.32.3.59.5.83Zm-3.61-2-.06-.35c-.32-.29-.22-.79-.27-1.16-.23-.18,0-.47-.2-.68,0-.33-.51-.44-.35-.81-.06-.09-.14-.21-.07-.32s.32,0,.39-.16l0-.3c.12-.07.29.09.35-.08s-.42-.63,0-.78c.15,0,.36-.05.42.14a1.29,1.29,0,0,1,0,.67c.15.06,0,.19,0,.28s-.18.13-.28.1-.13-.2-.23-.19,0,.24,0,.38,0,.17-.06.23a.19.19,0,0,0-.14,0c-.1.05,0,.15,0,.21s.17.16.29.16l.06-.07a4.89,4.89,0,0,1,.08-.5l.16.09a5.65,5.65,0,0,0,.87,1.94l.22.21A15,15,0,0,0,11,18.89h0s0-.11-.09-.08c0-.22.31-.15.24-.4Zm.79-6.7a1.19,1.19,0,0,0-.38.4c-.14.08-.31.08-.43.23s.08.14,0,.19-.4,0-.46.2-.27.33-.26.56c-.14.09-.11.27-.1.41s0,.26.1.32a1.42,1.42,0,0,0-.71,0,5.12,5.12,0,0,0,.14-.84,6.69,6.69,0,0,1,1.52-3.14,13.77,13.77,0,0,0,1.25,1.17c-.32,0-.33.49-.67.48Zm3.5,6.1c-.08.13,0,.32-.06.48a4.32,4.32,0,0,1-2-.94,8.78,8.78,0,0,0,1-1.13c0,.18.25.27.4.35.3.14.67.34,1,.2l-.08.07c.1.1-.07.2,0,.29s-.07.06-.08.12,0,.28.15.32a.1.1,0,0,1-.07.15c-.11,0-.27,0-.32.1Zm-1.82-1.7a.82.82,0,0,0,.23-.37l.19.1c-.18,0-.27.19-.41.28Zm1.58-4.61c0-.08.06-.16,0-.22-.26.12-.16.41-.34.6s-.22.07-.31.15a.21.21,0,0,0-.3,0c-.13,0-.16-.28-.3-.13s0,.15-.12.11-.06,0-.09-.07.14-.08.09-.18-.32-.15-.46-.29h-.12a3.87,3.87,0,0,1,2.42-1.14,3.58,3.58,0,0,0,.09,1.23c-.14-.18-.34,0-.51,0Zm.45-1.84a2.63,2.63,0,0,0-.86.1,5.21,5.21,0,0,0-1.73.9L13,10.8a15,15,0,0,0-1.21-1.13,6.62,6.62,0,0,1,3.78-1.6l.1-.06a7.54,7.54,0,0,0,0,1.67Zm-6.13-4a11,11,0,0,1,6.09-2.16l0,.16,0,1.36.05.14A9,9,0,0,0,9.82,7.6l0,.08a9.72,9.72,0,0,0-1.25-1.2H8.49c.35-.2.66-.57,1-.8ZM5.28,13a11.14,11.14,0,0,1,2.9-6.19l0,.15c.39.38.77.78,1.14,1.13A4.6,4.6,0,0,0,8.6,9a9.2,9.2,0,0,0-1.7,4.85l0,.22a11.15,11.15,0,0,0-1.75,0c.07-.35,0-.7.09-1Zm1.31,6.62a11.56,11.56,0,0,1-1.39-5H6.77l.15-.06a1.77,1.77,0,0,0,0,.32v0s0,.05,0,.09a9,9,0,0,0,.27,1.72l.08.12A2.31,2.31,0,0,1,7,16.5a.72.72,0,0,0-.37.14c.06.16-.1.11-.18.16a.3.3,0,0,0-.11-.11c-.12,0-.24,0-.3.13S6,16.94,6,17c0,.26-.12.59.07.8a.66.66,0,0,0,.23.47c.06,0,.09,0,.12-.05s.23.39.46.34c.07,0,0-.1.07-.15.12.12.18.36.4.34.05.06.08.16.17.17s.15.27.33.37.21.29.41.19l.07-.08c.06,0,0,.16.07.22a.77.77,0,0,0,.47.36,3.35,3.35,0,0,0,.53.54l-.14.06L8.09,21.75a18.71,18.71,0,0,1-1.51-2.12Zm8,5.37a11.46,11.46,0,0,1-6-2.82L9.69,21l0-.07a8.92,8.92,0,0,0,5.78,2.49l.18,0-.06.09V25l.09.14A9.26,9.26,0,0,0,14.56,25Zm1.37-6.41a.59.59,0,0,1-.33,0c-.05,0,0-.06-.05-.1.17,0,.24-.19.42-.16s.12-.25.26-.3c0-.15.14-.05.18-.14s.12-.1.19-.06.35.1.46.28c.06,0,.07,0,.07-.08v-.07c.18,0,.27.24.46.07a.13.13,0,0,0,0-.16s-.05,0-.05-.05.21.2.37.11.22-.24.4-.24l0,.05c0,.34-.26.54-.51.7s-.46,0-.45.31c-.19.17-.36-.1-.59,0s0-.22-.15-.24-.52-.12-.69.15Zm.42,2.87c.21.08.56-.08.67.15-.06.13-.16.26-.12.41s.21.49.48.5a.47.47,0,0,0,.25.15,8.86,8.86,0,0,0-1.36.19,11.67,11.67,0,0,0,0-1.4l-.09-.12c.08,0,.12.08.18.12Zm0,3.62-.11.07a13.19,13.19,0,0,0,0-1.78,2.73,2.73,0,0,0,.88,0l.87-.15c.43.09.73.78,1.21.36.16-.2.45-.18.56-.46.28-.1.35-.38.54-.56.19-.53.79-.61,1.16-1a3.08,3.08,0,0,0,.78-.75l0,.14,1.2,1.14a11,11,0,0,1-7.11,3ZM26.77,14.7a10.91,10.91,0,0,1-2.83,6.91l0,.08a12,12,0,0,0-1.26-1.24,3.73,3.73,0,0,0,.67-.73,9.13,9.13,0,0,0,1.8-5L25,14.55l.1.07h1.62l.08,0-.07.14Z">
+          </path>
+          <path class="cls-1"
+            d="M21,5.81A.23.23,0,0,0,21,6c.24.09.27.43.57.35.09-.1-.05-.21,0-.34a.34.34,0,0,0-.25-.2c-.12.11-.22-.1-.33,0Z">
+          </path>
+          <path class="cls-1"
+            d="M16.48,4.85c.3.39.82.17,1.19.1a.72.72,0,0,0,.74-.19v0a1.14,1.14,0,0,0-.88-.34l-.82.35c-.07,0-.2-.07-.24,0s0,.07,0,.1Z">
+          </path>
+        </svg>
+        <img alt="The SDG colour wheel with individual colours representing each of the 17 SDGs"
+        src="https://sdgintegration.undp.org/sites/all/themes/g20ib/images/sdg-wheel.svg" style="max-width: 30px; margin-left: 20px;">
+        <img src="./assets/mdea.png" alt="Logo" style="max-height: 30px; margin-left: 20px;" />
+
+    </p>
     <p>&copy; 2022–2023 Eje Temático del Agua, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+
+
   </footer>
 </main>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+

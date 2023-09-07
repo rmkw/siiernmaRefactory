@@ -12,8 +12,8 @@ const routes: Routes = [
     path: '',
     component: LayoutPageComponent,
     children: [
-      { path: 'dg', component: DgComponent},
-      { path: 'content/:by', component: ProductPageComponent},
+      { path: '', component: DgComponent},
+      { path: 'products', component: ProductPageComponent},
       { path: 'search', component: SearchPageComponent},
       { path: 'new', component: NewPageComponent},
       { path: 'by/:id', component: ByidsComponent},
