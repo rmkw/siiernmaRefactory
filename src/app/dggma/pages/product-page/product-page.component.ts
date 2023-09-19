@@ -8,6 +8,8 @@ import { Products } from '../../interfaces/product.interface';
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit{
+  flagFilter : boolean = false;
+  flagOther : boolean = true;
 
 
   public products: Products[] = [];
@@ -24,6 +26,15 @@ export class ProductPageComponent implements OnInit{
         console.log('Respuesta del servicio:', data);
       });
 
+  }
+
+  changeFlagFilter(){
+    this.flagFilter = true;
+    this.flagOther = false;
+  }
+  hiddenFilters(){
+    this.flagFilter = false;
+    this.flagOther = true;
   }
 
 }

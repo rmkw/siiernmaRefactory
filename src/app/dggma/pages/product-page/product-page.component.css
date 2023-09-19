@@ -104,3 +104,11 @@
   border-color: #113250;
 }
 
+.shadow-on-hover:hover {
+  box-shadow: 0 10px 5px -5px rgba(255, 255, 255, 0.5);
+  /* Sombra blanca al pasar el puntero */
+  transition: box-shadow 0.3s ease;
+  /* Transición suave de la sombra */
+}
+
+

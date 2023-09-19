@@ -1,238 +1,221 @@
+<div class="container-fluid" style="background-color: #113250;">
+  <div class="row ">
 
-    <div class="mt-0 " style="border-top: solid 1px; border-color: #113250; background-color: #f8f9fa; padding-bottom: 1rem;">
-      <h4 style="margin-left: 1rem; margin-top: 1rem;" class="">Filtros o controles.</h4>
+    <div *ngIf="flagFilter" class="col-3" style="background-color: #f8f9fa; border-top: solid 1px; border-color: #113250;">
+      <div class="row">
 
-      <div class="container-fluid">
-        <hr>
-        <div class="row">
-
-          <!--! POR DIRECCIÓN -->
-          <div class="col-4">
-            <h6 style="color: #113250;">Productos por dirección general:</h6>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="prodgeografico">
-              <label class="form-check-label" for="prodgeografico">
-                Geografía y Medio Ambiente
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="prodestadistico2">
-              <label class="form-check-label" for="prodestadistico2">
-                Estadísticas Sociodemográficas
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-              <label class="form-check-label" for="prodestadistico">
-                Estadísticas Económicas
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-              <label class="form-check-label" for="prodestadistico">
-                Estadísticas de Gobierno, Seguridad Pública y Justicia
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-              <label class="form-check-label" for="prodestadistico">
-                Integración, Análisis e Investigación
-              </label>
-            </div>
-            <hr>
-            <h6 style="color: #113250;">Productos de tipo:</h6>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="" id="prodgeografico">
-              <label class="form-check-label" for="prodgeografico">
-                Geográfico
-              </label>
-            </div>
-
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-              <label class="form-check-label" for="prodestadistico">
-                Estadístico
-              </label>
-            </div>
+        <div class="d-flex justify-content-between mt-2">
+          <div><i class="bi bi-funnel-fill"></i> <strong><span>Filtros</span></strong></div>
+          <div class="d-flex">
+            <button disabled  class="btn btn-outline-secondary" style=" --bs-btn-padding-y: .20rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin-right: 0.5rem;">Quitar filtros</button>
+            <button type="button" class="btn-close" aria-label="Close" (click)="hiddenFilters()"></button>
+          </div>
+        </div>
 
 
+        <div class="col-12 mt-2">
+          <hr>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Buscar...">
+            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+          </form>
+        </div>
+
+        <div class="col-12">
+          <hr class="mt-2">
+          <h6 style="color: #113250;">Productos por dirección general:</h6>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="prodgeografico">
+            <label class="form-check-label" for="prodgeografico">Geografía y Medio Ambiente</label>
           </div>
 
-          <!--! TIPO -->
-          <div class="col-4" >
-
-
-            <h6 style=" color: #113250;">Por cobertura:</h6>
-            <div class="form-check form-check-inline" style="margin-right: 2rem;">
-              <input class="form-check-input " type="checkbox" value="" id="cobeNacional">
-              <label class="form-check-label" for="cobeNacional">
-                Nacional
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="" id="cobeEstatal">
-              <label class="form-check-label" for="cobeEstatal">
-                Estatal
-              </label>
-            </div>
-            <div>
-              <div class="form-check form-check-inline" style="margin-right: 1.5rem;">
-                <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal">
-                <label class="form-check-label" for="cobeMunicipal">
-                  Municipal
-                </label>
-              </div>
-              <div class="form-check ">
-                <input class="form-check-input" type="checkbox" value="" id="cobRegional">
-                <label class="form-check-label" for="cobRegional">
-                  Regional
-                </label>
-              </div>
-            </div>
-            <hr>
-
-
-
-            <!--! TIPO DE SOPORTE -->
-            <h6 style="margin-top: 1rem; color: #113250;">Tipos de soporte:</h6>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo">
-              <label class="form-check-label" for="typeDatoGeo">
-                Datos Geográficos
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="typeTabulado">
-              <label class="form-check-label" for="typeTabulado">
-                Tabulado
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="typePublicacion">
-              <label class="form-check-label" for="typePublicacion">
-                Publicaciones
-              </label>
-            </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="prodestadistico2">
+            <label class="form-check-label" for="prodestadistico2">Estadísticas Sociodemográficas</label>
           </div>
 
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
+            <label class="form-check-label" for="prodestadistico">Estadísticas Económicas</label>
+          </div>
 
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
+            <label class="form-check-label" for="prodestadistico">Estadísticas de Gobierno, Seguridad Pública y Justicia</label>
+          </div>
 
-          <div class="col-4" >
-            <h6 style=" color: #113250;">Consultar por años de Publicación:</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
+            <label class="form-check-label" for="prodestadistico">Integración, Análisis e Investigación</label>
+          </div>
 
-            <div class="row mt-1">
-              <div class="col-md-6">
-                <div class="row g-2 align-items-center">
-                  <div class="col-4 col-md-auto">
-                    <label for="inputPassword6" class="col-form-label ms-2">Desde:</label>
-                  </div>
-                  <div class="col-8 col-md-auto">
-                    <select class="form-select form-select-sm" aria-label="Small select example" id="startYear2"
-                      >
-                      <option value="0">Seleccionar fecha</option>
-                      <option  [value]=""></option>
-                    </select>
-                  </div>
+          <hr>
+          <h6 style="color: #113250;">Productos de tipo:</h6>
 
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="prodgeografico">
+            <label class="form-check-label" for="prodgeografico">Geográfico</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
+            <label class="form-check-label" for="prodestadistico">Estadístico</label>
+          </div>
+
+          <hr>
+
+        </div>
+
+        <div class="col-12">
+          <h6 style=" color: #113250;">Por cobertura:</h6>
+          <div class="form-check form-check-inline" style="margin-right: 2rem;">
+            <input class="form-check-input " type="checkbox" value="" id="cobeNacional">
+            <label class="form-check-label" for="cobeNacional">Nacional</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="cobeEstatal">
+            <label class="form-check-label" for="cobeEstatal">Estatal</label>
+          </div>
+
+          <div class="form-check form-check-inline" style="margin-right: 1.5rem;">
+            <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal">
+            <label class="form-check-label" for="cobeMunicipal">Municipal</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="cobRegional">
+            <label class="form-check-label" for="cobRegional">Regional</label>
+          </div>
+
+          <hr>
+
+          <h6 style="margin-top: 1rem; color: #113250;">Tipos de soporte:</h6>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo">
+            <label class="form-check-label" for="typeDatoGeo">Datos Geográficos</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="typeTabulado">
+            <label class="form-check-label" for="typeTabulado">Tabulado</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="typePublicacion">
+            <label class="form-check-label" for="typePublicacion">Publicaciones</label>
+          </div>
+
+          <hr>
+        </div>
+
+        <div class="col-12">
+          <h6 style=" color: #113250;">Consultar por años de Publicación:</h6>
+          <div class="row mt-1">
+
+            <div class="col-md-6 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+
+                <div class="col-4 col-md-auto">
+                  <label for="inputPassword6" class="col-form-label ms-1">Desde:</label>
                 </div>
+
+                <div class="col-8 col-md-auto">
+                  <select class="form-select form-select-sm" id="endYear2">
+                    <option value="0">Seleccionar fecha</option>
+                    <option></option>
+                  </select>
+                </div>
+
               </div>
+            </div>
 
-              <div class="col-md-6 mt-2 mt-md-0">
-                <div class="row g-2 align-items-center">
-                  <div class="col-4 col-md-auto">
-                    <label for="inputPassword6" class="col-form-label ms-2">Hasta:</label>
-                  </div>
-                  <div class="col-8 col-md-auto">
-                    <select class="form-select form-select-sm" aria-label="Small select example" id="endYear2"
-                      >
-                      <option value="0">Seleccionar fecha</option>
-                      <option ></option>
-                    </select>
-                  </div>
-                  <div class="col-12 col-md-auto mt-2 ">
-                    <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100"
-                      >
-                      <i class="bi bi-search"></i>
-                    </button>
-                  </div>
-
+            <div class="col-md-6 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-4 col-md-auto">
+                  <label for="inputPassword6" class="col-form-label ms-1">Hasta:</label>
+                </div>
+                <div class="col-8 col-md-auto">
+                  <select class="form-select form-select-sm"  id="endYear2">
+                    <option value="0">Seleccionar fecha</option>
+                    <option></option>
+                  </select>
                 </div>
               </div>
             </div>
 
-
+            <div class="col-12 mt-2 ">
+              <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
           </div>
+          <hr>
+        </div>
 
+        <div class="col-12">
+          <h6 style=" color: #113250;">Consultar por años de Referencia:</h6>
+          <div class="row mt-1">
+            <div class="col-md-6 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-4 col-md-auto">
+                  <label for="inputPassword6" class="col-form-label ms-1">Desde:</label>
+                </div>
+                <div class="col-8 col-md-auto">
+                  <select class="form-select form-select-sm" id="endYear2">
+                    <option value="0">Seleccionar fecha</option>
+                    <option></option>
+                  </select>
+                </div>
+              </div>
+            </div>
 
-
-
-
+            <div class="col-md-6 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-4 col-md-auto">
+                  <label for="inputPassword6" class="col-form-label ms-1">Hasta:</label>
+                </div>
+                <div class="col-8 col-md-auto">
+                  <select class="form-select form-select-sm" id="endYear2">
+                    <option value="0">Seleccionar fecha</option>
+                    <option></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-2 ">
+              <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+          <hr>
         </div>
 
       </div>
-
-
-
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container-fluid" style="background-color: #113250;">
-
-
-
-
-
-
-
-    <!--! PRODUCTOS -->
-  <div class="row ">
-    <div class="col">
-
-      <div class="my-3 p-3 bg-body rounded shadow-sm">
-        <h6 class="border-bottom pb-2 mb-0">Productos</h6>
-
-        <div class="d-flex text-body-secondary pt-2" *ngFor="let item of products">
-
-          <div class="me-2 pt-0">
-            <i class="bi bi-globe display-6" style="color: #113250;"></i>
-          </div>
-
-          <div class="pb-3 pt-1 mb-0 small lh-sm border-bottom w-100">
-            <div class="d-flex justify-content-between">
-              <strong class="" style="color: #113250;">{{item.nom_producto}}</strong>
-              <button type="button" class="btn"
-                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">
-                Mas Información
-              </button>
-            </div>
-            <span class="d-block">{{item.nom_prod}}</span>
-          </div>
-
+    <div *ngIf="flagOther" class="col-2"></div>
+    <div [ngClass]="{'col-8': flagOther, 'col-9': flagFilter}">
+      <div class="row align-items-center">
+        <div class="col d-flex ms-3">
+          <button type="button" class="btn btn-outline-light btn-sm" (click)="changeFlagFilter()"style="margin-bottom: 0px; margin-top: 0.5rem;"><span>Filtrar</span></button>
+          <p style="color: #ffffff; margin-bottom: 0px; margin-top: 0.7rem; margin-left: 10px;">881 Recursos encontrados</p>
         </div>
+      </div>
 
-
-
-
-        <small class="d-block text-end mt-3">
-          <a href="#">All suggestions</a>
-        </small>
-
+      <div *ngFor="let item of products">
+        <div class="card shadow-on-hover" style="margin: 1rem;">
+          <div class="row card-body">
+            <div class="col-10 d-flex">
+              <i class="bi bi-globe me-2" style="color: #113250;"></i>
+              <strong class="card-title" style="color: #113250; ">{{item.nom_producto | uppercase}}</strong>
+            </div>
+            <div class="col-2 text-end">
+              <button type="button" class="btn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">Mas Información</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
