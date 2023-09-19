@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DGService } from '../../services/dg.service';
-import { Products } from '../../interfaces/product.interface';
+import { Products, Escalas } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-product-page',
@@ -13,6 +13,8 @@ export class ProductPageComponent implements OnInit{
 
 
   public products: Products[] = [];
+  elementoSeleccionado: any;
+  public escalas: Escalas[]=[];
 
   constructor(
     private _direServices: DGService,
@@ -26,6 +28,9 @@ export class ProductPageComponent implements OnInit{
         console.log('Respuesta del servicio:', data);
       });
 
+      this._direServices.getEscalas()
+    .subscribe( escala => this.escalas = escala)
+
   }
 
   changeFlagFilter(){
@@ -35,6 +40,19 @@ export class ProductPageComponent implements OnInit{
   hiddenFilters(){
     this.flagFilter = false;
     this.flagOther = true;
+  }
+  abrirModal(elemento: any) {
+    this.elementoSeleccionado = elemento;
+  }
+  getEscalasText(indicador_ps: number): string {
+    let escalasText = '';
+    for (let escalas of this.escalas) {
+      if (escalas.id === indicador_ps) {
+        escalasText = escalas.text;
+        break;
+      }
+    }
+    return escalasText;
   }
 
 }

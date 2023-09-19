@@ -207,12 +207,34 @@
       <div *ngFor="let item of products">
         <div class="card shadow-on-hover" style="margin: 1rem;">
           <div class="row card-body">
-            <div class="col-10 d-flex">
-              <i class="bi bi-globe me-2" style="color: #113250;"></i>
-              <strong class="card-title" style="color: #113250; ">{{item.nom_producto | uppercase}}</strong>
+            <div class="col-10 d-flex align-items-center">
+              <div *ngIf="item.dg_prod == 1">
+                <i class="bi bi-globe me-2" style="color: #113250; font-size: 1.5rem;"></i>
+              </div>
+              <div *ngIf="item.dg_prod == 2">
+                <i class="bi bi-bar-chart me-2" style="color: #113250; font-size: 1.5rem;"></i>
+              </div>
+              <div *ngIf="item.dg_prod == 3">
+                <i class="bi bi-cash-stack me-2" style="color: #113250; font-size: 1.5rem;"></i>
+              </div>
+              <div *ngIf="item.dg_prod == 4">
+                <i class="bi bi-file-earmark-text me-2" style="color: #113250; font-size: 1.5rem;"></i>
+              </div>
+              <div *ngIf="item.dg_prod == 5">
+                <i class="bi bi-bank me-2" style="color: #113250; font-size: 1.5rem;"></i>
+              </div>
+
+              <div>
+                <strong class="card-title" style="color: #113250;  ">{{item.nom_producto | uppercase}}</strong>
+              </div>
+
             </div>
-            <div class="col-2 text-end">
-              <button type="button" class="btn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">Mas Información</button>
+            <div class="col-2 text-end d-flex align-items-center">
+              <div class="ms-auto">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="abrirModal(item)"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">Mas
+                  Información</button>
+              </div>
             </div>
           </div>
         </div>
@@ -221,3 +243,69 @@
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+<!--* MODAL -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="col-10 d-flex align-items-center">
+          <div *ngIf="elementoSeleccionado?.dg_prod == 1">
+            <i class="bi bi-globe me-2" style="color: #113250; font-size: 1.5rem;"></i>
+          </div>
+          <div *ngIf="elementoSeleccionado?.dg_prod == 2">
+            <i class="bi bi-bar-chart me-2" style="color: #113250; font-size: 1.5rem;"></i>
+          </div>
+          <div *ngIf="elementoSeleccionado?.dg_prod == 3">
+            <i class="bi bi-cash-stack me-2" style="color: #113250; font-size: 1.5rem;"></i>
+          </div>
+          <div *ngIf="elementoSeleccionado?.dg_prod == 4">
+            <i class="bi bi-file-earmark-text me-2" style="color: #113250; font-size: 1.5rem;"></i>
+          </div>
+          <div *ngIf="elementoSeleccionado?.dg_prod == 5">
+            <i class="bi bi-bank me-2" style="color: #113250; font-size: 1.5rem;"></i>
+          </div>
+
+          <div>
+            <h2 class="modal-title fs-6" id="staticBackdropLabel" style="color: #113250;">{{elementoSeleccionado?.nom_producto | uppercase}}</h2>
+          </div>
+
+        </div>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <span style="color: #0d62c4;">
+          {{ elementoSeleccionado?.dg_prod == 1 ? 'Dirección General de Geografía y Medio Ambiente':(
+          elementoSeleccionado?.dg_prod == 2 ? 'Dirección General de Estadísticas Sociodemográficas': (
+          elementoSeleccionado?.dg_prod == 3 ? 'Dirección General de Estadísticas Económicas': (
+          elementoSeleccionado?.dg_prod == 4 ? 'Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia':(
+          elementoSeleccionado?.dg_prod == 5 ? 'Dirección General de Integración, Análisis e Investigación':''
+          )
+          )
+          )
+          )
+          }}.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
