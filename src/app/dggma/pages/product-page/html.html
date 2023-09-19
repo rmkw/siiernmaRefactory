@@ -1,0 +1,1573 @@
+<ng-container *ngIf="loading; else content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card2 shadow-sm  bg-body-tertiary rounded m-1">
+          <h5 style="color: #113250;">{{currentDirection}}.</h5>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card2 shadow-sm  bg-body-tertiary rounded m-1">
+          <div class="d-flex">
+            <h6>Filtros o controles. </h6>
+            <button class="btn btn-outline-secondary btn-sm ms-auto mb-1" (click)="allFalse()">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <div class="card card-body">
+            <div class="row mb-1">
+
+              <div class="col-12 col-md-6 ">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Consultar por años de Referencia:
+                  </li>
+                </ul>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Desde:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="startYear"
+                          [(ngModel)]="startDate" name="startDate">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_referenciaDesde" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-2 mt-md-0 mt-2">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Hasta:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="endYear"
+                          [(ngModel)]="endDate" name="endDate">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_referenciaHasta" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-md-auto mt-2">
+                        <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100"
+                          (click)="filterProductsByDateRangeReferencia()">
+                          <i class="bi bi-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mt-md-0 mt-2">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Consultar por años de Publicación:
+                  </li>
+                </ul>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Desde:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="startYear2"
+                          [(ngModel)]="startDate2" name="startDate2">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_publicacionDesde" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-2 mt-md-0">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Hasta:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="endYear2"
+                          [(ngModel)]="endDate2" name="endDate2">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_publicacionHasta" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-md-auto mt-2 ">
+                        <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100"
+                          (click)="filterProductsByDateRangePublicacion()">
+                          <i class="bi bi-search"></i>
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- TODO: 3 filtros  -->
+            <div class="row mb-1 d-none d-md-flex">
+
+              <div class="col-md-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Producto de tipo:
+                  </li>
+                </ul>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodgeografico"
+                    [checked]="checkboxesState['prodgeografico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodgeografico">
+                    Geográfico
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodestadistico"
+                    [checked]="checkboxesState['prodestadistico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodestadistico">
+                    Estadístico
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="col-md-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Coberturas:
+                  </li>
+                </ul>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeNacional"
+                        [checked]="checkboxesState['cobeNacional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeNacional">
+                        Nacional
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeEstatal"
+                        [checked]="checkboxesState['cobeEstatal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeEstatal">
+                        Estatal
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
+                        [checked]="checkboxesState['cobeMunicipal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeMunicipal">
+                        Municipal
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobRegional"
+                        [checked]="checkboxesState['cobRegional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobRegional">
+                        Regional
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Tipos de soporte:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo"
+                        [checked]="checkboxesState['typeDatoGeo']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeDatoGeo">
+                        Datos Geográficos
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeTabulado"
+                        [checked]="checkboxesState['typeTabulado']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeTabulado">
+                        Tabulado
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
+                        [checked]="checkboxesState['typePublicacion']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typePublicacion">
+                        Publicaciones
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <!-- TODO: VERSION MOVIL -->
+            <div class="row mb-1 d-flex d-md-none">
+              <div class="col-12">
+                <!-- Contenido de la columna 1 para móvil -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Producto de tipo:
+                  </li>
+                </ul>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodgeografico"
+                    [checked]="checkboxesState['prodgeografico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodgeografico">
+                    Geográfico
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodestadistico"
+                    [checked]="checkboxesState['prodestadistico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodestadistico">
+                    Estadístico
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-1 d-flex d-md-none">
+              <div class="col-12">
+                <!-- Contenido de la columna 2 para móvil -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Coberturas:
+                  </li>
+                </ul>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeNacional"
+                        [checked]="checkboxesState['cobeNacional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeNacional">
+                        Nacional
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeEstatal"
+                        [checked]="checkboxesState['cobeEstatal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeEstatal">
+                        Estatal
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
+                        [checked]="checkboxesState['cobeMunicipal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeMunicipal">
+                        Municipal
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobRegional"
+                        [checked]="checkboxesState['cobRegional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobRegional">
+                        Regional
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-1 d-flex d-md-none">
+              <div class="col-12">
+                <!-- Contenido de la columna 3 para móvil -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Tipos de soporte:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo"
+                        [checked]="checkboxesState['typeDatoGeo']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeDatoGeo">
+                        Datos Geográficos
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeTabulado"
+                        [checked]="checkboxesState['typeTabulado']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeTabulado">
+                        Tabulado
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
+                        [checked]="checkboxesState['typePublicacion']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typePublicacion">
+                        Publicaciones
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- TODO: el buscados -->
+            <div class="row d-none d-md-flex">
+              <div class="col-2"></div>
+
+              <div class="col-8">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Buscar:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+
+                    <div class="form-group">
+                      <input type="text" spellcheck="true" class="form-control mt-2" [formControl]="searchFormControl"
+                        placeholder="Buscar productos en todas las direcciones..." />
+                      <div *ngIf="filteredProducts$ | async as filteredProducts">
+                        <ul class="search-results" *ngIf="filteredProducts.length > 0">
+                          <li *ngFor="let product of filteredProducts" class="search-result-item">
+                            <div [routerLink]="['/dg/by', product.interview__id]">{{ product.nom_producto }}</div>
+                          </li>
+                        </ul>
+                        <p *ngIf="filteredProducts.length === 0 && searchFormControl.value !== ''">No se encontraron
+                          resultados.</p>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+
+
+
+                </div>
+              </div>
+
+              <div class="col-2"></div>
+            </div>
+
+            <div class="row d-flex d-md-none">
+              <div class="col-12">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Buscar:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+
+                    <div class="form-group">
+                      <input type="text" class="form-control mt-2" [formControl]="searchFormControl"
+                        placeholder="Buscar productos en todas las direcciones..." />
+                      <div *ngIf="filteredProducts$ | async as filteredProducts">
+                        <ul class="search-results" *ngIf="filteredProducts.length > 0">
+                          <li *ngFor="let product of filteredProducts" class="search-result-item">
+                            <div [routerLink]="['/dg/by', product.interview__id]">{{ product.nom_producto }}</div>
+                          </li>
+                        </ul>
+                        <p *ngIf="filteredProducts.length === 0 && searchFormControl.value !== ''">No se encontraron
+                          resultados.</p>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center maginTop">
+      <div class="spinner-grow m-2" style="color: #113250; width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow m-2" style="color: #113250; width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow m-2" style="color: #113250; width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center m-2">
+      <div class="">
+        <h4>Cargando...</h4>
+      </div>
+    </div>
+  </div>
+
+
+</ng-container>
+
+<ng-template #content>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card2 shadow-sm  bg-body-tertiary rounded m-1">
+          <h5 style="color: #113250;">{{currentDirection}}.</h5>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card2 shadow-sm  bg-body-tertiary rounded m-1">
+          <div class="d-flex">
+            <h6>Filtros o controles. </h6>
+            <button class="btn btn-outline-secondary btn-sm ms-auto mb-1" (click)="allFalse()">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <div class="card card-body">
+            <div class="row mb-1">
+
+              <div class="col-12 col-md-6 ">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Consultar por años de Referencia:
+                  </li>
+                </ul>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Desde:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="startYear"
+                          [(ngModel)]="startDate" name="startDate">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_referenciaDesde" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-2 mt-md-0 mt-2">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Hasta:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="endYear"
+                          [(ngModel)]="endDate" name="endDate">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_referenciaHasta" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-md-auto mt-2">
+                        <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100"
+                          (click)="filterProductsByDateRangeReferencia()">
+                          <i class="bi bi-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mt-md-0 mt-2">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Consultar por años de Publicación:
+                  </li>
+                </ul>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Desde:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="startYear2"
+                          [(ngModel)]="startDate2" name="startDate2">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_publicacionDesde" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-2 mt-md-0">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-4 col-md-auto">
+                        <label for="inputPassword6" class="col-form-label ms-2">Hasta:</label>
+                      </div>
+                      <div class="col-8 col-md-auto">
+                        <select class="form-select form-select-sm" aria-label="Small select example" id="endYear2"
+                          [(ngModel)]="endDate2" name="endDate2">
+                          <option value="0">Seleccionar fecha</option>
+                          <option *ngFor="let date of a_publicacionHasta" [value]="date">{{ date }}</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-md-auto mt-2 ">
+                        <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100"
+                          (click)="filterProductsByDateRangePublicacion()">
+                          <i class="bi bi-search"></i>
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- TODO: 3 filtros  -->
+            <div class="row mb-1 d-none d-md-flex">
+
+              <div class="col-md-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Producto de tipo:
+                  </li>
+                </ul>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodgeografico"
+                    [checked]="checkboxesState['prodgeografico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodgeografico">
+                    Geográfico
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodestadistico"
+                    [checked]="checkboxesState['prodestadistico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodestadistico">
+                    Estadístico
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="col-md-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Coberturas:
+                  </li>
+                </ul>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeNacional"
+                        [checked]="checkboxesState['cobeNacional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeNacional">
+                        Nacional
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeEstatal"
+                        [checked]="checkboxesState['cobeEstatal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeEstatal">
+                        Estatal
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
+                        [checked]="checkboxesState['cobeMunicipal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeMunicipal">
+                        Municipal
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobRegional"
+                        [checked]="checkboxesState['cobRegional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobRegional">
+                        Regional
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Tipos de soporte:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo"
+                        [checked]="checkboxesState['typeDatoGeo']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeDatoGeo">
+                        Datos Geográficos
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeTabulado"
+                        [checked]="checkboxesState['typeTabulado']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeTabulado">
+                        Tabulado
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
+                        [checked]="checkboxesState['typePublicacion']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typePublicacion">
+                        Publicaciones
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <!-- TODO: VERSION MOVIL -->
+            <div class="row mb-1 d-flex d-md-none">
+              <div class="col-12">
+                <!-- Contenido de la columna 1 para móvil -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Producto de tipo:
+                  </li>
+                </ul>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodgeografico"
+                    [checked]="checkboxesState['prodgeografico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodgeografico">
+                    Geográfico
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="prodestadistico"
+                    [checked]="checkboxesState['prodestadistico']" (change)="handleCheckboxChange($event)">
+                  <label class="form-check-label" for="prodestadistico">
+                    Estadístico
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-1 d-flex d-md-none">
+              <div class="col-12">
+                <!-- Contenido de la columna 2 para móvil -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Coberturas:
+                  </li>
+                </ul>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeNacional"
+                        [checked]="checkboxesState['cobeNacional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeNacional">
+                        Nacional
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeEstatal"
+                        [checked]="checkboxesState['cobeEstatal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeEstatal">
+                        Estatal
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
+                        [checked]="checkboxesState['cobeMunicipal']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobeMunicipal">
+                        Municipal
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="cobRegional"
+                        [checked]="checkboxesState['cobRegional']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="cobRegional">
+                        Regional
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-1 d-flex d-md-none">
+              <div class="col-12">
+                <!-- Contenido de la columna 3 para móvil -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Tipos de soporte:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo"
+                        [checked]="checkboxesState['typeDatoGeo']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeDatoGeo">
+                        Datos Geográficos
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typeTabulado"
+                        [checked]="checkboxesState['typeTabulado']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typeTabulado">
+                        Tabulado
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
+                        [checked]="checkboxesState['typePublicacion']" (change)="handleCheckboxChange($event)">
+                      <label class="form-check-label" for="typePublicacion">
+                        Publicaciones
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- TODO: el buscados -->
+            <div class="row d-none d-md-flex">
+              <div class="col-2"></div>
+
+              <div class="col-8">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Buscar:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+
+                    <div class="form-group">
+                      <input type="text" class="form-control mt-2" [formControl]="searchFormControl"
+                        placeholder="Buscar productos en todas las direcciones..." />
+                      <div *ngIf="filteredProducts$ | async as filteredProducts">
+                        <ul class="search-results" *ngIf="filteredProducts.length > 0">
+                          <li *ngFor="let product of filteredProducts" class="search-result-item">
+                            <div [routerLink]="['/dg/by', product.interview__id]">{{ product.nom_producto }}</div>
+                          </li>
+                        </ul>
+                        <p *ngIf="filteredProducts.length === 0 && searchFormControl.value !== ''">No se encontraron
+                          resultados.</p>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+
+
+
+                </div>
+              </div>
+
+              <div class="col-2"></div>
+            </div>
+
+            <div class="row d-flex d-md-none">
+              <div class="col-12">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                    Buscar:
+                  </li>
+                </ul>
+                <div class="row">
+                  <div class="col">
+
+                    <div class="form-group">
+                      <input type="text" class="form-control mt-2" [formControl]="searchFormControl"
+                        placeholder="Buscar productos en todas las direcciones..." />
+                      <div *ngIf="filteredProducts$ | async as filteredProducts">
+                        <ul class="search-results" *ngIf="filteredProducts.length > 0">
+                          <li *ngFor="let product of filteredProducts" class="search-result-item">
+                            <div [routerLink]="['/dg/by', product.interview__id]">{{ product.nom_producto }}</div>
+                          </li>
+                        </ul>
+                        <p *ngIf="filteredProducts.length === 0 && searchFormControl.value !== ''">No se encontraron
+                          resultados.</p>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div *ngIf="showFilteredProducts">
+        <div *ngFor="let dg of filteredProducts; let i = index">
+          <div class="card1 shadow-sm p-2 mb-3 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+            <h3>{{ dg.nom_producto }}</h3>
+            <h6 class="h666">{{ dg.nom_prod }}</h6>
+            <div class="collapse" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+              <div class="row">
+                <div class="col">
+                  <div class="card card-body" (click)="$event.stopPropagation()">
+                    <div class="row">
+                      <div class="col-md-3 col-12">
+                        <span>Producto de tipo: </span>
+                        <span class="badge">
+                          {{ dg.tipo_prod__1 == 0 ? '' : (
+                          dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 0 ? 'Geográfico' :
+                          '') }}
+                          {{ dg.tipo_prod__2 == 0 ? '' : (
+                          dg.tipo_prod__1 == 0 && dg.tipo_prod__2 == 1 ? 'Estadístico' :
+                          '') }}
+                          {{ dg.tipo_prod__2 == 0 ? '' : (
+                          dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '')
+                          }}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span>Cobertura del producto: </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__1 == 1">
+                          {{ dg.cobertura_geo__1 == 1 ? 'Nacional' : '' }}
+
+                        </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__2 == 1">
+
+                          {{ dg.cobertura_geo__2 == 1 ? 'Estatal' : '' }}
+                        </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__3 == 1">
+
+                          {{ dg.cobertura_geo__3 == 1 ? 'Municipal' : '' }}
+                        </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__4 == 1">
+
+                          {{ dg.cobertura_geo__4 == 1 ? 'Regional' : '' }}
+                        </span>
+                        <span class="badge" *ngIf="dg.cobertura_geo__5 == 1">
+
+                          {{ dg.cobertura_geo__5 == 1 ? 'Otra: '+dg.o_cobertura : '' }}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span>Año de publicación: </span>
+                        <span class="badge">{{ dg.a_publicacion}}
+                          {{dg.a_publicacion2 ? (
+                          ' - ' + dg.a_publicacion2): ''}}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span>Año de referencia: </span>
+                        <span class="badge">{{
+                          dg.a_referencia }}{{
+                          dg.a_referencia2 ? (
+                          ' - ' + dg.a_referencia2) : ''}}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row mt-md-2 mt-xs-0">
+                      <div class="col-md-3 col-12">
+                        <span>El producto se fragmenta:</span>
+                        <span class="badge m-1">{{
+                          dg.fragmenta == 1 ? 'Sí' : (
+                          dg.fragmenta == 2 ? 'No' : '')
+                          }}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12" *ngIf="dg.fragmenta == 1">
+                        <span>
+                          Número de fragmentos:
+                        </span>
+                        <span class="badge m-1">
+                          {{ dg.n_fragmenta }}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.actualizacion == 1">
+                          <span>Se actualiza: </span>
+                          <span class="badge">
+                            {{
+                            dg.p_actualizacion == 1 ? 'Mensual' : (
+                            dg.p_actualizacion == 2 ? 'Anual' : '') }}
+                            {{
+                            dg.p_actualizacion == 3 ? 'Bienal' : (
+                            dg.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                            {{
+                            dg.p_actualizacion == 5 ? 'Quinquenal' : (
+                            dg.p_actualizacion == 6 ? 'Irregular' : '') }}
+                            {{
+                            dg.p_actualizacion == 7 ? ''+ dg.o_periodo : ''}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.actualizacion == 2">
+                          <span>Se actualiza: </span>
+                          <span class="badge">No</span>
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.escala">Escala geográfica: </span>
+                        <div *ngIf="dg.escala == 14">
+                          <span class="badge">
+                            {{ dg.o_escala }}
+                          </span>
+                        </div>
+                        <span *ngIf="dg.escala">
+                          <span class="badge">
+                            {{ dg.escala == 14 ? '' : getEscalasText(dg.escala) }}
+                          </span>
+                        </span>
+                        <span *ngIf="!dg.escala">
+                          <span> Ninguna escala geográfica. </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row mt-md-2 mt-xs-0">
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.liga">
+                          <span>Ligas de acceso: </span>
+                          <a (click)="$event.stopPropagation()" target="_blank" [href]="dg.liga">
+                            enlace.
+                          </a>
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.metodologia == 1">
+                          <span *ngIf="dg.metodologia == 1">
+                            Cuenta con metodología:
+                          </span>
+                          <a (click)="$event.stopPropagation()" [href]="dg.liga_metodologia" target="_blank">
+                            enlace.
+                          </a>
+                        </span>
+                        <span *ngIf="dg.metodologia == 2">
+                          <span>No cuenta con metodología</span>
+                        </span>
+                      </div>
+                      <div class="col-12">
+                        <hr class="m-2">
+                        <span>Tipo(s) de soporte del producto:</span>
+                        <div class="row mt-2">
+                          <div class="col" *ngIf="dg?.tipo_soporte__1 == 1">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{ dg.tipo_soporte__1 == 1
+                                ? 'Datos Geográficos' : ''}}
+                              </li>
+                              <li *ngIf="dg.tipo_soporte__1 == 1" class="list-group-item">
+                                <span> En formato: </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__1 == 1">
+                                  {{
+                                  dg.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__2 == 1">
+                                  {{
+                                  dg.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__3 == 1">
+                                  {{
+                                  dg.formato_geo__3 == 1 ? 'GeoPDF' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__4 == 1">
+                                  {{
+                                  dg.formato_geo__4 == 1 ? 'PDF' : ''
+                                  }}
+                                </span>
+                                <span class="badge" *ngIf="dg.formato_geo__5 == 1">
+                                  {{
+                                  dg.formato_geo__5 == 1 ? 'Otro: ' + dg.o_formato_geo : ''
+                                  }}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col"
+                            *ngIf="(dg?.tipo_soporte__1 == 1 || dg?.tipo_soporte__1 == 0) && dg?.tipo_soporte__2 == 1 ">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{
+                                dg.tipo_soporte__2 == 1 ? 'Tabulado' : ''
+                                }}
+                              </li>
+                              <li class="list-group-item">
+                                <strong> En formato: </strong>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__1 == 1">
+                                  {{
+                                  dg.formato_tab__1 == 1 ? '.dbf' : ''
+                                  }}
+
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__2 == 1">
+                                  {{
+                                  dg.formato_tab__2 == 1 ? '.csv' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__3 == 1">
+                                  {{
+                                  dg.formato_tab__3 == 1 ? '.txt' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__4 == 1">
+                                  {{
+                                  dg.formato_tab__4 == 1 ? '.xlsx' : ''
+                                  }}
+                                </span>
+                                <span class="badge" *ngIf="dg.formato_tab__5 == 1">
+                                  {{
+                                  dg.formato_tab__5 == 1 ? 'Otro: ' + dg.o_formato_tab : ''
+                                  }}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col" *ngIf="dg.tipo_soporte__3">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{
+                                dg.tipo_soporte__3 == 1 ? 'Publicaciones' : ''
+                                }}
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col" *ngIf="dg.tipo_soporte__4">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{
+                                dg.tipo_soporte__4 == 1 ? 'Otro: ' + dg.o_soporte : ''
+                                }}
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 col-12">
+                        <hr>
+                        <span *ngIf="dg.num_var != 0">
+                          <strong> Variables detectadas: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_var}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.num_var == 0">
+                          <strong>Ninguna variable detectada.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.act_aeg == 1">
+                          <strong> Actividades Estadísticas o Geográficas: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_aeg}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.act_aeg != 1">
+                          <strong> No cuenta con Actividad Estadística o Geográfica.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.relacion_ods == 1">
+                          <strong> Relaciones con los Objetivos del Desarrollo Sostenible: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_ods}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.relacion_ods != 1">
+                          <strong> No cuenta con relaciones con los Objetivos del Desarrollo Sostenible (ODS).</strong>
+                        </span>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <hr>
+                        <span *ngIf="dg.pi == 1">
+                          <strong> Producto de Información(PI): </strong>
+                          <span class="badge m-1">
+                            {{dg.num_pi}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.pi != 1">
+                          <strong> Ningún Producto de Información detectado.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.relacion_mdea == 1">
+                          <strong> Relaciones con el Marco para el Desarrollo de las Estadísticas Ambientales: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_mdea}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.relacion_mdea != 1">
+                          <strong> No cuenta con relaciones con el Marco para el Desarrollo de las Estadísticas
+                            Ambientales.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.relacion_ods == 1">
+                          <strong> Relaciones con algún Programa Sectorial: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_ods}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.relacion_ods != 1">
+                          <strong> No cuenta con relaciones con algún Programa Sectorial (PS).</strong>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-12 mt-3">
+                  <span style="color: #0d62c4;">
+                    {{ dg.dg_prod == 1 ? 'Dirección General de Geografía y Medio Ambiente':(
+                    dg.dg_prod == 2 ? 'Dirección General de Estadísticas Sociodemográficas': (
+                    dg.dg_prod == 3 ? 'Dirección General de Estadísticas Económicas': (
+                    dg.dg_prod == 4 ? 'Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia':(
+                    dg.dg_prod == 5 ? 'Dirección General de Integración, Análisis e Investigación':''
+                    )
+                    )
+                    )
+                    )
+                    }}
+                  </span>
+                </div>
+                <div class="col-md-6 col-12 d-flex justify-content-end">
+                  <a [routerLink]="['/dg/by', dg.interview__id]" class="btn btn-primary mt-2"
+                    (click)="$event.stopPropagation()">
+                    Mas Información
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!showFilteredProducts">
+        <div *ngFor="let dg of productsById; let i = index">
+          <div class="card1 shadow-sm p-2 mb-3 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+            <h3>{{ dg.nom_producto }}</h3>
+            <h6 class="h666">{{ dg.nom_prod }}</h6>
+            <div class="collapse" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+              <div class="row">
+                <div class="col">
+                  <div class="card card-body" (click)="$event.stopPropagation()">
+                    <div class="row">
+                      <div class="col-md-3 col-12">
+                        <span>Producto de tipo: </span>
+                        <span class="badge">
+                          {{ dg.tipo_prod__1 == 0 ? '' : (
+                          dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 0 ? 'Geográfico' :
+                          '') }}
+                          {{ dg.tipo_prod__2 == 0 ? '' : (
+                          dg.tipo_prod__1 == 0 && dg.tipo_prod__2 == 1 ? 'Estadístico' :
+                          '') }}
+                          {{ dg.tipo_prod__2 == 0 ? '' : (
+                          dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '')
+                          }}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span>Cobertura del producto: </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__1 == 1">
+                          {{ dg.cobertura_geo__1 == 1 ? 'Nacional' : 'nac'
+                          }}</span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__2 == 1">
+                          {{ dg.cobertura_geo__2 == 1 ? 'Estatal' : 'es'
+                          }}</span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__3 == 1">
+                          {{ dg.cobertura_geo__3 == 1 ? 'Municipal' : 'mu'
+                          }}</span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__4 == 1">
+                          {{ dg.cobertura_geo__4 == 1 ? 'Regional' : 're'
+                          }}</span>
+                        <span class="badge" *ngIf="dg.cobertura_geo__5 == 1">
+                          {{ dg.cobertura_geo__5 == 1 ? 'Otra: '+dg.o_cobertura : 'ot'
+                          }}</span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span>Año de publicación: </span>
+                        <span class="badge">{{ dg.a_publicacion}}
+                          {{dg.a_publicacion2 ? (
+                          ' - ' + dg.a_publicacion2): ''}}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span>Año de referencia: </span>
+                        <span class="badge">{{
+                          dg.a_referencia }}{{
+                          dg.a_referencia2 ? (
+                          ' - ' + dg.a_referencia2) : ''}}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row mt-md-2 mt-xs-0">
+                      <div class="col-md-3 col-12">
+                        <span>El producto se fragmenta:</span>
+                        <span class="badge m-1">{{
+                          dg.fragmenta == 1 ? 'Sí' : (
+                          dg.fragmenta == 2 ? 'No' : '')
+                          }}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12" *ngIf="dg.fragmenta == 1">
+                        <span>
+                          Número de fragmentos:
+                        </span>
+                        <span class="badge m-1">
+                          {{ dg.n_fragmenta }}
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.actualizacion == 1">
+                          <span>Se actualiza: </span>
+                          <span class="badge">
+                            {{
+                            dg.p_actualizacion == 1 ? 'Mensual' : (
+                            dg.p_actualizacion == 2 ? 'Anual' : '') }}
+                            {{
+                            dg.p_actualizacion == 3 ? 'Bienal' : (
+                            dg.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                            {{
+                            dg.p_actualizacion == 5 ? 'Quinquenal' : (
+                            dg.p_actualizacion == 6 ? 'Irregular' : '') }}
+                            {{
+                            dg.p_actualizacion == 7 ? ''+ dg.o_periodo : ''}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.actualizacion == 2">
+                          <span>Se actualiza: </span>
+                          <span class="badge">No</span>
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.escala">Escala geográfica: </span>
+                        <div *ngIf="dg.escala == 14">
+                          <span class="badge">
+                            {{ dg.o_escala }}
+                          </span>
+                        </div>
+                        <span *ngIf="dg.escala">
+                          <span class="badge">
+                            {{ dg.escala == 14 ? '' : getEscalasText(dg.escala) }}
+                          </span>
+                        </span>
+                        <span *ngIf="!dg.escala">
+                          <span> Ninguna escala geográfica. </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row mt-md-2 mt-xs-0">
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.liga">
+                          <span>Ligas de acceso: </span>
+                          <a (click)="$event.stopPropagation()" target="_blank" [href]="dg.liga">
+                            enlace.
+                          </a>
+                        </span>
+                      </div>
+                      <div class="col-md-3 col-12">
+                        <span *ngIf="dg.metodologia == 1">
+                          <span *ngIf="dg.metodologia == 1">
+                            Cuenta con metodología:
+                          </span>
+                          <a (click)="$event.stopPropagation()" [href]="dg.liga_metodologia" target="_blank">
+                            enlace.
+                          </a>
+                        </span>
+                        <span *ngIf="dg.metodologia == 2">
+                          <span>No cuenta con metodología</span>
+                        </span>
+                      </div>
+                      <div class="col-12">
+                        <hr class="m-2">
+                        <span>Tipo(s) de soporte del producto:</span>
+                        <div class="row mt-2">
+                          <div class="col" *ngIf="dg?.tipo_soporte__1 == 1">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{ dg.tipo_soporte__1 == 1
+                                ? 'Datos Geográficos' : ''}}
+                              </li>
+                              <li *ngIf="dg.tipo_soporte__1 == 1" class="list-group-item">
+                                <span> En formato: </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__1 == 1">
+                                  {{
+                                  dg.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__2 == 1">
+                                  {{
+                                  dg.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__3 == 1">
+                                  {{
+                                  dg.formato_geo__3 == 1 ? 'GeoPDF' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_geo__4 == 1">
+                                  {{
+                                  dg.formato_geo__4 == 1 ? 'PDF' : ''
+                                  }}
+                                </span>
+                                <span class="badge" *ngIf="dg.formato_geo__5 == 1">
+                                  {{
+                                  dg.formato_geo__5 == 1 ? 'Otro: ' + dg.o_formato_geo : ''
+                                  }}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col"
+                            *ngIf="(dg?.tipo_soporte__1 == 1 || dg?.tipo_soporte__1 == 0) && dg?.tipo_soporte__2 == 1 ">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{
+                                dg.tipo_soporte__2 == 1 ? 'Tabulado' : ''
+                                }}
+                              </li>
+                              <li class="list-group-item">
+                                <strong> En formato: </strong>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__1 == 1">
+                                  {{
+                                  dg.formato_tab__1 == 1 ? '.dbf' : ''
+                                  }}
+
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__2 == 1">
+                                  {{
+                                  dg.formato_tab__2 == 1 ? '.csv' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__3 == 1">
+                                  {{
+                                  dg.formato_tab__3 == 1 ? '.txt' : ''
+                                  }}
+                                </span>
+                                <span class="badge me-1" *ngIf="dg.formato_tab__4 == 1">
+                                  {{
+                                  dg.formato_tab__4 == 1 ? '.xlsx' : ''
+                                  }}
+                                </span>
+                                <span class="badge" *ngIf="dg.formato_tab__5 == 1">
+                                  {{
+                                  dg.formato_tab__5 == 1 ? 'Otro: ' + dg.o_formato_tab : ''
+                                  }}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col" *ngIf="dg.tipo_soporte__3">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{
+                                dg.tipo_soporte__3 == 1 ? 'Publicaciones' : ''
+                                }}
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col" *ngIf="dg.tipo_soporte__4">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                                {{
+                                dg.tipo_soporte__4 == 1 ? 'Otro: ' + dg.o_soporte : ''
+                                }}
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 col-12">
+                        <hr>
+                        <span *ngIf="dg.num_var != 0">
+                          <strong> Variables detectadas: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_var}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.num_var == 0">
+                          <strong>Ninguna variable detectada.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.act_aeg == 1">
+                          <strong> Actividades Estadísticas o Geográficas: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_aeg}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.act_aeg != 1">
+                          <strong> No cuenta con Actividad Estadística o Geográfica.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.relacion_ods == 1">
+                          <strong> Relaciones con los Objetivos del Desarrollo Sostenible: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_ods}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.relacion_ods != 1">
+                          <strong> No cuenta con relaciones con los Objetivos del Desarrollo Sostenible (ODS).</strong>
+                        </span>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <hr>
+                        <span *ngIf="dg.pi == 1">
+                          <strong> Producto de Información(PI): </strong>
+                          <span class="badge m-1">
+                            {{dg.num_pi}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.pi == 2">
+                          <strong> Ningún Producto de Información detectado.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.relacion_mdea == 1">
+                          <strong> Relaciones con el Marco para el Desarrollo de las Estadísticas Ambientales: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_mdea}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.relacion_mdea == 2">
+                          <strong> No cuenta con relaciones con el Marco para el Desarrollo de las Estadísticas
+                            Ambientales.</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="dg.relacion_ods == 1">
+                          <strong> Relaciones con algún Programa Sectorial: </strong>
+                          <span class="badge m-1">
+                            {{dg.num_ods}}
+                          </span>
+                        </span>
+                        <span *ngIf="dg.relacion_ods == 2">
+                          <strong> No cuenta con relaciones con algún Programa Sectorial (PS).</strong>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-12 mt-3">
+                  <span style="color: #0d62c4;">
+                    {{ dg.dg_prod == 1 ? 'Dirección General de Geografía y Medio Ambiente':(
+                    dg.dg_prod == 2 ? 'Dirección General de Estadísticas Sociodemográficas': (
+                    dg.dg_prod == 3 ? 'Dirección General de Estadísticas Económicas': (
+                    dg.dg_prod == 4 ? 'Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia':(
+                    dg.dg_prod == 5 ? 'Dirección General de Integración, Análisis e Investigación':''
+                    )
+                    )
+                    )
+                    )
+                    }}
+                  </span>
+                </div>
+                <div class="col-md-6 col-12 d-flex justify-content-end">
+                  <button [routerLink]="['/dg/by', dg.interview__id]" class="btn btn-primary mt-2"
+                    (click)="$event.stopPropagation()">
+                    Mas Información
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
+
+
+<div class="container-fluid">
+  <div class="row mt-2">
+    <div class="col-2"></div>
+    <div *ngIf="noProductsFound" class="col-8">
+      <div class="alert alert-primary text-center mt-2">
+        No se encontraron productos con esas características.
+      </div>
+      <div class="text-center mb-4">
+        <div class="d-none d-md-block">
+          <img src="./assets/nodata.svg" alt="" class="img-fluid img-desktop">
+        </div>
+        <div class="d-md-none">
+          <img src="./assets/nodata.svg" alt="" class="img-fluid img-mobile">
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

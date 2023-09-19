@@ -94,3 +94,13 @@
     /* Ajusta este valor según tus necesidades */
   }
 }
+
+
+
+
+
+.form-check-input:checked {
+  background-color: #113250;;
+  border-color: #113250;
+}
+

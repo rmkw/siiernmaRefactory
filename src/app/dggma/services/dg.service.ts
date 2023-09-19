@@ -10,12 +10,31 @@ import { Aeg2, DgaProd, SecuenciaAeg } from '../interfaces/aeg.interface';
 import { MetaODS, Ods, SecuenciaOds } from '../interfaces/ods.interface';
 import { IndicadoresPS2023, PS2023, SecuenciaPS } from '../interfaces/ps.interface';
 
+
+
+
+
+
 @Injectable({providedIn: 'root'})
 export class DGService {
 
   private baseUrl: string = environments.baseUrl;
 
-  constructor(private _http: HttpClient) { }
+
+
+  constructor(private _http: HttpClient) {
+
+// Ruta al diccionario y archivo .aff en español
+
+
+
+  }
+
+
+
+
+
+
 
   getDG(){
     return this._http.get<UAdmin[]>(`${ this.baseUrl}/u_admin`)
