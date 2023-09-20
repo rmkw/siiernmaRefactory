@@ -16,8 +16,8 @@
 }
 
 .badge{
-  background-color: #cfe2ff;
-  color: black;
+  background-color: #113250;
+  color: white;
 }
 
 .card2 {
@@ -112,3 +112,7 @@
 }
 
 
+.custom-scroll{
+  overflow-y: visible;
+  max-height: 65rem;
+}

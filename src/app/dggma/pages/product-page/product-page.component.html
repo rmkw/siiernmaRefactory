@@ -253,9 +253,11 @@
 
 
 <!--* MODAL -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+
+<div class="modal fade " id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+  <div class="custom-scroll">
+    <div class="modal-dialog modal-xl " >
     <div class="modal-content">
       <div class="modal-header">
         <div class="col-10 d-flex align-items-center">
@@ -283,17 +285,355 @@
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+
+      <!--! BODY MODAL -->
+      <div class="modal-body custom-modal-body">
+        <div class="row mb-2">
+
+          <div class="col-md-4 col-12">
+            <span>Producto de tipo: </span>
+            <br>
+            <span class="badge">
+              {{ elementoSeleccionado?.tipo_prod__1 == 0 ? '' : (
+              elementoSeleccionado?.tipo_prod__1 == 1 && elementoSeleccionado?.tipo_prod__2 == 0 ? 'Geográfico' :
+              '') }}
+              {{ elementoSeleccionado?.tipo_prod__2 == 0 ? '' : ( elementoSeleccionado?.tipo_prod__1 == 0 && elementoSeleccionado?.tipo_prod__2 == 1 ? 'Estadístico' :
+              '') }}
+              {{ elementoSeleccionado?.tipo_prod__2 == 0 ? '' : ( elementoSeleccionado?.tipo_prod__1 == 1 && elementoSeleccionado?.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '')
+              }}
+            </span>
+          </div>
+
+          <div class="col-md-4 col-12">
+            <span>Cobertura del producto: </span>
+            <br>
+            <span class="badge me-1" *ngIf="elementoSeleccionado?.cobertura_geo__1 == 1">
+              {{ elementoSeleccionado?.cobertura_geo__1 == 1 ? 'Nacional' : '' }}
+
+            </span>
+            <span class="badge me-1" *ngIf="elementoSeleccionado?.cobertura_geo__2 == 1">
+
+              {{ elementoSeleccionado?.cobertura_geo__2 == 1 ? 'Estatal' : '' }}
+            </span>
+            <span class="badge me-1" *ngIf="elementoSeleccionado?.cobertura_geo__3 == 1">
+
+              {{ elementoSeleccionado?.cobertura_geo__3 == 1 ? 'Municipal' : '' }}
+            </span>
+            <span class="badge me-1" *ngIf="elementoSeleccionado?.cobertura_geo__4 == 1">
+
+              {{ elementoSeleccionado?.cobertura_geo__4 == 1 ? 'Regional' : '' }}
+            </span>
+            <span class="badge" *ngIf="elementoSeleccionado?.cobertura_geo__5 == 1">
+
+              {{ elementoSeleccionado?.cobertura_geo__5 == 1 ? 'Otra: '+elementoSeleccionado?.o_cobertura : '' }}
+            </span>
+          </div>
+
+          <div class="col-md-4 col-12">
+            <span>El producto se fragmenta:</span>
+            <br>
+            <span class="badge m-1">{{
+              elementoSeleccionado?.fragmenta == 1 ? 'Sí' : (
+              elementoSeleccionado?.fragmenta == 2 ? 'No' : '')
+              }}
+            </span>
+          </div>
+
+          <div class="col-md-4 col-12" *ngIf="elementoSeleccionado?.fragmenta == 1">
+            <span>
+              Número de fragmentos:
+            </span>
+            <span class="badge m-1">
+              {{ elementoSeleccionado?.n_fragmenta }}
+            </span>
+          </div>
+
+          <div class="container">
+            <hr>
+          </div>
+
+
+
+        </div>
+
+        <div class="row mb-2">
+
+          <div class="col-md-4 col-12">
+            <span>Año de publicación: </span>
+            <br>
+            <span class="badge">{{ elementoSeleccionado?.a_publicacion}}
+              {{elementoSeleccionado?.a_publicacion2 ? (
+              ' - ' + elementoSeleccionado?.a_publicacion2): ''}}
+            </span>
+
+          </div>
+
+          <div class="col-md-4 col-12">
+            <span>Año de referencia: </span>
+            <br>
+            <span class="badge">{{
+              elementoSeleccionado?.a_referencia }}{{
+              elementoSeleccionado?.a_referencia2 ? (
+              ' - ' + elementoSeleccionado?.a_referencia2) : ''}}
+            </span>
+
+          </div>
+
+          <div class="col-md-4 col-12">
+            <span *ngIf="elementoSeleccionado?.actualizacion == 1">
+              <span>Se actualiza: </span>
+              <br>
+              <span class="badge">
+                {{
+                elementoSeleccionado?.p_actualizacion == 1 ? 'Mensual' : (
+                elementoSeleccionado?.p_actualizacion == 2 ? 'Anual' : '') }}
+                {{
+                elementoSeleccionado?.p_actualizacion == 3 ? 'Bienal' : (
+                elementoSeleccionado?.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                {{
+                elementoSeleccionado?.p_actualizacion == 5 ? 'Quinquenal' : (
+                elementoSeleccionado?.p_actualizacion == 6 ? 'Irregular' : '') }}
+                {{
+                elementoSeleccionado?.p_actualizacion == 7 ? ''+ elementoSeleccionado?.o_periodo : ''}}
+              </span>
+            </span>
+            <span *ngIf="elementoSeleccionado?.actualizacion == 2">
+              <span>Se actualiza: </span>
+              <br>
+              <span class="badge">No</span>
+            </span>
+          </div>
+
+          <div class="container">
+            <hr>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-4 col-12">
+            <span *ngIf="elementoSeleccionado?.escala">Escala geográfica: </span>
+            <div *ngIf="elementoSeleccionado?.escala == 14">
+              <span class="badge">
+                {{ elementoSeleccionado?.o_escala }}
+              </span>
+            </div>
+            <span *ngIf="elementoSeleccionado?.escala">
+              <span class="badge">
+                {{ elementoSeleccionado?.escala == 14 ? '' : getEscalasText(elementoSeleccionado?.escala) }}
+              </span>
+            </span>
+            <span *ngIf="!elementoSeleccionado?.escala">
+              <span> Ninguna escala geográfica. </span>
+            </span>
+          </div>
+          <div class="col-md-4 col-12">
+            <span *ngIf="elementoSeleccionado?.liga">
+              <span>Ligas de acceso: </span>
+              <a (click)="$event.stopPropagation()" target="_blank" [href]="elementoSeleccionado?.liga">
+                enlace.
+              </a>
+            </span>
+          </div>
+          <div class="col-md-4 col-12">
+            <span *ngIf="elementoSeleccionado?.metodologia == 1">
+              <span *ngIf="elementoSeleccionado?.metodologia == 1">
+                Cuenta con metodología:
+              </span>
+              <a (click)="$event.stopPropagation()" [href]="elementoSeleccionado?.liga_metodologia" target="_blank">
+                enlace.
+              </a>
+            </span>
+            <span *ngIf="elementoSeleccionado?.metodologia == 2">
+              <span>No cuenta con metodología</span>
+            </span>
+          </div>
+          <div class="container">
+            <hr>
+          </div>
+        </div>
+
+
         <div class="row">
           <div class="col-12">
 
+            <span>Tipo(s) de soporte del producto:</span>
+            <div class="row mt-2">
+              <div class="col" *ngIf="elementoSeleccionado?.tipo_soporte__1 == 1">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" [style.background-color]="'#113250'" [style.color]="'#ffffff'">
+                    {{ elementoSeleccionado?.tipo_soporte__1 == 1
+                    ? 'Datos Geográficos' : ''}}
+                  </li>
+                  <li *ngIf="elementoSeleccionado?.tipo_soporte__1 == 1" class="list-group-item">
+                    <span> En formato: </span>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_geo__1 == 1">
+                      {{
+                      elementoSeleccionado?.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : ''
+                      }}
+                    </span>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_geo__2 == 1">
+                      {{
+                      elementoSeleccionado?.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''
+                      }}
+                    </span>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_geo__3 == 1">
+                      {{
+                      elementoSeleccionado?.formato_geo__3 == 1 ? 'GeoPDF' : ''
+                      }}
+                    </span>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_geo__4 == 1">
+                      {{
+                      elementoSeleccionado?.formato_geo__4 == 1 ? 'PDF' : ''
+                      }}
+                    </span>
+                    <span class="badge" *ngIf="elementoSeleccionado?.formato_geo__5 == 1">
+                      {{
+                      elementoSeleccionado?.formato_geo__5 == 1 ? 'Otro: ' + elementoSeleccionado?.o_formato_geo : ''
+                      }}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col"
+                *ngIf="(elementoSeleccionado?.tipo_soporte__1 == 1 || elementoSeleccionado?.tipo_soporte__1 == 0) && elementoSeleccionado?.tipo_soporte__2 == 1 ">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" [style.background-color]="'#113250'" [style.color]="'#ffffff'">
+                    {{
+                    elementoSeleccionado?.tipo_soporte__2 == 1 ? 'Tabulado' : ''
+                    }}
+                  </li>
+                  <li class="list-group-item">
+                    <strong> En formato: </strong>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_tab__1 == 1">
+                      {{
+                      elementoSeleccionado?.formato_tab__1 == 1 ? '.dbf' : ''
+                      }}
+
+                    </span>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_tab__2 == 1">
+                      {{
+                      elementoSeleccionado?.formato_tab__2 == 1 ? '.csv' : ''
+                      }}
+                    </span>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_tab__3 == 1">
+                      {{
+                      elementoSeleccionado?.formato_tab__3 == 1 ? '.txt' : ''
+                      }}
+                    </span>
+                    <span class="badge me-1" *ngIf="elementoSeleccionado?.formato_tab__4 == 1">
+                      {{
+                      elementoSeleccionado?.formato_tab__4 == 1 ? '.xlsx' : ''
+                      }}
+                    </span>
+                    <span class="badge" *ngIf="elementoSeleccionado?.formato_tab__5 == 1">
+                      {{
+                      elementoSeleccionado?.formato_tab__5 == 1 ? 'Otro: ' + elementoSeleccionado?.o_formato_tab : ''
+                      }}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col" *ngIf="elementoSeleccionado?.tipo_soporte__3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item " [style.background-color]="'#113250'" [style.color]="'#ffffff'">
+                    {{
+                    elementoSeleccionado?.tipo_soporte__3 == 1 ? 'Publicaciones' : ''
+                    }}
+                  </li>
+                </ul>
+              </div>
+              <div class="col" *ngIf="elementoSeleccionado?.tipo_soporte__4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item " [style.background-color]="'#113250'" [style.color]="'#ffffff'">
+                    {{
+                    elementoSeleccionado?.tipo_soporte__4 == 1 ? 'Otro: ' + elementoSeleccionado?.o_soporte : ''
+                    }}
+                  </li>
+                </ul>
+              </div>
+            </div>
 
           </div>
+          <div class="container">
+            <hr>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-variable-tab" data-bs-toggle="tab" data-bs-target="#nav-variable"
+                  type="button" role="tab" aria-controls="nav-variable" aria-selected="true"
+                  style="color: #113250;">Variables</button>
+
+                <button class="nav-link" id="nav-pi-tab" data-bs-toggle="tab" data-bs-target="#nav-pi" type="button" role="tab"
+                  aria-controls="nav-pi" aria-selected="false" style="color: #113250;">Productos de Información</button>
+
+                <button class="nav-link" id="nav-aeg-tab" data-bs-toggle="tab" data-bs-target="#nav-aeg" type="button" role="tab"
+                  aria-controls="nav-aeg" aria-selected="false" style="color: #113250;">Actividades Estadísticas o
+                  Geográficas</button>
+
+                <button class="nav-link" id="nav-mdea-tab" data-bs-toggle="tab" data-bs-target="#nav-mdea" type="button"
+                  role="tab" aria-controls="nav-mdea" aria-selected="false" style="color: #113250;">MDEA</button>
+
+                <button class="nav-link" id="nav-ods-tab" data-bs-toggle="tab" data-bs-target="#nav-ods" type="button" role="tab"
+                  aria-controls="nav-ods" aria-selected="false" style="color: #113250;">ODS</button>
+
+                <button class="nav-link" id="nav-ps-tab" data-bs-toggle="tab" data-bs-target="#nav-ps" type="button" role="tab"
+                  aria-controls="nav-ps" aria-selected="false" style="color: #113250;">Programas Sectoriales</button>
+              </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-variable" role="tabpanel" aria-labelledby="nav-variable-tab" tabindex="0">
+                <!--TODO: variables -->
+                <div class="row">
+                  <div class="col">
+                    <ng-container *ngIf="secuenciaVAR && secuenciaVAR.length > 0; else nosecuenciaVAR">
+                      <div class="pt-2 m-2">
+                                  <div class=" card-body" (click)="$event.stopPropagation()">
+                                    <div class="row">
+                                      <div class="col-md-4 col-12" *ngFor="let item of secuenciaVAR">
+                                        <div class="shadow-sm p-1 mt-2 mb-0 bg-body-tertiary rounded">
+                                          <h6 style="color: #113250; text-align: center;">{{item.nom_var | uppercase}}</h6>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                      </div>
+                    </ng-container>
+                    <ng-template #nosecuenciaVAR>
+                      <div class="shadow-sm p-1 mt-2 mb-0 bg-body-tertiary rounded">
+                        <h4 style="color: #113250;">Ninguna variable detectada.</h4>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="tab-pane fade" id="nav-pi" role="tabpanel" aria-labelledby="nav-pi-tab" tabindex="0">
+
+                <!--! AGREGAR MAS CONTENIDO AHORA DE PRODUCTOS DE INFORMACION -->
+              </div>
+              <div class="tab-pane fade" id="nav-aeg" role="tabpanel" aria-labelledby="nav-aeg-tab" tabindex="0">probando</div>
+              <div class="tab-pane fade" id="nav-mdea" role="tabpanel" aria-labelledby="nav-mdea-tab" tabindex="0">.eee.</div>
+              <div class="tab-pane fade" id="nav-ods" role="tabpanel" aria-labelledby="nav-ods-tab" tabindex="0">.ews..</div>
+              <div class="tab-pane fade" id="nav-ps" role="tabpanel" aria-labelledby="nav-ps-tab" tabindex="0">..dgsh.</div>
+            </div>
+
+
+          </div>
+
         </div>
 
       </div>
       <div class="modal-footer">
-        <span style="color: #0d62c4;">
+        <span style="color: #113250;">
           {{ elementoSeleccionado?.dg_prod == 1 ? 'Dirección General de Geografía y Medio Ambiente':(
           elementoSeleccionado?.dg_prod == 2 ? 'Dirección General de Estadísticas Sociodemográficas': (
           elementoSeleccionado?.dg_prod == 3 ? 'Dirección General de Estadísticas Económicas': (
@@ -308,4 +648,11 @@
       </div>
     </div>
   </div>
+  </div>
+
 </div>
+
+
+
+
+

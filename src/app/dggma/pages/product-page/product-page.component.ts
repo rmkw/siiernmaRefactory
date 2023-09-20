@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DGService } from '../../services/dg.service';
-import { Products, Escalas } from '../../interfaces/product.interface';
+import { Products, Escalas, SecuenciaVar } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-product-page',
@@ -8,13 +8,18 @@ import { Products, Escalas } from '../../interfaces/product.interface';
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit{
-  flagFilter : boolean = false;
-  flagOther : boolean = true;
-
 
   public products: Products[] = [];
-  elementoSeleccionado: any;
   public escalas: Escalas[]=[];
+  public secuenciaVAR: SecuenciaVar[]=[]
+
+
+
+  flagFilter : boolean = false;
+  flagOther : boolean = true;
+  elementoSeleccionado: any;
+  expandedIndex: number | null = null;
+
 
   constructor(
     private _direServices: DGService,
@@ -22,14 +27,19 @@ export class ProductPageComponent implements OnInit{
 
 
   ngOnInit(): void {
+
+    //! TODOS LOS PRODUCTOS
     this._direServices.getProducts()
       .subscribe(data => {
         this.products = data;
         console.log('Respuesta del servicio:', data);
       });
 
+      //! ESCALAS
       this._direServices.getEscalas()
-    .subscribe( escala => this.escalas = escala)
+    .subscribe( escala => this.escalas = escala);
+
+
 
   }
 
@@ -43,7 +53,19 @@ export class ProductPageComponent implements OnInit{
   }
   abrirModal(elemento: any) {
     this.elementoSeleccionado = elemento;
+
+    //! VARIABLES
+    this._direServices.getSecuenciaVARBy(this.elementoSeleccionado.interview__id)
+    .subscribe( data => { this.secuenciaVAR = data});
+
+
+
   }
+
+
+
+
+
   getEscalasText(indicador_ps: number): string {
     let escalasText = '';
     for (let escalas of this.escalas) {
@@ -54,5 +76,6 @@ export class ProductPageComponent implements OnInit{
     }
     return escalasText;
   }
+
 
 }
