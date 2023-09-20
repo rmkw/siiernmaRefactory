@@ -231,7 +231,7 @@
             </div>
             <div class="col-2 text-end d-flex align-items-center">
               <div class="ms-auto">
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="abrirModal(item)"
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openModal(item)"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">Mas
                   Información</button>
               </div>
@@ -337,16 +337,25 @@
               elementoSeleccionado?.fragmenta == 2 ? 'No' : '')
               }}
             </span>
+            <div *ngIf="elementoSeleccionado?.fragmenta == 1">
+
+
+              <div class="col-12">
+                <span>
+                  Número de fragmentos:
+                </span>
+                <span class="badge m-1">
+                  {{ elementoSeleccionado?.n_fragmenta }}
+                </span>
+              </div>
+
+            </div>
+
           </div>
 
-          <div class="col-md-4 col-12" *ngIf="elementoSeleccionado?.fragmenta == 1">
-            <span>
-              Número de fragmentos:
-            </span>
-            <span class="badge m-1">
-              {{ elementoSeleccionado?.n_fragmenta }}
-            </span>
-          </div>
+
+
+
 
           <div class="container">
             <hr>
@@ -455,7 +464,6 @@
 
         <div class="row">
           <div class="col-12">
-
             <span>Tipo(s) de soporte del producto:</span>
             <div class="row mt-2">
               <div class="col" *ngIf="elementoSeleccionado?.tipo_soporte__1 == 1">
@@ -590,7 +598,7 @@
 
             <div class="tab-content" id="nav-tabContent">
               <div class="tab-pane fade show active" id="nav-variable" role="tabpanel" aria-labelledby="nav-variable-tab" tabindex="0">
-                <!--TODO: variables -->
+                <!--! variables -->
                 <div class="row">
                   <div class="col">
                     <ng-container *ngIf="secuenciaVAR && secuenciaVAR.length > 0; else nosecuenciaVAR">
@@ -607,8 +615,8 @@
                       </div>
                     </ng-container>
                     <ng-template #nosecuenciaVAR>
-                      <div class="shadow-sm p-1 mt-2 mb-0 bg-body-tertiary rounded">
-                        <h4 style="color: #113250;">Ninguna variable detectada.</h4>
+                      <div class="text-center shadow-sm p-1 mt-2 mb-0 bg-body-tertiary rounded">
+                        <h5 style="color: #113250;">Ninguna Variable Detectada.</h5>
                       </div>
                     </ng-template>
                   </div>
@@ -617,13 +625,197 @@
 
 
               <div class="tab-pane fade" id="nav-pi" role="tabpanel" aria-labelledby="nav-pi-tab" tabindex="0">
+                <!--! programas de información -->
+                <div class="row">
+                  <div class="col">
+                    <ng-container *ngIf="pi && pi.length > 0; else noPi">
+                      <div class="pt-2 m-2">
+                              <div class="row" *ngFor="let item of pi">
+                                <div class="col">
+                                  <div class=" card-body">
+                                    <div class="row">
+                                      <div class="col-md-12 col-12">
+                                        <strong style="color: #113250;">Unidad Administrativa Responsable:</strong>
+                                        <span for=""> {{getDireccionGeneralText(item.dg_pi)}}.</span>
+                                      </div>
+                                      <div class="col-md-12 col-12">
+                                        <strong style="color: #113250;">Programa de Información:</strong>
+                                        <span for=""> {{getProgInfoText(item.nom_pi)}}.</span>
+                                      </div>
+                                      <div class="col-md-12 col-12">
+                                        <strong style="color: #113250;">Proceso de Producción:</strong>
+                                        <span for=""> {{getProgInfoText(item.pp_pi)}}.</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                      </div>
+                    </ng-container>
+                    <ng-template #noPi>
+                      <div class="text-center shadow-sm p-2 mt-2 m-1 mb-0 bg-body-tertiary rounded">
+                        <h5 style="color: #113250;">Ningún Programa de Información Detectado.</h5>
+                      </div>
+                    </ng-template>
 
-                <!--! AGREGAR MAS CONTENIDO AHORA DE PRODUCTOS DE INFORMACION -->
+                  </div>
+                </div>
               </div>
-              <div class="tab-pane fade" id="nav-aeg" role="tabpanel" aria-labelledby="nav-aeg-tab" tabindex="0">probando</div>
-              <div class="tab-pane fade" id="nav-mdea" role="tabpanel" aria-labelledby="nav-mdea-tab" tabindex="0">.eee.</div>
-              <div class="tab-pane fade" id="nav-ods" role="tabpanel" aria-labelledby="nav-ods-tab" tabindex="0">.ews..</div>
-              <div class="tab-pane fade" id="nav-ps" role="tabpanel" aria-labelledby="nav-ps-tab" tabindex="0">..dgsh.</div>
+
+              <div class="tab-pane fade" id="nav-aeg" role="tabpanel" aria-labelledby="nav-aeg-tab" tabindex="0">
+                <!--! Actividades Estadísticas o Geográficas -->
+
+                <div class="row">
+                  <div class="col">
+                    <ng-container *ngIf="aegSecuencia && aegSecuencia.length > 0; else noaegSecuencia">
+                      <div class="pt-2 m-2">
+                        <div class="row" *ngFor="let item of aegSecuencia">
+                          <div class="col">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-12 col-12">
+                                  <strong style="color: #113250;">Dirección General Responsable: </strong>
+                                  <span> {{getDga_PprodText(item.dg_aeg)}}.</span>
+                                </div>
+                                <div class="col-md-12 col-12">
+                                  <strong style="color: #113250;">Actividad Estadística o Geográfica: </strong>
+                                  <span> {{getAEG_2Text(item.nom_aeg)}}.</span>
+                                </div>
+                                <div class="col-md-12 col-12">
+                                  <strong style="color: #113250;">Dirección General Adjunta Responsable : </strong>
+                                  <span> {{getAEG_ProdText(item.dga_aeg)}}.</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-template #noaegSecuencia>
+                      <div class="text-center shadow-sm p-2 mt-3 m-1 mb-0 bg-body-tertiary rounded">
+                        <h5 style="color: #113250;">Ninguna Actividad Estadística o Geográfica Detectada.</h5>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-mdea" role="tabpanel" aria-labelledby="nav-mdea-tab" tabindex="0">
+                <!--! Marco para el Desarrollo de las Estadísticas Ambientales -->
+                <div class="row">
+                  <div class="col">
+                    <ng-container *ngIf="mdeas && mdeas.length > 0; else nomdeas">
+                      <div class="pt-2 m-2  bg-body-tertiary rounded">
+                        <h4 style="color: #113250; padding-left: 0.5rem;">Relación con el Marco para el Desarrollo de las Estadísticas Ambientales:
+                        </h4>
+                        <div class="row" *ngFor="let item of mdeas">
+                          <div class="col">
+                            <div class="card card-body m-2 mb-2">
+                              <div class="row">
+                                <div class="col-md-4 col-12">
+                                  <strong style="color: #113250;">Componente: </strong>
+                                  <br>
+                                  <span for=""> {{getComponenteText(item.comp_mdea)}}.</span>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                  <strong style="color: #113250;">Subcomponente: </strong>
+                                  <br>
+                                  <span for=""> {{getSubcomponenteText(item.subcomp_mdea)}}.</span>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                  <strong style="color: #113250;">Tópico: </strong>
+                                  <br>
+                                  <span for=""> {{getTopicoText(item.topico_mdea)}}.</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-template #nomdeas>
+                      <div class="text-center shadow-sm p-2 mt-3 m-1 mb-0 bg-body-tertiary rounded">
+                        <h5 style="color: #113250;">Ninguna Relación con el Marco para el Desarrollo de las Estadísticas Ambientales.
+                        </h5>
+                      </div>
+                    </ng-template>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-ods" role="tabpanel" aria-labelledby="nav-ods-tab" tabindex="0">
+                <!--! Relación con los Objetivos del Desarrollo Sostenible -->
+                <div class="row">
+                  <div class="col">
+                    <ng-container *ngIf="ODSes && ODSes.length > 0; else noODSes">
+                      <div class="pt-2 m-2 bg-body-tertiary rounded">
+                        <h4 style="color: #113250; padding-left: 0.5rem;">Relación con Objetivos del Desarrollo Sostenible:</h4>
+                        <div class="row" *ngFor="let item of ODSes">
+                          <div class="col">
+                            <div class="card card-body m-2 mb-2">
+                              <div class="row">
+                                <div class="col-md-6 col-12">
+                                  <strong style="color: #113250;">Objetivo: </strong>
+                                  <br>
+                                  <span class=""> {{getObjetivODSText(item.obj_ods)}}.</span>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                  <strong style="color: #113250;">Meta: </strong>
+                                  <br>
+                                  <span for=""> {{getMetaODSText(item.meta_ods)}}.</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-template #noODSes>
+                      <div class="text-center shadow-sm p-2 mt-3 m-1 mb-0 bg-body-tertiary rounded">
+                        <h5 style="color: #113250;">Ninguna Relación con Objetivos del Desarrollo Sostenible.</h5>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-ps" role="tabpanel" aria-labelledby="nav-ps-tab" tabindex="0">
+                <!--! Relación con algún Programa Sectorial (PS): -->
+                <div class="row mb-2">
+                  <div class="col">
+                    <ng-container *ngIf="PSes && PSes.length > 0; else noPSes">
+                      <div class="pt-2 m-2 bg-body-tertiary rounded">
+                        <h4 style="color: #113250; padding-left: 0.5rem;">Relación con Programas Sectoriales:</h4>
+                        <div class="row" *ngFor="let item of PSes">
+                          <div class="col">
+                            <div class="card card-body m-2 mb-2">
+                              <div class="row">
+                                <div class="col-md-6 col-12">
+                                  <strong style="color: #113250;">Programa Sectorial: </strong>
+                                  <br>
+                                  <span>{{getps2023Text(item.prog_ps)}}.</span>
+
+
+                                </div>
+                                <div class="col-md-6 col-12">
+                                  <div *ngIf="item.indicador_ps">
+                                    <strong style="color: #113250;">Indicador que corresponde: </strong>
+                                    <br>
+                                    <span> {{getIndicadoresPS2023Text(item.indicador_ps)}}.</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-template #noPSes>
+                      <div class="text-center shadow-sm p-2 mt-3 m-1 mb-0 bg-body-tertiary rounded">
+                        <h4 style="color: #113250;">Ninguna relación con algún Programa Sectorial.</h4>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
             </div>
 
 
