@@ -1,7 +1,8 @@
 <div class="container-fluid" style="background-color: #113250;">
   <div class="row ">
 
-    <div *ngIf="flagFilter" class="col-3" style="background-color: #f8f9fa; border-top: solid 1px; border-color: #113250;">
+    <!--* FILTROS -->
+    <div [hidden]="flagHidden" class="col-3" style="background-color: #f8f9fa; border-top: solid 1px; border-color: #113250;">
       <div class="row">
 
         <div class="d-flex justify-content-between mt-2">
@@ -25,29 +26,30 @@
           <hr class="mt-2">
           <h6 style="color: #113250;">Productos por dirección general:</h6>
 
+          <!--! FILTRO DE GMA  -->
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="prodgeografico">
-            <label class="form-check-label" for="prodgeografico">Geografía y Medio Ambiente</label>
+            <input class="form-check-input" type="checkbox" value="" id="direGeoAmbiente">
+            <label class="form-check-label" for="direGeoAmbiente">Geografía y Medio Ambiente</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="prodestadistico2">
-            <label class="form-check-label" for="prodestadistico2">Estadísticas Sociodemográficas</label>
+            <input class="form-check-input" type="checkbox" value="" id="direEstaSocio">
+            <label class="form-check-label" for="direEstaSocio">Estadísticas Sociodemográficas</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-            <label class="form-check-label" for="prodestadistico">Estadísticas Económicas</label>
+            <input class="form-check-input" type="checkbox" value="" id="direEstaEconomicas">
+            <label class="form-check-label" for="direEstaEconomicas">Estadísticas Económicas</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-            <label class="form-check-label" for="prodestadistico">Estadísticas de Gobierno, Seguridad Pública y Justicia</label>
+            <input class="form-check-input" type="checkbox" value="" id="direEstaGobSegPubJus">
+            <label class="form-check-label" for="direEstaGobSegPubJus">Estadísticas de Gobierno, Seguridad Pública y Justicia</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-            <label class="form-check-label" for="prodestadistico">Integración, Análisis e Investigación</label>
+            <input class="form-check-input" type="checkbox" value="" id="direInteAnaInv">
+            <label class="form-check-label" for="direInteAnaInv">Integración, Análisis e Investigación</label>
           </div>
 
           <hr>
@@ -195,6 +197,7 @@
       </div>
     </div>
 
+    <!--* PRODUCTOS -->
     <div *ngIf="flagOther" class="col-2"></div>
     <div [ngClass]="{'col-8': flagOther, 'col-9': flagFilter}">
       <div class="row align-items-center">
@@ -636,15 +639,15 @@
                                     <div class="row">
                                       <div class="col-md-12 col-12">
                                         <strong style="color: #113250;">Unidad Administrativa Responsable:</strong>
-                                        <span for=""> {{getDireccionGeneralText(item.dg_pi)}}.</span>
+                                        <span > {{getDireccionGeneralText(item.dg_pi)}}.</span>
                                       </div>
                                       <div class="col-md-12 col-12">
                                         <strong style="color: #113250;">Programa de Información:</strong>
-                                        <span for=""> {{getProgInfoText(item.nom_pi)}}.</span>
+                                        <span > {{getProgInfoText(item.nom_pi)}}.</span>
                                       </div>
                                       <div class="col-md-12 col-12">
                                         <strong style="color: #113250;">Proceso de Producción:</strong>
-                                        <span for=""> {{getProgInfoText(item.pp_pi)}}.</span>
+                                        <span > {{getProgInfoText(item.pp_pi)}}.</span>
                                       </div>
                                     </div>
                                   </div>
@@ -714,17 +717,17 @@
                                 <div class="col-md-4 col-12">
                                   <strong style="color: #113250;">Componente: </strong>
                                   <br>
-                                  <span for=""> {{getComponenteText(item.comp_mdea)}}.</span>
+                                  <span > {{getComponenteText(item.comp_mdea)}}.</span>
                                 </div>
                                 <div class="col-md-4 col-12">
                                   <strong style="color: #113250;">Subcomponente: </strong>
                                   <br>
-                                  <span for=""> {{getSubcomponenteText(item.subcomp_mdea)}}.</span>
+                                  <span > {{getSubcomponenteText(item.subcomp_mdea)}}.</span>
                                 </div>
                                 <div class="col-md-4 col-12">
                                   <strong style="color: #113250;">Tópico: </strong>
                                   <br>
-                                  <span for=""> {{getTopicoText(item.topico_mdea)}}.</span>
+                                  <span > {{getTopicoText(item.topico_mdea)}}.</span>
                                 </div>
                               </div>
                             </div>
@@ -761,7 +764,7 @@
                                 <div class="col-md-6 col-12">
                                   <strong style="color: #113250;">Meta: </strong>
                                   <br>
-                                  <span for=""> {{getMetaODSText(item.meta_ods)}}.</span>
+                                  <span > {{getMetaODSText(item.meta_ods)}}.</span>
                                 </div>
                               </div>
                             </div>

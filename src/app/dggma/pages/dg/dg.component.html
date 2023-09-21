@@ -1,5 +1,6 @@
 <main>
 
+  <!--TODO: CARRUSEL -->
   <div id="myCarousel" class="carousel carousel-dark slide mb-6" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
@@ -7,7 +8,9 @@
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
+
     <div class="carousel-inner">
+      <!--! INEGI CARRUSEL -->
       <div class="carousel-item active">
         <video loop muted autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true"
           style="width: 100%; height: 100%; object-fit: cover;">
@@ -21,12 +24,14 @@
             <img focusable="false" src="../../../../assets/inegilogowhite.png" alt="Mi SVG"
               style="max-width: 500px; height: auto;  margin: 0 auto;">
             <h1 style="color: white;">Productos detectados en las direcciones generales.</h1>
-            <p style="color: white;">Échale un vistazo a los productos detectados y catalogados por direcciones generales.
+            <p style="color: white;">Descubre los productos detectados y catalogados por direcciones generales.
             </p>
             <button class="btn btn-lg btn-light" [routerLink]="['/dg/products']" href="#">Ver más</button>
           </div>
         </div>
       </div>
+
+      <!--! MDEA CARRUSEL -->
       <div class="carousel-item" style="background-color: #e6e6e6;">
 
         <img focusable="false" src="../../../../assets/mdea.png" alt="Mi SVG"
@@ -34,14 +39,15 @@
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1 style="color: #007a98; max-width: 700px;">Relación con los productos detectados en las diferentes
-            direcciones.</h1>
-            <p style="color: #007a98; margin-left: 5px;">Échale un vistazo para saber más.</p>
+            <h1 style="color: #007a98; max-width: 700px;">Relación con el Marco para el Desarrollo de las Estadísticas Ambientales.</h1>
+            <p style="color: #007a98; margin-left: 5px;">Explora para saber más.</p>
             <button class="btn btn-lg custom-btn-color" style="margin-left: 5px;" href="#">Ver más</button>
           </div>
         </div>
       </div>
-    <div class="carousel-item" style="background-color: white; border-bottom: 1px solid #009edb; position: relative;">
+
+      <!--! ODS CARRUSEL -->
+      <div class="carousel-item" style="background-color: white; border-bottom: 1px solid #009edb; position: relative;">
       <video loop muted autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true"
         style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1;">
         <source
@@ -57,16 +63,14 @@
           data-retina_logo_url="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2020/05/SDG_website_banner_S.png">
       </div>
 
-      <!-- <div class="carousel-caption" style="position: absolute;   background: rgba(255, 255, 255, 0.7); padding: 15px; border-radius: 5px; max-width: 80%;"> -->
+
       <div class="carousel-caption"
         style="position: absolute;">
-        <h1 style="color: #009edb;">Relación con los productos detectados en las diferentes direcciones.</h1>
-        <p style="color: #009edb;">Échale un vistazo para saber más.</p>
+        <h1 style="color: #009edb;">Relación con los Objetivos de Desarrollo Sostenible.</h1>
+        <p style="color: #009edb;">Explora para saber más.</p>
         <button class="btn btn-lg custom-btn-color2" href="#">Ver más</button>
       </div>
-    </div>
-
-
+      </div>
 
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -82,9 +86,10 @@
 
 
 
+
   <div class="container marketing">
 
-
+    <!--TODO: LAS DIRECCIONES CON ICONOS-->
     <div class="row justify-content-center align-items-center">
 
       <div class="col-md-4 col-sm-6 col-xs-12">
@@ -95,29 +100,26 @@
         <div class="d-flex justify-content-center">
           <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
-
       </div>
+
       <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="d-flex justify-content-center ">
           <i class="bi bi-bar-chart display-1 " style="color: #113250;"></i>
         </div>
         <h3 class="fw-normal text-center">Dirección General de Estadísticas Sociodemográficas.</h3>
-
         <div class="d-flex justify-content-center">
           <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
-
       </div>
+
       <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="d-flex justify-content-center ">
           <i class="bi bi-cash-stack display-1 " style="color: #113250;"></i>
         </div>
         <h3 class="fw-normal text-center">Dirección General de Estadísticas Económicas.</h3>
         <div class="d-flex justify-content-center">
-
           <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
-
       </div>
 
       <div class="mt-5"></div>
@@ -131,7 +133,6 @@
         <div class="d-flex justify-content-center">
           <button class="btn btn-secondary mt-2" href="#">Ver productos detectados</button>
         </div>
-
       </div>
 
       <div class="col-md-4 col-sm-6 col-xs-12">
@@ -143,130 +144,46 @@
         <div class="d-flex justify-content-center">
           <button class="btn btn-secondary custom-buttonMT mt-2" href="#">Ver productos detectados</button>
         </div>
-
       </div>
-
-
 
     </div>
 
 
 
-    <!-- /.row -->
+    <!--! START THE FEATURETTES -->
 
 
-    <!-- START THE FEATURETTES -->
 
     <hr class="featurette-divider">
 
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1 mt-0" style="color: #113250;">Productos detectados en las direcciones generales.</h2>
-        <p class="lead">"En nuestro sistema, hemos logrado un hito importante al detectar y asignar la mayoría de los
-                productos registrados por
-                el INEGI. Pero nuestra labor no se detiene allí. Hemos llevado a cabo una integración profunda, vinculando cada
-                uno de
-                estos productos con actividades estadísticas geográficas, programas de información y programas sectoriales. En
-                este
-                proceso, hemos asignado posibles variables que enriquecen la información de cada producto.
-              </p>
-              <p class="lead">
-                Pero lo que hace que nuestro sistema sea aún más poderoso es su conexión con el MDEA (Marco de Desarrollo
-                Estadístico) y
-                su alineación con los ODS (Objetivos de Desarrollo Sostenible). Estas conexiones estratégicas permiten una gestión
-                más
-                eficiente y una comprensión más profunda de la información estadística.
-              </p>
-              <p class="lead">
-                Bienvenido a un mundo de datos en constante evolución, donde la integración y la visión integral son nuestra
-                prioridad.
-                ¡Explora y descubre cómo nuestra plataforma transforma la forma en que comprendemos y utilizamos los datos
-                estadísticos!".
-              </p>
-        <!-- <p class="lead">
-          In our system, we have achieved an important milestone by detecting and assigning most of the products
-          registered by
-          INEGI. But our work does not stop there. We have carried out a deep integration, linking each of these
-          products with
-          geographic statistical activities , information programs and sectorial programs In this process, we have
-          assigned
-          possible variables that enrich the information of each product.
-        </p>
-        <p class="lead">
-          But what makes our system even more powerful is its connection to the MDEA (Development Statistical Framework)
-          and its
-          alignment with the SDGs (Sustainable Development Goals). These strategic connections allow for more efficient
-          management
-          and a deeper understanding of statistical information.
-        </p>
-        <p class="lead">
-          Welcome to an ever-evolving world of data, where integration and comprehensive insight are our priority.
-          Explore and
-          discover how our platform transforms the way we understand and use statistical data!".
-        </p> -->
-      </div>
-      <div class="col-md-5">
-        <img focusable="false" src="../../../../assets/INEGI_g.png" alt="Mi SVG"
-          style=" max-height: 500px; max-width: 500px; height: auto; display: block; margin: 0 auto; margin-top: 10rem;">
+    <div class="row">
+      <div class="col">
+        <h1 class="display-5" style="margin-bottom: 2rem;">Temas de actualidad</h1>
       </div>
     </div>
-    <hr class="featurette-divider">
+    <div class="row" style=" margin-bottom: 15rem; background-color: #eef5f8; ">
 
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading fw-normal lh-1" style="color: #113250;">Marco para el Desarrollo de las
-          Estadísticas Ambientales <br><span class="text-body-secondary">(MDEA 2013).</span></h2>
-        <p class="lead m-1">El uso del MDEA 2013 en los sistemas estadísticos nacionales promueve el desarrollo en este campo de las estadísticas,
-              ya que es una herramienta flexible y multipropósito que puede ser adaptada para abordar intereses y prioridades
-              específicos de política ambiental de los países, y puede adaptarse según sus diferentes niveles de desarrollo
-              estadístico.</p>
-        <!-- <p class="lead m-1">
-          The use of the MDEA 2013 in national statistical systems will promote the development in this field of
-          statistics,
-          since it is a flexible and multipurpose tool that can be adapted to address interests and priorities
-          environmental policy of the countries, and can be adapted according to their different levels of development
-          statistical.
-        </p> -->
-      </div>
-      <div class="col-md-5 order-md-1">
-        <img focusable="false" src="../../../../assets/mdea.png" alt="Mi SVG"
-          style="max-height: 500px; height: auto; display: block; margin: 0 auto; margin-right: 25rem;">
-      </div>
-    </div>
 
-    <hr class="featurette-divider">
-    <div class="row featurette">
-      <div class="col-md-7 ">
-        <h2 class="featurette-heading fw-normal lh-1 mt-0" style="color: #113250;">Objetivos de Desarrollo Sostenible.
-          <span class="text-body-secondary">ODS.</span>
-        </h2>
-        <p class="lead">Los Objetivos de Desarrollo Sostenible (ODS), fueron adoptados por las
-              Naciones Unidas en 2015 como un llamado universal para poner fin a la pobreza, proteger el planeta y garantizar que
-              para el 2030 todas las personas disfruten de un futuro fundamentado en la sostenibilidad.
-              </p>
-
-              <p class="lead">
-                La creatividad, el conocimiento, la tecnología y los recursos financieros de toda la sociedad son necesarios para
-                alcanzar los ODS en todos los contextos.
-              </p>
-        <!-- <p class="lead m-1">
-          The Sustainable Development Goals (SDGs), also known as the Global Goals, were adopted by the
-          United Nations in 2015 as a universal call to end poverty, protect the planet and ensure that
-          by 2030 all people will enjoy peace and prosperity.
-        </p>
-        <p class="lead m-1">
-          The SDGs are designed to end poverty, hunger, AIDS and discrimination against women and girls.
-        </p>
-        <p class="lead m-1">
-          The creativity, knowledge, technology and financial resources of the whole society are necessary to
-          achieve the SDGs in all contexts.
-        </p> -->
-      </div>
-      <div class="col-md-5 ">
-
-        <div style="background-color: #113250; display: inline-block; padding: 30px; margin-left: 5rem;">
-          <img focusable="false" src="../../../../assets/logoODS_es.png" alt="Mi SVG"
-            style=" height: auto; display: block; margin: 0 auto;">
+      <div class="col-4" style="border-right: solid 15px; border-color: #ffffff;">
+        <div class="row">
+          <div class="col-12" [ngClass]="{'selected': !isINEGISelected}" (click)="hiddenTheOtherContents_INEGI()"
+            style="cursor: pointer; border-bottom: solid 3px; border-color: #ffffff; padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <h4  >
+              Productos detectados en las direcciones generales.
+            </h4>
+          </div>
+          <div class="col-12" [ngClass]="{'selected': !isMDEASelected}" (click)="hiddenTheOtherContents_MDEA()"
+            style="cursor: pointer; border-bottom: solid 3px; border-color: #ffffff; padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <h4  >
+              Marco para el Desarrollo de las Estadísticas Ambientales.
+            </h4>
+          </div>
+          <div class="col-12" [ngClass]="{'selected': !isODSSelected}" (click)="hiddenTheOtherContents_ODS()"
+            style="cursor: pointer; border-bottom: solid 3px; border-color: #ffffff; padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <h4  >
+              Objetivos de Desarrollo Sostenible.
+            </h4>
+          </div>
         </div>
 
 
@@ -274,9 +191,101 @@
 
 
       </div>
+
+
+      <!--! INEGI -->
+      <div class="col-8 p-0" >
+        <div [hidden]="isINEGISelected" class="row" >
+          <div class="col-12 p-0 m-0" style=" margin: 1px; background-color: #ffffff;">
+            <img focusable="false" src="../../../../assets/INEGI_g.png" alt="Mi SVG"
+              style=" max-height: 500px; max-width: 500px; height: auto; display: block; margin: 0 auto; margin-top: 5rem; margin-bottom: 5rem; background-color: #ffffff;">
+          </div>
+          <div class="col-12">
+
+
+            <div style="margin: 2rem; margin-bottom: 5rem;">
+              <h2 style="color: #036baa;">Productos detectados en las direcciones generales.</h2>
+              <p class="lead">"En nuestro sistema, hemos logrado un hito importante al detectar y asignar la mayoría de los
+              productos registrados por
+              el INEGI. Pero nuestra labor no se detiene allí. Hemos llevado a cabo una integración profunda, vinculando cada
+              uno de
+              estos productos con actividades estadísticas geográficas, programas de información y programas sectoriales. En
+              este
+              proceso, hemos asignado posibles variables que enriquecen la información de cada producto.
+            </p>
+            <p class="lead">
+              Pero lo que hace que nuestro sistema sea aún más poderoso es su conexión con el MDEA (Marco de Desarrollo
+              Estadístico) y
+              su alineación con los ODS (Objetivos de Desarrollo Sostenible). Estas conexiones estratégicas permiten una gestión
+              más
+              eficiente y una comprensión más profunda de la información estadística.
+            </p>
+            <p class="lead">
+              Bienvenido a un mundo de datos en constante evolución, donde la integración y la visión integral son nuestra
+              prioridad.
+              ¡Explora y descubre cómo nuestra plataforma transforma la forma en que comprendemos y utilizamos los datos
+              estadísticos!".
+            </p>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!--! MDEA -->
+        <div [hidden]="isMDEASelected" class="row" style=" margin: 1px;">
+          <div class="col-12" style=" background-color: #e6e6e6; margin-left: 0px;">
+            <img focusable="false" src="../../../../assets/mdea.png" alt="Mi SVG"
+              style=" max-height: 30rem; max-width: 500px; height: auto; display: block; margin: 0 auto;   ">
+          </div>
+          <div class="col-12 mt-2">
+            <div style="margin: 2rem; margin-bottom: 5rem;">
+              <h2 style="color: #036baa;">Marco para el Desarrollo de las Estadísticas Ambientales.</h2>
+              <p class="lead">Los Objetivos de Desarrollo Sostenible (ODS), fueron adoptados por las
+                Naciones Unidas en 2015 como un llamado universal para poner fin a la pobreza, proteger el planeta y garantizar que
+                para el 2030 todas las personas disfruten de un futuro fundamentado en la sostenibilidad.
+              </p>
+
+              <p class="lead">
+                La creatividad, el conocimiento, la tecnología y los recursos financieros de toda la sociedad son necesarios para
+                alcanzar los ODS en todos los contextos.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!--! ODS -->
+        <div [hidden]="isODSSelected" class="row" style=" margin: 1px;">
+          <div class="col-12" style=" margin: 1px; background-color: #113250;">
+            <img focusable="false" src="../../../../assets/logoODS_es.png" alt="Mi SVG"
+              style=" max-height: 500px; max-width: 500px; height: auto; display: block; margin: 0 auto; margin-top: 5rem; margin-bottom: 5rem; background-color: #113250;">
+          </div>
+          <div class="col-12 m-2">
+            <div style="margin: 2rem; margin-bottom: 5rem;">
+              <h2 style="color: #036baa;">Objetivos de Desarrollo Sostenible.</h2>
+              <p class="lead">Los Objetivos de Desarrollo Sostenible (ODS), fueron adoptados por las
+                Naciones Unidas en 2015 como un llamado universal para poner fin a la pobreza, proteger el planeta y garantizar
+                que
+                para el 2030 todas las personas disfruten de un futuro fundamentado en la sostenibilidad.
+              </p>
+
+              <p class="lead">
+                La creatividad, el conocimiento, la tecnología y los recursos financieros de toda la sociedad son necesarios para
+                alcanzar los ODS en todos los contextos.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+
     </div>
 
-    <hr class="featurette-divider">
 
 
 
@@ -289,12 +298,12 @@
 
 
 
-    <!-- /END THE FEATURETTES -->
 
-  </div><!-- /.container -->
+  </div>
 
 
-  <!-- FOOTER -->
+
+  <!--! FOOTER -->
   <footer class="container">
     <p class="float-end">
       <a href="#"><i class="bi bi-arrow-up-square-fill" style="font-size: xx-large; color: #113250;"></i></a></p>

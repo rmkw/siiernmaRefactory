@@ -78,6 +78,7 @@ export class ProductPageComponent implements OnInit{
 
 
 
+  flagHidden : boolean = true;
   flagFilter : boolean = false;
   flagOther : boolean = true;
   elementoSeleccionado: any;
@@ -149,11 +150,14 @@ export class ProductPageComponent implements OnInit{
 
   //!bandera para filtros para que mostrar
   changeFlagFilter(){
+    this.flagHidden = false;
     this.flagFilter = true;
     this.flagOther = false;
   }
   //!bandera para filtros para que oculte
   hiddenFilters(){
+
+    this.flagHidden = true;
     this.flagFilter = false;
     this.flagOther = true;
   }

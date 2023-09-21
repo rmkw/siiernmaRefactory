@@ -229,3 +229,11 @@ body {
   /* Color cuando pasas el mouse */
 }
 
+p{
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+.selected {
+  color: #ffffff;
+  background-color: #00528a;
+}
