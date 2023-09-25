@@ -16,10 +16,11 @@
 
         <div class="col-12 mt-2">
           <hr>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Buscar...">
+          <form class="d-flex" role="search" (ngSubmit)="funcionParaBuscarByQuery()">
+            <input class="form-control me-2" type="search" placeholder="Buscar..." [(ngModel)]="terminoBusqueda" name="query">
             <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
           </form>
+
         </div>
 
         <div class="col-12">
@@ -28,27 +29,32 @@
 
           <!--! FILTRO DE GMA  -->
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="direGeoAmbiente">
-            <label class="form-check-label" for="direGeoAmbiente">Geografía y Medio Ambiente</label>
+            <input class="form-check-input" type="checkbox" value="" id="direGeogrAmbiente"
+              [checked]="checkboxesState['direGeogrAmbiente']" (change)="handleCheckboxChange($event)">
+            <label class="form-check-label" for="direGeogrAmbiente">Geografía y Medio Ambiente</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="direEstaSocio">
+            <input class="form-check-input" type="checkbox" value="" id="direEstaSocio"
+              [checked]="checkboxesState['direEstaSocio']" (change)="handleCheckboxChange($event)">
             <label class="form-check-label" for="direEstaSocio">Estadísticas Sociodemográficas</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="direEstaEconomicas">
+            <input class="form-check-input" type="checkbox" value="" id="direEstaEconomicas"
+              [checked]="checkboxesState['direEstaEconomicas']" (change)="handleCheckboxChange($event)">
             <label class="form-check-label" for="direEstaEconomicas">Estadísticas Económicas</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="direEstaGobSegPubJus">
+            <input class="form-check-input" type="checkbox" value="" id="direEstaGobSegPubJus"
+              [checked]="checkboxesState['direEstaGobSegPubJus']" (change)="handleCheckboxChange($event)">
             <label class="form-check-label" for="direEstaGobSegPubJus">Estadísticas de Gobierno, Seguridad Pública y Justicia</label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="direInteAnaInv">
+            <input class="form-check-input" type="checkbox" value="" id="direInteAnaInv"
+              [checked]="checkboxesState['direInteAnaInv']" (change)="handleCheckboxChange($event)">
             <label class="form-check-label" for="direInteAnaInv">Integración, Análisis e Investigación</label>
           </div>
 
@@ -207,41 +213,86 @@
         </div>
       </div>
 
-      <div *ngFor="let item of products">
-        <div class="card shadow-on-hover" style="margin: 1rem;">
-          <div class="row card-body">
-            <div class="col-10 d-flex align-items-center">
-              <div *ngIf="item.dg_prod == 1">
-                <i class="bi bi-globe me-2" style="color: #113250; font-size: 1.5rem;"></i>
-              </div>
-              <div *ngIf="item.dg_prod == 2">
-                <i class="bi bi-bar-chart me-2" style="color: #113250; font-size: 1.5rem;"></i>
-              </div>
-              <div *ngIf="item.dg_prod == 3">
-                <i class="bi bi-cash-stack me-2" style="color: #113250; font-size: 1.5rem;"></i>
-              </div>
-              <div *ngIf="item.dg_prod == 4">
-                <i class="bi bi-file-earmark-text me-2" style="color: #113250; font-size: 1.5rem;"></i>
-              </div>
-              <div *ngIf="item.dg_prod == 5">
-                <i class="bi bi-bank me-2" style="color: #113250; font-size: 1.5rem;"></i>
-              </div>
+      <div *ngIf="showFilteredProducts">
+        <div *ngFor="let item of filteredProducts">
+          <div class="card shadow-on-hover" style="margin: 1rem;">
+            <div class="row card-body">
+              <div class="col-10 d-flex align-items-center">
+                <div *ngIf="item.dg_prod == 1">
+                  <i class="bi bi-globe me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 2">
+                  <i class="bi bi-bar-chart me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 3">
+                  <i class="bi bi-cash-stack me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 4">
+                  <i class="bi bi-file-earmark-text me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 5">
+                  <i class="bi bi-bank me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
 
-              <div>
-                <strong class="card-title" style="color: #113250;  ">{{item.nom_producto | uppercase}}</strong>
-              </div>
+                <div>
+                  <strong class="card-title" style="color: #113250;  ">{{item.nom_producto | uppercase}}</strong>
+                </div>
 
-            </div>
-            <div class="col-2 text-end d-flex align-items-center">
-              <div class="ms-auto">
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openModal(item)"
-                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">Mas
-                  Información</button>
+              </div>
+              <div class="col-2 text-end d-flex align-items-center">
+                <div class="ms-auto">
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                    (click)="openModal(item)"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">Mas
+                    Información</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
+
+      <div *ngIf="!showFilteredProducts">
+        <div *ngFor="let item of products">
+          <div class="card shadow-on-hover" style="margin: 1rem;">
+            <div class="row card-body">
+              <div class="col-10 d-flex align-items-center">
+                <div *ngIf="item.dg_prod == 1">
+                  <i class="bi bi-globe me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 2">
+                  <i class="bi bi-bar-chart me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 3">
+                  <i class="bi bi-cash-stack me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 4">
+                  <i class="bi bi-file-earmark-text me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+                <div *ngIf="item.dg_prod == 5">
+                  <i class="bi bi-bank me-2" style="color: #113250; font-size: 1.5rem;"></i>
+                </div>
+
+                <div>
+                  <strong class="card-title" style="color: #113250;  ">{{item.nom_producto | uppercase}}</strong>
+                </div>
+
+              </div>
+              <div class="col-2 text-end d-flex align-items-center">
+                <div class="ms-auto">
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                    (click)="openModal(item)"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #113250; color: #ffffff;">Mas
+                    Información</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </div>

@@ -22,19 +22,7 @@ export class DGService {
 
 
 
-  constructor(private _http: HttpClient) {
-
-// Ruta al diccionario y archivo .aff en español
-
-
-
-  }
-
-
-
-
-
-
+  constructor(private _http: HttpClient) {}
 
   getDG(){
     return this._http.get<UAdmin[]>(`${ this.baseUrl}/u_admin`)
@@ -123,7 +111,6 @@ export class DGService {
   }
 
   getProductCountByDirection(id: string): Observable<number> {
-
     const url = `${this.baseUrl}/products?dg_prod=${id}`;
     return this._http.get<Products[]>(url)
       .pipe(
@@ -238,6 +225,17 @@ cuantosProdcutosCompo1(){
   return this._http.get<Mdea[]>(`${this.baseUrl}/mdea?comp_mdea=6`).pipe(
     tap(data => console.log('Datos obtenidos:', data))
   );
+}
+
+  getByQuery( query: string ) : Observable<Products[]> {
+    console.log(query)
+    if (query.trim() === '') {
+    return of([]); // Emitir un arreglo vacío si el término de búsqueda está vacío
+  }
+  return this._http.get<Products[]>(`${ this.baseUrl }/fuzzy-search?q=${ query }`)
+  .pipe(
+      tap(data => console.log('DATA by Service',data))
+    );
 }
 
 

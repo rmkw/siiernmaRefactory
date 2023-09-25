@@ -8,6 +8,20 @@ import { Componente, Mdea, Subcomponente, Topico } from '../../interfaces/mdea.i
 import { MetaODS, Ods, SecuenciaOds } from '../../interfaces/ods.interface';
 import { IndicadoresPS2023, PS2023, SecuenciaPS } from '../../interfaces/ps.interface';
 
+
+//! Interface de los checkbox
+interface CheckboxesState {
+  [key: string]: boolean;
+}
+
+// Define un tipo que refleja la estructura real de la respuesta del servicio
+interface ServiceResponse {
+  item: any; // Debes definir las propiedades adecuadas aquí
+  refIndex: number;
+  score: number;
+}
+
+
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
@@ -78,16 +92,40 @@ export class ProductPageComponent implements OnInit{
 
 
 
+  //*banderas para ocultar filtros y mostrarlos
   flagHidden : boolean = true;
   flagFilter : boolean = false;
   flagOther : boolean = true;
+  //! elementoSeleccionado es una variable para tomar el objeto del array de productos y poder sacar la info de uno solo
   elementoSeleccionado: any;
-  expandedIndex: number | null = null;
+
+
+  //!Definimos los checkbox
+  checkboxesState: CheckboxesState = {
+    direGeogrAmbiente: false,
+    direEstaSocio: false,
+    direEstaEconomicas: false,
+    direEstaGobSegPubJus: false,
+    direInteAnaInv: false,
+
+  }
+
+  //! elementos que nos ayudara a filtrar
+  filteredProducts: Products[] = [];
+  showFilteredProducts = false;
+
+
+  //! términos de búsqueda
+  terminoBusqueda: string = '';
+
+
 
 
   constructor(
     private _direServices: DGService,
-  ){}
+  ){
+
+  }
 
 
   ngOnInit(): void {
@@ -147,6 +185,8 @@ export class ProductPageComponent implements OnInit{
 
 
   }
+
+
 
   //!bandera para filtros para que mostrar
   changeFlagFilter(){
@@ -359,4 +399,78 @@ export class ProductPageComponent implements OnInit{
     return indicadoresPS2023Text;
   }
 
+   //! función que detecta los cambios en los checks box
+  handleCheckboxChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const checkboxId = target.id;
+    this.checkboxesState[checkboxId] = target.checked;
+
+
+    this.applyFilters();
+
+  }
+
+  //TODO FILTROS
+
+  applyFilters(): void {
+  this.showFilteredProducts = false;
+  this.filteredProducts = this.products;
+
+  // Combinamos las condiciones de búsqueda y dirección
+  const inputValue = this.terminoBusqueda !== null && this.terminoBusqueda !== undefined ? this.terminoBusqueda : '';
+  const hasSearchFilter = inputValue !== '';
+  const hasDirectionFilter =
+    this.checkboxesState['direGeogrAmbiente'] ||
+    this.checkboxesState['direEstaSocio'] ||
+    this.checkboxesState['direEstaEconomicas'] ||
+    this.checkboxesState['direEstaGobSegPubJus'] ||
+    this.checkboxesState['direInteAnaInv'];
+
+  if (
+    hasSearchFilter || hasDirectionFilter
+  ) {
+    this.showFilteredProducts = true;
+
+    this.filteredProducts = this.products.filter(product => {
+      const direFilter =
+        (this.checkboxesState['direGeogrAmbiente'] && product.dg_prod === 1) ||
+        (this.checkboxesState['direEstaSocio'] && product.dg_prod === 2) ||
+        (this.checkboxesState['direEstaEconomicas'] && product.dg_prod === 3) ||
+        (this.checkboxesState['direEstaGobSegPubJus'] && product.dg_prod === 4) ||
+        (this.checkboxesState['direInteAnaInv'] && product.dg_prod === 5);
+
+      return direFilter;
+    });
+  }
 }
+
+
+
+  funcionParaBuscarByQuery() {
+    const inputValue = this.terminoBusqueda !== null && this.terminoBusqueda !== undefined ? this.terminoBusqueda : '';
+
+    if (inputValue) {
+      // Si hay un término de búsqueda, filtra los productos
+      this._direServices.getByQuery(inputValue).subscribe(result => {
+        // Actualiza tanto los productos filtrados como el indicador showFilteredProducts
+        this.filteredProducts = result;
+        this.showFilteredProducts = true;
+      });
+    } else {
+      // Si no hay un término de búsqueda, muestra todos los productos
+      this.filteredProducts = this.products;
+      this.showFilteredProducts = false;
+    }
+  }
+
+
+
+
+
+
+}
+
+
+
+
+
