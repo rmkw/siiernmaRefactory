@@ -15,6 +15,8 @@ export class DgComponent implements OnInit{
   public isINEGISelected : boolean = true
   public isMDEASelected : boolean = true
   public isODSSelected : boolean = true
+  public isINDSelected : boolean = true
+
 
 
   constructor(

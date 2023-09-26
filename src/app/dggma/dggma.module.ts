@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+
 @NgModule({
   declarations: [
     DgComponent,
@@ -19,7 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductPageComponent,
     NewPageComponent,
     SearchPageComponent,
-    ByidsComponent
+    ByidsComponent,
+
+
   ],
   imports: [
     CommonModule,
@@ -27,6 +30,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+
+  ],
+  exports: [
 
   ]
 })

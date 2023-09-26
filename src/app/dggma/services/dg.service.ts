@@ -239,5 +239,24 @@ cuantosProdcutosCompo1(){
 }
 
 
+//!mdea
+
+  subCompbyId(id:string){
+    const url = `${ this.baseUrl}/subcomponentes?parentid=${ id }`;
+    return this._http.get<Subcomponente[]>(url);
+  }
+
+  TopicbyId(id:string){
+    const url = `${ this.baseUrl}/topicos?parentid=${ id }`;
+    return this._http.get<Topico[]>(url);
+  }
+
+  MdeaByCompId(id:string){
+    const url = `${ this.baseUrl}/mdea?comp_mdea=${ id }`;
+    return this._http.get<Mdea[]>(url);
+
+  }
+
+
 
 }
