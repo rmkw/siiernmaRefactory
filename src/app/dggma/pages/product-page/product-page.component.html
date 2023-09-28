@@ -62,14 +62,22 @@
           <h6 style="color: #113250;">Productos de tipo:</h6>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="prodgeografico">
-            <label class="form-check-label" for="prodgeografico">Geográfico</label>
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico" value="option1"
+              (change)="handleRadioChange($event)">
+            <label class="form-check-label" for="proGeografico">Geográfico</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proEstadistico" value="option2"
+            (change)="handleRadioChange($event)">
+            <label class="form-check-label" for="proEstadistico">Estadístico</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico&proEstadistico" value="option3"
+              (change)="handleRadioChange($event)">
+            <label class="form-check-label" for="proGeografico&proEstadistico">Geográfico y Estadístico</label>
           </div>
 
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="prodestadistico">
-            <label class="form-check-label" for="prodestadistico">Estadístico</label>
-          </div>
+
 
           <hr>
 
@@ -209,7 +217,9 @@
       <div class="row align-items-center">
         <div class="col d-flex ms-3">
           <button type="button" class="btn btn-outline-light btn-sm" (click)="changeFlagFilter()"style="margin-bottom: 0px; margin-top: 0.5rem;"><span>Filtrar</span></button>
-          <p style="color: #ffffff; margin-bottom: 0px; margin-top: 0.7rem; margin-left: 10px;">881 Recursos encontrados</p>
+          <p *ngIf="!showFilteredProducts" style="color: #ffffff; margin-bottom: 0px; margin-top: 0.7rem; margin-left: 10px;">{{displayedProductCountAll}} Recursos encontrados</p>
+          <p *ngIf="showFilteredProducts" style="color: #ffffff; margin-bottom: 0px; margin-top: 0.7rem; margin-left: 10px;">{{displayedProductCount}}
+            Recursos encontrados</p>
         </div>
       </div>
 
@@ -475,17 +485,16 @@
         <div class="row mb-2">
           <div class="col-md-4 col-12">
             <span *ngIf="elementoSeleccionado?.escala">Escala geográfica: </span>
-            <div *ngIf="elementoSeleccionado?.escala == 14">
-              <span class="badge">
-                {{ elementoSeleccionado?.o_escala }}
-              </span>
-            </div>
+
             <span *ngIf="elementoSeleccionado?.escala">
               <span class="badge">
-                {{ elementoSeleccionado?.escala == 14 ? '' : getEscalasText(elementoSeleccionado?.escala) }}
+                {{ elementoSeleccionado?.escala != 14 ? getEscalasText(elementoSeleccionado?.escala) : 'Otra: '+elementoSeleccionado?.o_escala }}
               </span>
             </span>
+
+
             <span *ngIf="!elementoSeleccionado?.escala">
+
               <span> Ninguna escala geográfica. </span>
             </span>
           </div>

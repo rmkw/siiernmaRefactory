@@ -9,6 +9,7 @@ import { MetaODS, Ods, SecuenciaOds } from '../../interfaces/ods.interface';
 import { IndicadoresPS2023, PS2023, SecuenciaPS } from '../../interfaces/ps.interface';
 
 
+
 //! Interface de los checkbox
 interface CheckboxesState {
   [key: string]: boolean;
@@ -113,10 +114,15 @@ export class ProductPageComponent implements OnInit{
   //! elementos que nos ayudara a filtrar
   filteredProducts: Products[] = [];
   showFilteredProducts = false;
+  displayedProductCount: number = 0;
+  displayedProductCountAll: number = 0;
 
 
   //! términos de búsqueda
   terminoBusqueda: string = '';
+
+  //! otro elemento para filtrar
+  selectedRadioValue: string = '';
 
 
 
@@ -135,6 +141,7 @@ export class ProductPageComponent implements OnInit{
       .subscribe(data => {
         this.products = data;
         console.log('Respuesta del servicio:', data);
+        this.displayedProductCountAll = this.products.length
       });
 
     //! ESCALAS
@@ -185,6 +192,16 @@ export class ProductPageComponent implements OnInit{
 
 
   }
+
+  //! check flag de radios
+  handleRadioChange(event: Event): void {
+  const target = event.target as HTMLInputElement;
+  this.selectedRadioValue = target.value;
+
+
+
+  // Ahora puedes utilizar this.selectedRadioValue para realizar tu filtro
+}
 
 
 
@@ -414,11 +431,8 @@ export class ProductPageComponent implements OnInit{
 
   applyFilters(): void {
   this.showFilteredProducts = false;
-  this.filteredProducts = this.products;
 
-  // Combinamos las condiciones de búsqueda y dirección
-  const inputValue = this.terminoBusqueda !== null && this.terminoBusqueda !== undefined ? this.terminoBusqueda : '';
-  const hasSearchFilter = inputValue !== '';
+  // Verificamos si hay algún filtro de dirección seleccionado
   const hasDirectionFilter =
     this.checkboxesState['direGeogrAmbiente'] ||
     this.checkboxesState['direEstaSocio'] ||
@@ -426,23 +440,53 @@ export class ProductPageComponent implements OnInit{
     this.checkboxesState['direEstaGobSegPubJus'] ||
     this.checkboxesState['direInteAnaInv'];
 
-  if (
-    hasSearchFilter || hasDirectionFilter
-  ) {
-    this.showFilteredProducts = true;
+  // Filtramos los productos basados en los filtros de dirección
+  const filteredByDirection = this.products.filter((product) => {
+    const direFilter =
+      (this.checkboxesState['direGeogrAmbiente'] && product.dg_prod === 1) ||
+      (this.checkboxesState['direEstaSocio'] && product.dg_prod === 2) ||
+      (this.checkboxesState['direEstaEconomicas'] && product.dg_prod === 3) ||
+      (this.checkboxesState['direEstaGobSegPubJus'] && product.dg_prod === 4) ||
+      (this.checkboxesState['direInteAnaInv'] && product.dg_prod === 5);
 
-    this.filteredProducts = this.products.filter(product => {
-      const direFilter =
-        (this.checkboxesState['direGeogrAmbiente'] && product.dg_prod === 1) ||
-        (this.checkboxesState['direEstaSocio'] && product.dg_prod === 2) ||
-        (this.checkboxesState['direEstaEconomicas'] && product.dg_prod === 3) ||
-        (this.checkboxesState['direEstaGobSegPubJus'] && product.dg_prod === 4) ||
-        (this.checkboxesState['direInteAnaInv'] && product.dg_prod === 5);
+    return direFilter;
+  });
 
-      return direFilter;
-    });
+  // Verificamos si hay algún filtro nuevo seleccionado
+  const hasNewFilter =
+    this.checkboxesState['proGeografico'] || this.checkboxesState['proEstadistico'];
+
+  // Filtramos los productos basados en los filtros nuevos
+  const filteredByNewFilter = this.products.filter((product) => {
+    const proFilter =
+      (this.checkboxesState['proGeografico'] && product.tipo_prod__1 === 1) ||
+      (this.checkboxesState['proEstadistico'] && product.tipo_prod__2 === 1);
+
+    return proFilter;
+  });
+
+  if (hasDirectionFilter && !hasNewFilter) {
+    // Si hay un filtro de dirección pero no hay filtros nuevos, mostramos los productos filtrados por dirección
+    this.filteredProducts = filteredByDirection;
+  } else if (!hasDirectionFilter && hasNewFilter) {
+    // Si no hay filtros de dirección pero hay filtros nuevos, mostramos los productos filtrados por los filtros nuevos
+    this.filteredProducts = filteredByNewFilter;
+  } else if (hasDirectionFilter && hasNewFilter) {
+    // Si hay filtros de dirección y filtros nuevos, intersectamos los resultados de ambos filtros
+    this.filteredProducts = filteredByDirection.filter((product) =>
+      filteredByNewFilter.includes(product)
+    );
+  } else {
+    // Si no hay filtros activados, mostramos todos los productos
+    this.filteredProducts = this.products;
   }
+
+  // Actualizamos el estado de la vista
+  this.showFilteredProducts = this.filteredProducts.length > 0;
+  this.displayedProductCount = this.filteredProducts.length;
 }
+
+
 
 
 
@@ -450,14 +494,13 @@ export class ProductPageComponent implements OnInit{
     const inputValue = this.terminoBusqueda !== null && this.terminoBusqueda !== undefined ? this.terminoBusqueda : '';
 
     if (inputValue) {
-      // Si hay un término de búsqueda, filtra los productos
       this._direServices.getByQuery(inputValue).subscribe(result => {
-        // Actualiza tanto los productos filtrados como el indicador showFilteredProducts
+
         this.filteredProducts = result;
         this.showFilteredProducts = true;
       });
     } else {
-      // Si no hay un término de búsqueda, muestra todos los productos
+
       this.filteredProducts = this.products;
       this.showFilteredProducts = false;
     }
