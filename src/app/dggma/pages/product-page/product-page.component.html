@@ -86,22 +86,26 @@
         <div class="col-12">
           <h6 style=" color: #113250;">Por cobertura:</h6>
           <div class="form-check form-check-inline" style="margin-right: 2rem;">
-            <input class="form-check-input " type="checkbox" value="" id="cobeNacional">
+            <input class="form-check-input " type="checkbox" value="" id="cobeNacional"
+              [checked]="checkboxesCobe['cobeNacional']" (change)="handleCheckboxCobe($event)">
             <label class="form-check-label" for="cobeNacional">Nacional</label>
           </div>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="cobeEstatal">
+            <input class="form-check-input" type="checkbox" value="" id="cobeEstatal"
+              [checked]="checkboxesCobe['cobeEstatal']" (change)="handleCheckboxCobe($event)">
             <label class="form-check-label" for="cobeEstatal">Estatal</label>
           </div>
 
           <div class="form-check form-check-inline" style="margin-right: 1.5rem;">
-            <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal">
+            <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
+              [checked]="checkboxesCobe['cobeMunicipal']" (change)="handleCheckboxCobe($event)">
             <label class="form-check-label" for="cobeMunicipal">Municipal</label>
           </div>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="cobRegional">
+            <input class="form-check-input" type="checkbox" value="" id="cobRegional"
+              [checked]="checkboxesCobe['cobRegional']" (change)="handleCheckboxCobe($event)">
             <label class="form-check-label" for="cobRegional">Regional</label>
           </div>
 
@@ -110,17 +114,20 @@
           <h6 style="margin-top: 1rem; color: #113250;">Tipos de soporte:</h6>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo">
+            <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo"
+              [checked]="checkboxesType['typeDatoGeo']" (change)="handleCheckboxType($event)">
             <label class="form-check-label" for="typeDatoGeo">Datos Geográficos</label>
           </div>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="typeTabulado">
+            <input class="form-check-input" type="checkbox" value="" id="typeTabulado"
+              [checked]="checkboxesType['typeTabulado']" (change)="handleCheckboxType($event)">
             <label class="form-check-label" for="typeTabulado">Tabulado</label>
           </div>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="typePublicacion">
+            <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
+              [checked]="checkboxesType['typePublicacion']" (change)="handleCheckboxType($event)">
             <label class="form-check-label" for="typePublicacion">Publicaciones</label>
           </div>
 

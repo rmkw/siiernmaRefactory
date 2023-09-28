@@ -108,6 +108,17 @@ export class ProductPageComponent implements OnInit{
     direEstaEconomicas: false,
     direEstaGobSegPubJus: false,
     direInteAnaInv: false,
+  }
+  checkboxesCobe: CheckboxesState = {
+    cobeNacional: false,
+    cobeEstatal: false,
+    cobeMunicipal: false,
+    cobRegional: false
+  }
+  checkboxesType: CheckboxesState = {
+    typeDatoGeo: false,
+    typeTabulado: false,
+    typePublicacion: false
 
   }
 
@@ -188,20 +199,7 @@ export class ProductPageComponent implements OnInit{
     this._direServices.getMetas()
     .subscribe( metas => this.metasODS = metas )
 
-
-
-
   }
-
-  //! check flag de radios
-  handleRadioChange(event: Event): void {
-  const target = event.target as HTMLInputElement;
-  this.selectedRadioValue = target.value;
-
-
-
-  // Ahora puedes utilizar this.selectedRadioValue para realizar tu filtro
-}
 
 
 
@@ -257,12 +255,9 @@ export class ProductPageComponent implements OnInit{
     //! segundo parámetro de texto del ps
     this._direServices.getIndicadoresPS2023()
     .subscribe( indiPS2023 => this.indicadoresPS2023 = indiPS2023)
-
-
-
-
-
   }
+
+
   //! ESCALAS Transformando IDs a texto
   getEscalasText(indicador_ps: number): string {
     let escalasText = '';
@@ -318,7 +313,6 @@ export class ProductPageComponent implements OnInit{
     }
     return aeg_2Text;
   }
-
   //!TRANSFORMA EL IDS DEL DIRECCIÓN ADJUNTA RESPONSABLE PARA HACERLA TEXTO
   getAEG_ProdText(dga_eag: number): string {
     let aeg_ProdText = '';
@@ -330,7 +324,6 @@ export class ProductPageComponent implements OnInit{
     }
     return aeg_ProdText;
   }
-
   //! TRANSFORMA EL IDs del componente para hacerlo texto
   getComponenteText(comp_mdea: number): string {
     let componentesMDEAText = '';
@@ -342,7 +335,6 @@ export class ProductPageComponent implements OnInit{
     }
     return componentesMDEAText;
   }
-
   //! transforma los ids de los sub componentes para hacerlos texto
   getSubcomponenteText(subcomp_mdea: number): string {
     let subComponentesMDEAText = '';
@@ -354,7 +346,6 @@ export class ProductPageComponent implements OnInit{
     }
     return subComponentesMDEAText;
   }
-
   //! Transforma los ids de los tópicos para hacerlos a texto
   getTopicoText(topico_mdea: number): string {
     let topicoMDEAText = '';
@@ -366,7 +357,6 @@ export class ProductPageComponent implements OnInit{
     }
     return topicoMDEAText;
   }
-
   //! Transforma los id de los objetivos a texto
   getObjetivODSText(obj_ods: number): string {
     let objetivODSText = '';
@@ -378,7 +368,6 @@ export class ProductPageComponent implements OnInit{
     }
     return objetivODSText;
   }
-
   //! transforma los id de las metas a texto
   getMetaODSText(meta_ods: number): string {
     let metasODSText = '';
@@ -390,7 +379,6 @@ export class ProductPageComponent implements OnInit{
     }
     return metasODSText;
   }
-
   //! transforma los id de los ps a texto
   getps2023Text(prog_ps: number): string {
     let ps2023Text = '';
@@ -402,8 +390,6 @@ export class ProductPageComponent implements OnInit{
     }
     return ps2023Text;
   }
-
-
   //! transforma los ids del segunda parámetro de los ps a texto
   getIndicadoresPS2023Text(indicador_ps: number): string {
     let indicadoresPS2023Text = '';
@@ -416,75 +402,122 @@ export class ProductPageComponent implements OnInit{
     return indicadoresPS2023Text;
   }
 
-   //! función que detecta los cambios en los checks box
+
+   //! función que detecta los cambios en los checks box DIRECCIONES
   handleCheckboxChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     const checkboxId = target.id;
     this.checkboxesState[checkboxId] = target.checked;
-
-
+    this.applyFilters();
+  }
+   //! check flag de radios TIPO
+  handleRadioChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.selectedRadioValue = target.value;
+    this.applyFilters();
+  }
+  //! función que detecta los cambios en los checks box COBERTURA
+  handleCheckboxCobe(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const checkboxId = target.id;
+    this.checkboxesCobe[checkboxId] = target.checked;
+    this.applyFilters();
+  }
+  //! función que detecta los cambios en los checks box TYPO SOPORTE
+  handleCheckboxType(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const checkboxId = target.id;
+    this.checkboxesType[checkboxId] = target.checked;
     this.applyFilters();
 
   }
-
   //TODO FILTROS
 
   applyFilters(): void {
   this.showFilteredProducts = false;
+  let combinedResults = this.products;
 
-  // Verificamos si hay algún filtro de dirección seleccionado
-  const hasDirectionFilter =
-    this.checkboxesState['direGeogrAmbiente'] ||
-    this.checkboxesState['direEstaSocio'] ||
-    this.checkboxesState['direEstaEconomicas'] ||
-    this.checkboxesState['direEstaGobSegPubJus'] ||
-    this.checkboxesState['direInteAnaInv'];
-
-  // Filtramos los productos basados en los filtros de dirección
-  const filteredByDirection = this.products.filter((product) => {
-    const direFilter =
-      (this.checkboxesState['direGeogrAmbiente'] && product.dg_prod === 1) ||
-      (this.checkboxesState['direEstaSocio'] && product.dg_prod === 2) ||
-      (this.checkboxesState['direEstaEconomicas'] && product.dg_prod === 3) ||
-      (this.checkboxesState['direEstaGobSegPubJus'] && product.dg_prod === 4) ||
-      (this.checkboxesState['direInteAnaInv'] && product.dg_prod === 5);
-
-    return direFilter;
-  });
-
-  // Verificamos si hay algún filtro nuevo seleccionado
-  const hasNewFilter =
-    this.checkboxesState['proGeografico'] || this.checkboxesState['proEstadistico'];
-
-  // Filtramos los productos basados en los filtros nuevos
-  const filteredByNewFilter = this.products.filter((product) => {
-    const proFilter =
-      (this.checkboxesState['proGeografico'] && product.tipo_prod__1 === 1) ||
-      (this.checkboxesState['proEstadistico'] && product.tipo_prod__2 === 1);
-
-    return proFilter;
-  });
-
-  if (hasDirectionFilter && !hasNewFilter) {
-    // Si hay un filtro de dirección pero no hay filtros nuevos, mostramos los productos filtrados por dirección
-    this.filteredProducts = filteredByDirection;
-  } else if (!hasDirectionFilter && hasNewFilter) {
-    // Si no hay filtros de dirección pero hay filtros nuevos, mostramos los productos filtrados por los filtros nuevos
-    this.filteredProducts = filteredByNewFilter;
-  } else if (hasDirectionFilter && hasNewFilter) {
-    // Si hay filtros de dirección y filtros nuevos, intersectamos los resultados de ambos filtros
-    this.filteredProducts = filteredByDirection.filter((product) =>
-      filteredByNewFilter.includes(product)
-    );
-  } else {
-    // Si no hay filtros activados, mostramos todos los productos
-    this.filteredProducts = this.products;
+  if (
+    this.checkboxesState['direGeogrAmbiente'] || this.checkboxesState['direEstaSocio'] || this.checkboxesState['direEstaEconomicas'] ||
+    this.checkboxesState['direEstaGobSegPubJus'] || this.checkboxesState['direInteAnaInv']
+  ) {
+    combinedResults = combinedResults.filter((product) => {
+      return (
+        (!this.checkboxesState['direGeogrAmbiente'] || product.dg_prod === 1) && (!this.checkboxesState['direEstaSocio'] || product.dg_prod === 2) &&
+        (!this.checkboxesState['direEstaEconomicas'] || product.dg_prod === 3) && (!this.checkboxesState['direEstaGobSegPubJus'] || product.dg_prod === 4) &&
+        (!this.checkboxesState['direInteAnaInv'] || product.dg_prod === 5)
+      );
+    });
   }
 
-  // Actualizamos el estado de la vista
-  this.showFilteredProducts = this.filteredProducts.length > 0;
+  const radioOption = this.selectedRadioValue;
+  if (radioOption) {
+    combinedResults = combinedResults.filter((product) => {
+      if (radioOption === 'option1') {
+        return product.tipo_prod__1 === 1 && product.tipo_prod__2 === 0;
+      } else if (radioOption === 'option2') {
+        return product.tipo_prod__1 === 0 && product.tipo_prod__2 === 1;
+      } else if (radioOption === 'option3') {
+        return product.tipo_prod__1 === 1 && product.tipo_prod__2 === 1;
+      }
+      return true;
+    });
+  }
+
+  if (
+    this.checkboxesCobe['cobeNacional'] || this.checkboxesCobe['cobeEstatal'] ||
+    this.checkboxesCobe['cobeMunicipal'] ||this.checkboxesCobe['cobRegional']
+  ) {
+    combinedResults = combinedResults.filter((product) => {
+      const coberturaGeo1 = this.checkboxesCobe['cobeNacional'] && product.cobertura_geo__1 === 1;
+      const coberturaGeo2 = this.checkboxesCobe['cobeEstatal'] && product.cobertura_geo__2 === 1;
+      const coberturaGeo3 = this.checkboxesCobe['cobeMunicipal'] && product.cobertura_geo__3 === 1;
+      const coberturaGeo4 = this.checkboxesCobe['cobRegional'] && product.cobertura_geo__4 === 1;
+
+      return coberturaGeo1 || coberturaGeo2 || coberturaGeo3 || coberturaGeo4;
+    });
+  }
+
+  if (
+    this.checkboxesType['typeDatoGeo'] || this.checkboxesType['typeTabulado'] || this.checkboxesType['typePublicacion']
+  ) {
+    combinedResults = combinedResults.filter((product) =>{
+      const typeDato = this.checkboxesType['typeDatoGeo'] && product.tipo_soporte__1 === 1;
+      const typeTabu = this.checkboxesType['typeTabulado'] && product.tipo_soporte__2 === 1;
+      const typePubl = this.checkboxesType['typePublicacion'] && product.tipo_soporte__3 === 1;
+
+      return typeDato || typeTabu || typePubl
+    })
+  }
+
+
+  this.filteredProducts = combinedResults;
+
   this.displayedProductCount = this.filteredProducts.length;
+
+  if (this.filteredProducts.length === 0) {
+    console.log('entre al infierno')
+    console.log(this.filteredProducts)
+    this.showFilteredProducts = true;
+    //! Aquí puedes manejar cómo mostrar un mensaje o tomar alguna acción cuando no hay resultados.
+    //! Por ejemplo, puedes mostrar un mensaje en la interfaz de usuario.
+    //! this.showNoResultsMessage = true;
+  } else {
+    console.log('entre al cielo')
+    console.log(this.filteredProducts)
+    this.showFilteredProducts = true;
+  }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -492,15 +525,12 @@ export class ProductPageComponent implements OnInit{
 
   funcionParaBuscarByQuery() {
     const inputValue = this.terminoBusqueda !== null && this.terminoBusqueda !== undefined ? this.terminoBusqueda : '';
-
     if (inputValue) {
       this._direServices.getByQuery(inputValue).subscribe(result => {
-
         this.filteredProducts = result;
         this.showFilteredProducts = true;
       });
     } else {
-
       this.filteredProducts = this.products;
       this.showFilteredProducts = false;
     }
