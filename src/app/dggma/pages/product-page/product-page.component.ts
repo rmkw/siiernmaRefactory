@@ -138,6 +138,8 @@ export class ProductPageComponent implements OnInit{
 
 
 
+
+
   //! FECHAS SELECT referencia
   allYears: number[] = [];
   uniqueYears: number[] = [];
@@ -724,6 +726,52 @@ if (this.pU_selectedYearHasta != null) {
     this.showFilteredProducts = true;
   }
 }
+
+  deleteFilter(){
+    this.checkboxesState = {
+    direGeogrAmbiente: false,
+    direEstaSocio: false,
+    direEstaEconomicas: false,
+    direEstaGobSegPubJus: false,
+    direInteAnaInv: false,
+  };
+
+  this.checkboxesCobe = {
+    cobeNacional: false,
+    cobeEstatal: false,
+    cobeMunicipal: false,
+    cobRegional: false
+  };
+
+  this.checkboxesType = {
+    typeDatoGeo: false,
+    typeTabulado: false,
+    typePublicacion: false
+  };
+
+  this.selectedRadioValue = '';
+
+
+  this.showFilteredProducts = false;
+
+  this.allProducts();
+
+
+
+  }
+
+  allProducts(){
+    this._direServices.getProducts()
+      .subscribe(data => {
+        this.products = data;
+
+        this.displayedProductCountAll = this.products.length
+        this.extractAndSortYears();
+        this.extractAndSortYearsHasta();
+        this.pU_extractAndSortYears();
+        this.pU_extractAndSortYearsHasta();
+      });
+  }
 
 
 

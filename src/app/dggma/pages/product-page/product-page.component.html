@@ -8,7 +8,7 @@
         <div class="d-flex justify-content-between mt-2">
           <div><i class="bi bi-funnel-fill"></i> <strong><span>Filtros</span></strong></div>
           <div class="d-flex">
-            <button disabled  class="btn btn-outline-secondary" style=" --bs-btn-padding-y: .20rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin-right: 0.5rem;">Quitar filtros</button>
+            <button (click)="deleteFilter()"  class="btn btn-outline-secondary" style=" --bs-btn-padding-y: .20rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin-right: 0.5rem;">Quitar filtros</button>
             <button type="button" class="btn-close" aria-label="Close" (click)="hiddenFilters()"></button>
           </div>
         </div>
@@ -63,17 +63,17 @@
 
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico" value="option1"
-              (change)="handleRadioChange($event)">
+              (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option1'">
             <label class="form-check-label" for="proGeografico">Geográfico</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proEstadistico" value="option2"
-            (change)="handleRadioChange($event)">
+            (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option2'">
             <label class="form-check-label" for="proEstadistico">Estadístico</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico&proEstadistico" value="option3"
-              (change)="handleRadioChange($event)">
+              (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option3'">
             <label class="form-check-label" for="proGeografico&proEstadistico">Geográfico y Estadístico</label>
           </div>
 
