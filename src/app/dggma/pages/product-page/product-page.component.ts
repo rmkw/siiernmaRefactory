@@ -630,12 +630,15 @@ export class ProductPageComponent implements OnInit{
     this.checkboxesState['direEstaGobSegPubJus'] || this.checkboxesState['direInteAnaInv']
   ) {
     combinedResults = combinedResults.filter((product) => {
-      return (
-        (!this.checkboxesState['direGeogrAmbiente'] || product.dg_prod === 1) && (!this.checkboxesState['direEstaSocio'] || product.dg_prod === 2) &&
-        (!this.checkboxesState['direEstaEconomicas'] || product.dg_prod === 3) && (!this.checkboxesState['direEstaGobSegPubJus'] || product.dg_prod === 4) &&
-        (!this.checkboxesState['direInteAnaInv'] || product.dg_prod === 5)
-      );
-    });
+  return (
+    (this.checkboxesState['direGeogrAmbiente'] && product.dg_prod === 1) ||
+    (this.checkboxesState['direEstaSocio'] && product.dg_prod === 2) ||
+    (this.checkboxesState['direEstaEconomicas'] && product.dg_prod === 3) ||
+    (this.checkboxesState['direEstaGobSegPubJus'] && product.dg_prod === 4) ||
+    (this.checkboxesState['direInteAnaInv'] && product.dg_prod === 5)
+  );
+});
+
   }
 
   const radioOption = this.selectedRadioValue;
@@ -680,15 +683,15 @@ export class ProductPageComponent implements OnInit{
 
   if (this.selectedYear) {
   combinedResults = combinedResults.filter((product) => {
-    const productYear = parseInt(product.a_referencia as string, 10); // Convierte a número
+    const productYear = parseInt(product.a_referencia as string, 10);
     return !isNaN(productYear) && productYear >= this.selectedYear!;
   });
 }
 
-// Aplicar el filtro de fecha "hasta" (selectedYearHasta)
+
 if (this.selectedYearHasta != null) {
   combinedResults = combinedResults.filter((product) => {
-    const productYear = parseInt(product.a_referencia2 as unknown as string, 10); // Convierte a número
+    const productYear = parseInt(product.a_referencia2 as unknown as string, 10);
     return !isNaN(productYear) && productYear <= this.selectedYearHasta!;
   });
 }
@@ -753,6 +756,30 @@ if (this.pU_selectedYearHasta != null) {
 
 
   this.showFilteredProducts = false;
+
+
+
+  //! FECHAS SELECT referencia
+  this.allYears = [];
+  this.uniqueYears = [];
+
+  this.allYearsHasta = [];
+  this.uniqueYearsHasta = [];
+
+  //* Filtro fechas
+  this.selectedYear = null;
+  this.selectedYearHasta = null;
+
+
+  //! FECHAS SELECT publicación
+  this.pU_allYears = [];
+  this.pU_uniqueYears = [];
+
+  this.pU_allYearsHasta = [];
+  this.pU_uniqueYearsHasta = [];
+  //* Filtro fechas publicación
+  this.pU_selectedYear = null;
+  this.pU_selectedYearHasta = null;
 
   this.allProducts();
 
