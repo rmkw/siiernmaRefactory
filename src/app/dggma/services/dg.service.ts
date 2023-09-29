@@ -119,36 +119,6 @@ export class DGService {
       );
   }
 
-  getProductArrayDateREFERENCIA(id: string): Observable<string[]> {
-  const url = `${this.baseUrl}/products?dg_prod=${id}`;
-  return this._http.get<Products[]>(url)
-    .pipe(
-      map(products => products.map(product => product.a_referencia.toString())),
-    );
-  }
-  getProductArrayDateREFERENCIAhasta(id: string): Observable<string[]> {
-  const url = `${this.baseUrl}/products?dg_prod=${id}`;
-  return this._http.get<Products[]>(url)
-    .pipe(
-      map(products => products.map(product => (product.a_referencia2 !== undefined) ? product.a_referencia2.toString() : '')),
-    );
-  }
-
-  getProductArrayDatePUBLICACION(id: string): Observable<string[]> {
-  const url = `${this.baseUrl}/products?dg_prod=${id}`;
-  return this._http.get<Products[]>(url)
-    .pipe(
-      map(products => products.map(product => product.a_publicacion.toString())),
-    );
-  }
-  getProductArrayDatePUBLICACIONhasta(id: string): Observable<string[]> {
-  const url = `${this.baseUrl}/products?dg_prod=${id}`;
-  return this._http.get<Products[]>(url)
-    .pipe(
-      map(products => products.map(product => (product.a_publicacion2 !== undefined) ? product.a_publicacion2.toString() : '')),
-    );
-  }
-
   getProductById( id: string ): Observable<Products[]> {
     const url = `${ this.baseUrl}/products?interview__id=${ id }`;
     console.log(url);
@@ -158,8 +128,6 @@ export class DGService {
       tap(data => console.log('DATA by Service',data))
     );
   }
-
-
 
   getProdInfo(){
     return this._http.get<ProgInformacion[]>(`${ this.baseUrl}/prog_informacion`)
@@ -177,7 +145,6 @@ export class DGService {
   getAEG_prod(){
     return this._http.get<DgaProd[]>(`${ this.baseUrl}/dga_prod`)
   }
-
 
   getObjetivos(){
     return this._http.get<Ods[]>(`${ this.baseUrl}/ods`)
@@ -204,22 +171,6 @@ export class DGService {
     return this._http.get<Products[]>(`${ this.baseUrl }/products?q=${ query }`)
   }
 
-//   cuantosProdcutosCompo1(){
-//   return this._http.get<Mdea[]>(`${this.baseUrl}/mdea?comp_mdea=6`).pipe(
-//     map(data => {
-//       const uniqueInterviewIds = new Set<number>();
-//       return data.filter(item => {
-//         const interviewIdAsNumber = parseInt(item.interview__id, 10); // Parse as integer
-//         if (!uniqueInterviewIds.has(interviewIdAsNumber)) {
-//           uniqueInterviewIds.add(interviewIdAsNumber);
-//           return true;
-//         }
-//         return false;
-//       });
-//     }),
-//     tap(filteredData => console.log('Datos únicos por interview__id:', filteredData))
-//   );
-// }
 
 cuantosProdcutosCompo1(){
   return this._http.get<Mdea[]>(`${this.baseUrl}/mdea?comp_mdea=6`).pipe(

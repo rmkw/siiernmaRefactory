@@ -138,11 +138,48 @@ export class ProductPageComponent implements OnInit{
 
 
 
-  constructor(
-    private _direServices: DGService,
-  ){
+  //! FECHAS SELECT referencia
+  allYears: number[] = [];
+  uniqueYears: number[] = [];
 
-  }
+  allYearsHasta: number[] = [];
+  uniqueYearsHasta: number[] = [];
+
+  //* Filtro fechas
+  selectedYear: number | null = null;
+  selectedYearHasta: number | null = null;
+
+
+  //! FECHAS SELECT publicación
+  pU_allYears: number[] = [];
+  pU_uniqueYears: number[] = [];
+
+  pU_allYearsHasta: number[] = [];
+  pU_uniqueYearsHasta: number[] = [];
+  //* Filtro fechas publicación
+  pU_selectedYear: number | null = null;
+  pU_selectedYearHasta: number | null = null;
+
+  //! MDEA
+  componentes:Componente[] = []
+  subcomponente:Subcomponente[]=[]
+  topicos : Topico[]=[]
+  mdeasbyCompo: Mdea[]=[]
+
+
+
+
+  selectedOptions: { [key: string]: boolean } = {};
+
+  selectedOptionsSub_componente: { [key: string]: boolean } = {};
+
+  selectedOptionsTopico: { [key: string]: boolean } = {};
+
+
+
+
+
+  constructor( private _direServices: DGService,){}
 
 
   ngOnInit(): void {
@@ -151,8 +188,12 @@ export class ProductPageComponent implements OnInit{
     this._direServices.getProducts()
       .subscribe(data => {
         this.products = data;
-        console.log('Respuesta del servicio:', data);
+
         this.displayedProductCountAll = this.products.length
+        this.extractAndSortYears();
+        this.extractAndSortYearsHasta();
+        this.pU_extractAndSortYears();
+        this.pU_extractAndSortYearsHasta();
       });
 
     //! ESCALAS
@@ -199,7 +240,85 @@ export class ProductPageComponent implements OnInit{
     this._direServices.getMetas()
     .subscribe( metas => this.metasODS = metas )
 
+    //? COMPONENTES
+    this._direServices.getComponentes().
+    subscribe(data => {this.componentes = data;})
+
   }
+  //! LLENAMOS SELECT de fechas hasta referencia
+  extractAndSortYears(): void {
+    const allYearSet = new Set<number>();
+    this.products.forEach(product => {
+      const year = product.a_referencia;
+      if (typeof year === 'number' && !isNaN(year)) {
+        allYearSet.add(year);
+      }
+    });
+    this.allYears = Array.from(allYearSet);
+    this.allYears.sort((a, b) => a - b);
+    this.uniqueYears = [...this.allYears];
+  }
+  //! LLENAMOS SELECT de fechas desde referencia
+  extractAndSortYearsHasta(): void {
+    const allYearSet = new Set<number>();
+    this.products.forEach(product => {
+      const year = product.a_referencia2;
+      if (typeof year === 'number' && !isNaN(year)) {
+        allYearSet.add(year);
+      }
+    });
+    this.allYearsHasta = Array.from(allYearSet);
+    this.allYearsHasta.sort((a, b) => a - b);
+    this.uniqueYearsHasta = [...this.allYearsHasta];
+  }
+
+  //! LLENAMOS SELECT de fechas hasta publicación
+  pU_extractAndSortYears(): void {
+    const allYearSet = new Set<number>();
+    this.products.forEach(product => {
+      const year = product.a_publicacion;
+      if (typeof year === 'number' && !isNaN(year)) {
+        allYearSet.add(year);
+      }
+    });
+    this.pU_allYears = Array.from(allYearSet);
+    this.pU_allYears.sort((a, b) => a - b);
+    this.pU_uniqueYears = [...this.pU_allYears];
+  }
+  //! LLENAMOS SELECT de fechas desde publicación
+  pU_extractAndSortYearsHasta(): void {
+    const allYearSet = new Set<number>();
+    this.products.forEach(product => {
+      const year = product.a_publicacion2;
+      if (typeof year === 'number' && !isNaN(year)) {
+        allYearSet.add(year);
+      }
+    });
+    this.pU_allYearsHasta = Array.from(allYearSet);
+    this.pU_allYearsHasta.sort((a, b) => a - b);
+    this.pU_uniqueYearsHasta = [...this.pU_allYearsHasta];
+  }
+
+  //* aquí lo del sub componente
+  onChangeComp(event: any) {
+    const id = event.target.value;
+    this._direServices.subCompbyId(id).
+    subscribe(data => {this.subcomponente = data;});
+
+    //!por componente
+    this._direServices.MdeaByCompId(id).subscribe(data => {this.mdeasbyCompo = data; this.productByCompont();})
+
+  }
+  productByCompont(){
+    this.filteredProducts = this.products.filter(product =>
+    this.mdeasbyCompo.some(mdea => mdea.interview__id === product.interview__id));
+  }
+  onChangeSubComp(event:any){
+    const id = event.target.value;
+    this._direServices.TopicbyId(id).
+    subscribe(data => {this.topicos = data;})
+  }
+
 
 
 
@@ -431,6 +550,73 @@ export class ProductPageComponent implements OnInit{
     this.applyFilters();
 
   }
+  //! función que detecta los cambios en los checks box FECHAS desde referencia
+  onChangeDesdeRefe(event: Event): void {
+  const target = event.target as HTMLSelectElement;
+  const selectedYear = parseInt(target.value, 10); // Convierte el valor a un número entero
+  this.selectedYear = selectedYear; // Asigna el valor a la propiedad selectedYear
+  this.applyFilters(); // Aplica los filtros nuevamente
+}
+  onChangeHastaRefe(event: Event): void {
+  const target = event.target as HTMLSelectElement;
+  const selectedYearHasta = parseInt(target.value, 10);
+  this.selectedYearHasta = selectedYearHasta;
+  this.applyFilters();
+}
+
+  //! función que detecta los cambios en los checks box FECHAS desde referencia
+  onChangeDesdePubli(event: Event): void {
+  const target = event.target as HTMLSelectElement;
+  const selectedYear = parseInt(target.value, 10);
+  this.pU_selectedYear = selectedYear;
+  this.applyFilters();
+}
+  onChangeHastaPubli(event: Event): void {
+  const target = event.target as HTMLSelectElement;
+  const selectedYearHasta = parseInt(target.value, 10);
+  this.pU_selectedYearHasta = selectedYearHasta;
+  this.applyFilters();
+}
+  //!filtro calis
+  handleSelectChangeCOMPONENTES(event: Event): void {
+  const selectElement = event.target as HTMLSelectElement;
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+  const value = selectedOption.value;
+
+  this.selectedOptions[value] = !this.selectedOptions[value];
+
+  console.log(this.selectedOptions);
+
+
+}
+
+   handleSelectChangeSUBCOMPONENTES(event: Event): void {
+  const selectElement = event.target as HTMLSelectElement;
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+  const value = selectedOption.value;
+
+  this.selectedOptionsSub_componente[value] = !this.selectedOptionsSub_componente[value];
+
+  console.log(this.selectedOptionsSub_componente);
+
+
+}
+
+  handleSelectChangeTopico(event: Event): void {
+  const selectElement = event.target as HTMLSelectElement;
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+  const value = selectedOption.value;
+
+  this.selectedOptionsTopico[value] = !this.selectedOptionsTopico[value];
+
+  console.log(this.selectedOptionsTopico);
+
+
+}
+
+
+
+
   //TODO FILTROS
 
   applyFilters(): void {
@@ -490,6 +676,36 @@ export class ProductPageComponent implements OnInit{
     })
   }
 
+  if (this.selectedYear) {
+  combinedResults = combinedResults.filter((product) => {
+    const productYear = parseInt(product.a_referencia as string, 10); // Convierte a número
+    return !isNaN(productYear) && productYear >= this.selectedYear!;
+  });
+}
+
+// Aplicar el filtro de fecha "hasta" (selectedYearHasta)
+if (this.selectedYearHasta != null) {
+  combinedResults = combinedResults.filter((product) => {
+    const productYear = parseInt(product.a_referencia2 as unknown as string, 10); // Convierte a número
+    return !isNaN(productYear) && productYear <= this.selectedYearHasta!;
+  });
+}
+
+  //? desde aquí se filtra por a_publicación
+  if (this.pU_selectedYear) {
+  combinedResults = combinedResults.filter((product) => {
+    const productYear = parseInt(product.a_publicacion as string, 10); // Convierte a número
+    return !isNaN(productYear) && productYear >= this.pU_selectedYear!;
+  });
+}
+
+// Aplicar el filtro de fecha "hasta" (selectedYearHasta)
+if (this.pU_selectedYearHasta != null) {
+  combinedResults = combinedResults.filter((product) => {
+    const productYear = parseInt(product.a_publicacion2 as unknown as string, 10); // Convierte a número
+    return !isNaN(productYear) && productYear <= this.pU_selectedYearHasta!;
+  });
+}
 
   this.filteredProducts = combinedResults;
 
@@ -523,6 +739,9 @@ export class ProductPageComponent implements OnInit{
 
 
 
+
+
+  //! función para búsqueda difusa
   funcionParaBuscarByQuery() {
     const inputValue = this.terminoBusqueda !== null && this.terminoBusqueda !== undefined ? this.terminoBusqueda : '';
     if (inputValue) {
@@ -535,13 +754,6 @@ export class ProductPageComponent implements OnInit{
       this.showFilteredProducts = false;
     }
   }
-
-
-
-
-
-
-
 }
 
 

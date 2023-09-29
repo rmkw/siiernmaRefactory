@@ -146,9 +146,9 @@
                 </div>
 
                 <div class="col-8 col-md-auto">
-                  <select class="form-select form-select-sm" id="endYear2">
-                    <option value="0">Seleccionar fecha</option>
-                    <option></option>
+                  <select class="form-select form-select-sm" id="desdePubli" (change)="onChangeDesdePubli($event)">
+                    <option selected>Selecciona Fecha</option>
+                    <option *ngFor="let item of pU_uniqueYears" [value]="item">{{item}}</option>
                   </select>
                 </div>
 
@@ -161,19 +161,15 @@
                   <label for="inputPassword6" class="col-form-label ms-1">Hasta:</label>
                 </div>
                 <div class="col-8 col-md-auto">
-                  <select class="form-select form-select-sm"  id="endYear2">
-                    <option value="0">Seleccionar fecha</option>
-                    <option></option>
+                  <select class="form-select form-select-sm" id="hastaPubli" (change)="onChangeHastaPubli($event)">
+                    <option selected>Selecciona Fecha</option>
+                    <option *ngFor="let item of pU_uniqueYearsHasta" [value]="item">{{item}}</option>
                   </select>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 mt-2 ">
-              <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100">
-                <i class="bi bi-search"></i>
-              </button>
-            </div>
+
           </div>
           <hr>
         </div>
@@ -187,11 +183,12 @@
                   <label for="inputPassword6" class="col-form-label ms-1">Desde:</label>
                 </div>
                 <div class="col-8 col-md-auto">
-                  <select class="form-select form-select-sm" id="endYear2">
-                    <option value="0">Seleccionar fecha</option>
-                    <option></option>
+                  <select class="form-select form-select-sm" id="desdeRefe" (change)="onChangeDesdeRefe($event)">
+                    <option selected>Selecciona Fecha</option>
+                    <option *ngFor="let item of uniqueYears" [value]="item">{{item}}</option>
                   </select>
                 </div>
+
               </div>
             </div>
 
@@ -201,15 +198,102 @@
                   <label for="inputPassword6" class="col-form-label ms-1">Hasta:</label>
                 </div>
                 <div class="col-8 col-md-auto">
-                  <select class="form-select form-select-sm" id="endYear2">
-                    <option value="0">Seleccionar fecha</option>
-                    <option></option>
+                  <select class="form-select form-select-sm" id="hastaRefe" (change)="onChangeHastaRefe($event)">
+                    <option selected>Selecciona Fecha</option>
+                    <option *ngFor="let item of uniqueYearsHasta" [value]="item">{{item}}</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <hr>
+        </div>
+
+        <div class="col-12">
+          <h6 style=" color: #113250;">Consultar por componente:</h6>
+          <div class="row mt-1">
+            <div class="col-md-12 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-auto">
+                  <select class="form-select" aria-label="Default select example" (change)="handleSelectChangeCOMPONENTES($event)" (change)="onChangeComp($event)">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor="let item of componentes" [value]="item.id">{{ item.text }}</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-12 mt-2">
+          <h6 style=" color: #113250;">Consultar por subcomponente:</h6>
+          <div class="row mt-1">
+            <div class="col-md-12 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-auto">
+                  <select class="form-select" aria-label="Default select example" style="width: 28.2rem;"
+                  (change)="handleSelectChangeSUBCOMPONENTES($event)" (change)="onChangeSubComp($event)">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor="let item of subcomponente" [value]="item.id">{{item.text}}</option>
                   </select>
                 </div>
               </div>
             </div>
-            <div class="col-12 mt-2 ">
-              <button class="btn btn-outline-secondary btn-sm ms-auto mb-0 w-100"><i class="bi bi-search"></i></button>
+          </div>
+
+        </div>
+        <div class="col-12 mt-2">
+          <h6 style=" color: #113250;">Consultar por Tópico:</h6>
+          <div class="row mt-1">
+            <div class="col-md-12 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-auto">
+                  <select class="form-select" aria-label="Default select example" style="width: 28.2rem;"
+                    (change)="handleSelectChangeTopico($event)">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor="let item of topicos" [value]="item.id">{{item.text}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="col-12">
+          <h6 style=" color: #113250;">Consultar por Objetivo:</h6>
+          <div class="row mt-1">
+            <div class="col-md-12 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-auto">
+                  <select class="form-select" aria-label="Default select example" style="width: 28.2rem;"
+                    (change)="handleSelectChangeTopico($event)">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor="let item of topicos" [value]="item.id">{{item.text}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-12 mt-2" >
+          <h6 style=" color: #113250;">Consultar por Tópico:</h6>
+          <div class="row mt-1">
+            <div class="col-md-12 mt-2 mt-md-0">
+              <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-auto">
+                  <select class="form-select" aria-label="Default select example" style="width: 28.2rem;"
+                    (change)="handleSelectChangeTopico($event)">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor="let item of topicos" [value]="item.id">{{item.text}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
           <hr>
