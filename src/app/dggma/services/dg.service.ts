@@ -210,4 +210,72 @@ cuantosProdcutosCompo1(){
 
 
 
+  getMetabyObjetivo( id: number ): Observable<MetaODS[]> {
+    const url = `${ this.baseUrl}/metaods?parentid=${ id }`;
+     console.log(url);
+     return this._http.get<MetaODS[]>(url)
+     .pipe(
+      tap(data => data)
+     );
+   }
+  getODSObjetivo( id: number ): Observable<SecuenciaOds[]> {
+    const url = `${ this.baseUrl}/secuencia_ods?obj_ods=${ id }`;
+    console.log(url);
+    console.log(id)
+    return this._http.get<SecuenciaOds[]>(url)
+    .pipe(
+      tap(data => console.log(data))
+    );
+  }
+  getODSMeta( id: string ): Observable<SecuenciaOds[]> {
+    const url = `${ this.baseUrl}/secuencia_ods?meta_ods=${ id }`;
+    console.log(url);
+    console.log(id)
+    return this._http.get<SecuenciaOds[]>(url)
+    .pipe(
+      tap(data => console.log(data))
+    );
+  }
+  getMDEASSubCompByComp( idsubcomponente: number ): Observable<Subcomponente[]> {
+    const url = `${ this.baseUrl}/subcomponentes?parentid=${ idsubcomponente }`;
+     console.log(url);
+     return this._http.get<Subcomponente[]>(url)
+     .pipe(
+       tap(data => data)
+     );
+   }
+   getMDEASCompByProduct( id: number ): Observable<Mdea[]> {
+    const url = `${ this.baseUrl}/mdea?comp_mdea=${ id }`;
+     console.log(url);
+     return this._http.get<Mdea[]>(url)
+   }
+   getMDEASTopicoBySubcomp( idtopico: number ): Observable<Topico[]> {
+    const url = `${ this.baseUrl}/topicos?parentid=${ idtopico }`;
+     console.log(url);
+     console.log(idtopico)
+     return this._http.get<Topico[]>(url)
+     .pipe(
+       tap(data => data)
+     );
+   }
+    getMDEASSubCompByProduct( id: number ): Observable<Mdea[]> {
+    const url = `${ this.baseUrl}/mdea?subcomp_mdea=${ id }`;
+     console.log(url);
+     return this._http.get<Mdea[]>(url)
+     .pipe(
+      tap(data => data)
+     );
+   }
+   getMDEASTopico( id: number ): Observable<Mdea[]> {
+    const url = `${ this.baseUrl}/mdea?topico_mdea=${ id }`;
+     console.log(url);
+     return this._http.get<Mdea[]>(url)
+     .pipe(
+      tap(data => data)
+     );
+   }
+
+
+
+
 }

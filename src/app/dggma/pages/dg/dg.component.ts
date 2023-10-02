@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DGService } from '../../services/dg.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
-
-
+interface CheckboxesState {
+  [key: string]: boolean;
+}
 @Component({
   selector: 'app-dg',
   templateUrl: './dg.component.html',
@@ -21,7 +24,18 @@ export class DgComponent implements OnInit{
 
   constructor(
     private _direServices: DGService,
+    private route: ActivatedRoute,
+    private router: Router
   ){}
+
+  //!Definimos los checkbox
+  checkboxesState: CheckboxesState = {
+    direGeogrAmbiente: false,
+    direEstaSocio: false,
+    direEstaEconomicas: false,
+    direEstaGobSegPubJus: false,
+    direInteAnaInv: false,
+  }
 
   ngOnInit(): void {
     this.isINEGISelected = false;
@@ -45,6 +59,15 @@ export class DgComponent implements OnInit{
     this.isODSSelected = false;
 
   }
+  navigateWithParam() {
+
+
+    this.checkboxesState['direGeogrAmbiente'] = true;
+
+
+  // Luego, navegamos a la ruta con el parámetro
+  this.router.navigate(['/dg/products'], { queryParams: this.checkboxesState });
+}
 
 
 

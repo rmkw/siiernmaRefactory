@@ -1,0 +1,192 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card2 shadow-sm  bg-body-tertiary rounded m-1">
+
+        <div class="d-flex">
+          <div class="col">
+            <h5 class="mt-2 mb-3" style="color: #55a09d; text-align: center;">Relación con el Marco para el Desarrollo
+              de las Estadísticas Ambientales (MDEA)</h5>
+          </div>
+        </div>
+
+        <!-- Selectores -->
+        <div class="row m-1" id="filtroSeccion">
+          <div class="col-md-4">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-primary-emphasis subtlepersonalized">
+                Consultar por Componente:
+              </li>
+            </ul>
+            <div class="row mt-1">
+              <div class="col-md-12">
+                <div class="row g-2 align-items-center">
+                  <div class="col-4 col-md-auto">
+                    <div class="row mb-3">
+
+                      <div class="col mt-3">
+                        <select class="form-select form-select-sm" (change)="SelectorComponente($event)">
+                          <option selected> -- Componente -- </option>
+                          <option *ngFor="let componente of componentesMDEA" [value]="componente.id">{{ componente.text
+                            }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-primary-emphasis subtlepersonalized">
+                Consultar por Subcomponente:
+              </li>
+            </ul>
+            <div class="row mt-1">
+              <div class="col-md-12">
+                <div class="row g-2 align-items-center">
+                  <div class="col-4 col-md-auto">
+
+                    <div class="row mb-3">
+                      <div class="col mt-3">
+                        <select class="form-select form-select-sm" (change)="SelectorSubcomponente($event)">
+                          <option selected> -- Subcomponente -- </option>
+                          <option *ngFor="let item of subcomponentes" [value]="item.id">{{ item.text }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-4">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-primary-emphasis subtlepersonalized">
+                Consultar por Tópico:
+              </li>
+            </ul>
+            <div class="row mt-1">
+              <div class="col-md-12">
+                <div class="row g-2 align-items-center">
+                  <div class="col-4 col-md-auto">
+
+                    <div class="row mb-1">
+                      <div class="col mt-3">
+                        <select class="form-select form-select-sm" (change)="SelectorTopico($event)">
+                          <option selected> -- Tópico -- </option>
+                          <option *ngFor="let item of topicos" [value]="item.id">{{ item.text }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="row" id="fondo">
+    <div class="col-12 ">
+      <div class="container">
+        <br>
+        <div class="mb-2" style="margin-left: 10px;">
+          <p>
+            El MDEA 2013 organiza las estadísticas ambientales en seis componentes, cada uno
+            de los cuales se desagrega en subcomponentes y a su vez en tópicos estadisticos. Los seis componentes
+            incluyen: condiciones y calidad ambiental; disponibilidad y uso de los recursos
+            ambientales y las actividades humanas relacionadas; el uso del ambiente como sumidero de
+            residuos y actividades humanas relacionadas; eventos naturales extremos y desastres; asentamientos humanos y
+            salud ambiental; y medidas sociales y económicas para proteger y gestionar el ambiente. Los temas
+            estadísticos representan los aspectos cuantificables de los componentes y están agrupados en subcomponentes,
+            tomando en cuenta los tipos y fuentes de las
+            estadísticas necesarias para describirlos.
+          </p>
+          <br>
+          <div [hidden]="CompMdeaimg">
+            <div class="alert alert-success text-center mt-3">
+              Inicia la consulta por Componentes.
+            </div>
+            <div class="text-center mb-4">
+              <div class="d-none d-md-block">
+                <img src="./assets/mdeacomp.png" class="img-fluid img-desktop">
+              </div>
+              <div class="d-md-none">
+                <img src="./assets/mdeacomp.png" class="img-fluid img-mobile">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngFor="let dg of filteredProducts">
+          <div class="card2 shadow-md bg-body-tertiary rounded">
+            <div class="card-body d-md-flex justify-content-between align-items-center">
+              <div style="margin-right: 10px; font-weight: bolder;">{{ dg.nom_producto }}</div>
+              <div class="btn-group">
+                <a class="btn btn-primary btn-fixed-size" type="button" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">Ver mas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="background-color: #113250;" *ngIf="noProductsFound">
+  <div class="alert alert-primary text-center">
+    No se encontraron productos con esas características.
+  </div>
+  <div class="text-center mt-2">
+    <div class="d-none d-md-block ">
+      <img src="./assets/nodata.svg" alt="" class="img-fluid img-desktop">
+    </div>
+    <div class="d-md-none">
+      <img src="./assets/nodata.svg" alt="" class="img-fluid img-mobile">
+    </div>
+  </div>
+
+</div>
+
+
+
+<button class="scroll-to-top-button" (click)="scrollToTop()" style="border-radius: 20px;"><i
+    class="bi bi-arrow-up-circle "></i></button>
+
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" style="overflow-y: auto;">
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Propiedades del producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> -->
+
+<!-- <div *ngIf="selectedProduct.interview__id"> -->
+
+
+<!-- </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div> -->

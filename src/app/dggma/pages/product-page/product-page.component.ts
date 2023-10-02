@@ -8,6 +8,8 @@ import { Componente, Mdea, Subcomponente, Topico } from '../../interfaces/mdea.i
 import { MetaODS, Ods, SecuenciaOds } from '../../interfaces/ods.interface';
 import { IndicadoresPS2023, PS2023, SecuenciaPS } from '../../interfaces/ps.interface';
 
+import { ActivatedRoute } from '@angular/router';
+
 
 
 //! Interface de los checkbox
@@ -177,14 +179,27 @@ export class ProductPageComponent implements OnInit{
 
   selectedOptionsTopico: { [key: string]: boolean } = {};
 
+  loading = true;
 
 
 
 
-  constructor( private _direServices: DGService,){}
+
+  constructor( private _direServices: DGService, private route: ActivatedRoute){}
 
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+
+      this.checkboxesState['direGeogrAmbiente'] = params['direGeogrAmbiente'] === 'true';
+      this.checkboxesState['direEstaSocio'] = params['direEstaSocio'] === 'true';
+      this.checkboxesState['direEstaEconomicas'] = params['direEstaEconomicas'] === 'true';
+      this.checkboxesState['direEstaGobSegPubJus'] = params['direEstaGobSegPubJus'] === 'true';
+      this.checkboxesState['direInteAnaInv'] = params['direInteAnaInv'] === 'true';
+      console.log(this.checkboxesState)
+
+    });
+
 
     //! TODOS LOS PRODUCTOS
     this._direServices.getProducts()
@@ -196,6 +211,7 @@ export class ProductPageComponent implements OnInit{
         this.extractAndSortYearsHasta();
         this.pU_extractAndSortYears();
         this.pU_extractAndSortYearsHasta();
+        this.loading = false;
       });
 
     //! ESCALAS

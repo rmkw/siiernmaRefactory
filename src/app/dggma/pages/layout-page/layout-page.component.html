@@ -46,8 +46,17 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" [routerLink]="['/dg']">Inicio</a>
         </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" aria-current="page" href="#" [routerLink]="['/dg/mdea']"
+            routerLinkActive="active">MDEA</a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Implementaciones futuras</a>
+          <a class="nav-link" aria-current="page" href="#" [routerLink]="['/dg/ods']" routerLinkActive="active">ODS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-current="page" href="#"
+            routerLinkActive="active">Indicadores</a>
         </li>
 
         <!-- <li class="nav-item dropdown">
