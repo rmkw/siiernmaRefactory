@@ -838,6 +838,7 @@ if (this.pU_selectedYearHasta != null) {
     if (inputValue) {
       this._direServices.getByQuery(inputValue).subscribe(result => {
         this.filteredProducts = result;
+        this.displayedProductCount = this.filteredProducts.length;
         this.showFilteredProducts = true;
       });
     } else {
