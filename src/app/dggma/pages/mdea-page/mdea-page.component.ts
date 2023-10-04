@@ -54,7 +54,7 @@ export class MdeaPageComponent  implements OnInit{
 
     SelectorComponente(event: any)  {
       const id = event.target.value;
-      this._direServices.getMDEASSubCompByComp(id)
+      this._direServices.subcomponenteByParentid(id)
       .subscribe( data => {
         this.subcomponentes = data;
 
@@ -64,7 +64,7 @@ export class MdeaPageComponent  implements OnInit{
 
       })
 
-      this._direServices.getMDEASCompByProduct(id)
+      this._direServices.mdeaByComponenteId(id)
       .subscribe( data => {
         this.mdeas = data;
         this.mdeasByComponente()
@@ -76,14 +76,14 @@ export class MdeaPageComponent  implements OnInit{
       const id = event.target.value;
       console.log(id);
 
-      this._direServices.getMDEASTopicoBySubcomp(id)
+      this._direServices.topicoByParentid(id)
       .subscribe( data => {
         this.topicos = data; console.log('Topico', data);
 
 
 
       })
-      this._direServices.getMDEASSubCompByProduct(id)
+      this._direServices.mdeaBySubcomponenteId(id)
       .subscribe( data => {
         this.mdeas = data;
         this.mdeasByComponente()
@@ -96,7 +96,7 @@ export class MdeaPageComponent  implements OnInit{
       const id = event.target.value;
       console.log(id);
 
-      this._direServices.getMDEASTopico(id)
+      this._direServices.mdeaByTopicoId(id)
       .subscribe( data => {
         this.mdeas = data;
         this.mdeasByComponente()
@@ -110,16 +110,16 @@ export class MdeaPageComponent  implements OnInit{
 
   ngOnInit(): void {
 
-    this._direServices.getProducts()
+    this._direServices.productos()
     .subscribe(data => this.products = data )
 
-    this._direServices.getComponentes()
+    this._direServices.componentes()
     .subscribe( componentes => this.componentesMDEA = componentes)
 
-    this._direServices.getSubcomponentes()
+    this._direServices.subcomponentes()
     .subscribe( subcomponente => this.subComponentesMDEA = subcomponente)
 
-    this._direServices.getTopicos()
+    this._direServices.topicos()
     .subscribe( topicomdea => this.topicoMDEA = topicomdea)
 
 

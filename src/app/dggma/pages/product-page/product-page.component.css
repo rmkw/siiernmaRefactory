@@ -1,14 +1,3 @@
-.card1 {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  /* cursor: pointer; */
-  transition: transform 0.2s;
-}
-
-.card1:hover {
-  transform: scale(1.02);
-}
 .show {
   display: block !important;
   visibility: visible !important;
@@ -20,85 +9,6 @@
   color: white;
 }
 
-.card2 {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  /* cursor: pointer; */
-  transition: transform 0.2s;
-}
-
-/* Estilo para la lista de resultados */
-.search-results {
-  list-style-type: none;
-  /* Elimina los puntos de la lista */
-  padding: 0;
-  /* Elimina el espacio interno de la lista */
-  border: 1px solid #ccc;
-  /* Agrega un borde para separar visualmente las opciones */
-  max-height: 200px;
-  /* Limita la altura máxima para evitar que sea demasiado larga */
-  overflow-y: auto;
-  /* Agrega una barra de desplazamiento vertical si es necesario */
-
-  position: absolute;
-    z-index: 1000;
-    /* Ajusta el valor de z-index según sea necesario para que la lista aparezca por encima de la tarjeta */
-    width: 65%;
-    /* Ajusta el ancho de la lista según sea necesario */
-    background-color: white;
-
-}
-
-/* Estilo para cada elemento de la lista */
-.search-result-item {
-  padding: 8px;
-  /* Añade un espacio interno a cada elemento de la lista */
-  cursor: pointer;
-  /* Cambia el cursor al pasar sobre los elementos */
-}
-
-/* Cambiar el color de fondo al pasar sobre los elementos */
-.search-result-item:hover {
-  background-color: #f0f0f0;
-}
-
-.maginTop {
-  margin-top: 200px;
-}
-
-@media (max-width: 767px) {
-  .search-results {
-    width: 100%;
-    /* Ajusta el ancho para que ocupe toda la pantalla */
-    left: 0;
-    /* Alinea la lista a la izquierda */
-  }
-
-  .col-md-12.button-col {
-    margin-top: 10px;
-  }
-}
-
-/* Estilos para la versión de escritorio */
-@media (min-width: 992px) {
-  .img-desktop {
-    max-width: 35%;
-  }
-}
-
-/* Estilos para la versión móvil */
-@media (max-width: 991px) {
-  .img-mobile {
-    max-width: 75%;
-    /* Ajusta este valor según tus necesidades */
-  }
-}
-
-
-
-
-
 .form-check-input:checked {
   background-color: #113250;;
   border-color: #113250;
@@ -106,13 +16,10 @@
 
 .shadow-on-hover:hover {
   box-shadow: 0 10px 5px -5px rgba(255, 255, 255, 0.5);
-  /* Sombra blanca al pasar el puntero */
   transition: box-shadow 0.3s ease;
-  /* Transición suave de la sombra */
 }
-
 
 .custom-scroll{
   overflow-y: visible;
-  max-height: 58.5rem;
+  max-height: 97vh;
 }

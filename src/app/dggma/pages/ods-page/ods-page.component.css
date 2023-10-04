@@ -5,44 +5,44 @@
 }
 
 
-/* Estilos para la versión de escritorio */
+
 @media (min-width: 992px) {
   .img-desktop {
     max-width: 35%;
   }
 }
 
-/* Estilos para la versión móvil */
+
 @media (max-width: 991px) {
   .img-mobile {
     max-width: 75%;
-    /* Ajusta este valor según tus necesidades */
+
 
   }
 
 }
 
-/* Estilo para el botón */
+
 .scroll-to-top-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
   background-color: #77b7d7;
-  /* Color de fondo del botón */
+
   color: #fff;
-  /* Color del texto del botón */
+
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  /* Transición suave del color de fondo */
+
 }
 
 
 .scroll-to-top-button:hover {
   background-color: #87d4fa;
-  /* Cambia el color de fondo al pasar el mouse */
+
 
 }
 
@@ -66,5 +66,5 @@ p {
 
 .btn-fixed-size {
   min-width: 100px;
-  /* Define el ancho mínimo deseado para el botón */
+
 }

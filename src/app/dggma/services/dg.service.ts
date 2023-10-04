@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 import { environments } from 'src/app/environments/environments';
 import { Escalas, Products, SecuenciaVar } from "../interfaces/product.interface";
 import { Componente, Mdea, Subcomponente, Topico } from '../interfaces/mdea.interface';
@@ -11,271 +11,186 @@ import { MetaODS, Ods, SecuenciaOds } from '../interfaces/ods.interface';
 import { IndicadoresPS2023, PS2023, SecuenciaPS } from '../interfaces/ps.interface';
 
 
-
-
-
-
 @Injectable({providedIn: 'root'})
 export class DGService {
 
   private baseUrl: string = environments.baseUrl;
-
-
-
   constructor(private _http: HttpClient) {}
 
-  getDG(){
-    return this._http.get<UAdmin[]>(`${ this.baseUrl}/u_admin`)
+
+  //! get direcciones generales
+  direccionesGenerales(){
+    return this._http.get<UAdmin[]>(`${ this.baseUrl}/direcciones_ctrl`)
+  }
+  //! get productos
+  productos(){
+    return this._http.get<Products[]>(`${ this.baseUrl}/producto_coll`)
+  }
+  escalas(){
+    return this._http.get<Escalas[]>(`${ this.baseUrl}/escalas_ctrl`)
   }
 
-  getProducts(){
-    return this._http.get<Products[]>(`${ this.baseUrl}/products`)
-  }
 
-  getMdea(){
-    return this._http.get<Mdea[]>(`${ this.baseUrl}/mdea`)
-  }
 
-  getComponentes(){
-    return this._http.get<Componente[]>(`${ this.baseUrl}/componentes`)
-  }
-  getSubcomponentes(){
-    return this._http.get<Subcomponente[]>(`${ this.baseUrl}/subcomponentes`)
-  }
-  getTopicos(){
-    return this._http.get<Topico[]>(`${ this.baseUrl}/topicos`)
-  }
-  getMDEASById( id: string ): Observable<Mdea[]> {
-    const url = `${ this.baseUrl}/mdea?interview__id=${ id }`;
-    console.log(url);
-    console.log(id)
+
+
+
+  //! get secuencia MDEA
+  mdeaById( id: string ): Observable<Mdea[]> {
+    const url = `${ this.baseUrl}/mdea_coll?interview__id=${ id }`;
     return this._http.get<Mdea[]>(url)
-    .pipe(
-      tap(data => console.log(data))
-    );
   }
-  getPIById( id: string ): Observable<Pi[]> {
-    const url = `${ this.baseUrl}/pi?interview__id=${ id }`;
-    console.log(url);
-    console.log(id)
-   return this._http.get<Pi[]>(url)
-    .pipe(
-      tap(data => console.log(data))
-    );
-  }
-  getAEGById( id: string ): Observable<SecuenciaAeg[]> {
-    const url = `${ this.baseUrl}/secuencia_aeg?interview__id=${ id }`;
-    console.log(url);
-    console.log(id)
-   return this._http.get<SecuenciaAeg[]>(url)
-    .pipe(
-      tap(data => console.log(data))
-    );
-  }
-  getODSById( id: string ): Observable<SecuenciaOds[]> {
-    const url = `${ this.baseUrl}/secuencia_ods?interview__id=${ id }`;
-    console.log(url);
-    console.log(id)
-    return this._http.get<SecuenciaOds[]>(url)
-    .pipe(
-      tap(data => console.log(data))
-    );
-  }
-  getSecuenciaPSBy( id: string ): Observable<SecuenciaPS[]> {
-    const url = `${ this.baseUrl}/secuencia_ps?interview__id=${ id }`;
-    console.log(url);
-    console.log(id)
-    return this._http.get<SecuenciaPS[]>(url)
-    .pipe(
-      tap(data => console.log('DATA by Service',data))
-    );
-  }
-  getSecuenciaVARBy( id: string ): Observable<SecuenciaVar[]> {
-    const url = `${ this.baseUrl}/secuencia_var?interview__id=${ id }`;
-    console.log(url);
-    console.log(id)
-    return this._http.get<SecuenciaVar[]>(url)
-    .pipe(
-      tap(data => console.log('DATA by Service',data))
-    );
+  mdeaByComponenteId( id: number ): Observable<Mdea[]> {
+    const url = `${ this.baseUrl}/mdea_coll?comp_mdea=${ id }`;
+     return this._http.get<Mdea[]>(url)
+   }
+  mdeaBySubcomponenteId( id: number ): Observable<Mdea[]> {
+    const url = `${ this.baseUrl}/mdea_coll?subcomp_mdea=${ id }`;
+     return this._http.get<Mdea[]>(url)
+   }
+  mdeaByTopicoId( id: number ): Observable<Mdea[]> {
+    const url = `${ this.baseUrl}/mdea_coll?topico_mdea=${ id }`;
+     return this._http.get<Mdea[]>(url)
+   }
+
+  componentes(){
+    return this._http.get<Componente[]>(`${ this.baseUrl}/componentes_ctrl`)
   }
 
-  getSecuenciaProductBy( id: string ): Observable<Products[]> {
-    const url = `${ this.baseUrl}/products?dg_prod=${ id }`;
-    console.log(url);
-    console.log(id)
-    return this._http.get<Products[]>(url)
-    .pipe(
-      tap(data => console.log('DATA by Service',data))
-    );
+  subcomponentes(){
+    return this._http.get<Subcomponente[]>(`${ this.baseUrl}/subcomponentes_ctrl`)
   }
-
-  getProductCountByDirection(id: string): Observable<number> {
-    const url = `${this.baseUrl}/products?dg_prod=${id}`;
-    return this._http.get<Products[]>(url)
-      .pipe(
-        map(products => products.length),
-
-      );
-  }
-
-  getProductById( id: string ): Observable<Products[]> {
-    const url = `${ this.baseUrl}/products?interview__id=${ id }`;
-    console.log(url);
-    console.log(id)
-    return this._http.get<Products[]>(url)
-    .pipe(
-      tap(data => console.log('DATA by Service',data))
-    );
-  }
-
-  getProdInfo(){
-    return this._http.get<ProgInformacion[]>(`${ this.baseUrl}/prog_informacion`)
-  }
-  getProcProduccion(){
-    return this._http.get<ProcProduccion[]>(`${ this.baseUrl}/proc_produccion`)
-  }
-  getDgaPprod(){
-    return this._http.get<DgaPprod[]>(`${ this.baseUrl}/dga_pprod`)
-  }
-
-  getAEG_2(){
-    return this._http.get<Aeg2[]>(`${ this.baseUrl}/aeg_2`)
-  }
-  getAEG_prod(){
-    return this._http.get<DgaProd[]>(`${ this.baseUrl}/dga_prod`)
-  }
-
-  getObjetivos(){
-    return this._http.get<Ods[]>(`${ this.baseUrl}/ods`)
-  }
-  getMetas(){
-    return this._http.get<MetaODS[]>(`${ this.baseUrl}/metaODS`)
-  }
-
-  getPS2023(){
-    return this._http.get<PS2023[]>(`${ this.baseUrl}/PS_2023`)
-  }
-  getIndicadoresPS2023(){
-    return this._http.get<IndicadoresPS2023[]>(`${ this.baseUrl}/indicadores_PS_2023`)
-  }
-
-  getEscalas(){
-    return this._http.get<Escalas[]>(`${ this.baseUrl}/escalas`)
-  }
-
-  getSuggestions( query: string ) : Observable<Products[]> {
-    if (query.trim() === '') {
-    return of([]); // Emitir un arreglo vacío si el término de búsqueda está vacío
-  }
-    return this._http.get<Products[]>(`${ this.baseUrl }/products?q=${ query }`)
-  }
-
-
-cuantosProdcutosCompo1(){
-  return this._http.get<Mdea[]>(`${this.baseUrl}/mdea?comp_mdea=6`).pipe(
-    tap(data => console.log('Datos obtenidos:', data))
-  );
-}
-
-  getByQuery( query: string ) : Observable<Products[]> {
-    console.log(query)
-    if (query.trim() === '') {
-    return of([]); // Emitir un arreglo vacío si el término de búsqueda está vacío
-  }
-  return this._http.get<Products[]>(`${ this.baseUrl }/fuzzy-search?q=${ query }`)
-  .pipe(
-      tap(data => console.log('DATA by Service',data))
-    );
-}
-
-
-//!mdea
-
-  subCompbyId(id:string){
-    const url = `${ this.baseUrl}/subcomponentes?parentid=${ id }`;
+  subcomponenteByParentid(id:string){
+    const url = `${ this.baseUrl}/subcomponentes_ctrl?parentid=${ id }`;
     return this._http.get<Subcomponente[]>(url);
   }
 
-  TopicbyId(id:string){
-    const url = `${ this.baseUrl}/topicos?parentid=${ id }`;
-    return this._http.get<Topico[]>(url);
+  topicos(){
+    return this._http.get<Topico[]>(`${ this.baseUrl}/topicos_ctrl`)
   }
-
-  MdeaByCompId(id:string){
-    const url = `${ this.baseUrl}/mdea?comp_mdea=${ id }`;
-    return this._http.get<Mdea[]>(url);
-
-  }
-
-
-
-  getMetabyObjetivo( id: number ): Observable<MetaODS[]> {
-    const url = `${ this.baseUrl}/metaods?parentid=${ id }`;
-     console.log(url);
-     return this._http.get<MetaODS[]>(url)
-     .pipe(
-      tap(data => data)
-     );
-   }
-  getODSObjetivo( id: number ): Observable<SecuenciaOds[]> {
-    const url = `${ this.baseUrl}/secuencia_ods?obj_ods=${ id }`;
-    console.log(url);
-    console.log(id)
-    return this._http.get<SecuenciaOds[]>(url)
-    .pipe(
-      tap(data => console.log(data))
-    );
-  }
-  getODSMeta( id: string ): Observable<SecuenciaOds[]> {
-    const url = `${ this.baseUrl}/secuencia_ods?meta_ods=${ id }`;
-    console.log(url);
-    console.log(id)
-    return this._http.get<SecuenciaOds[]>(url)
-    .pipe(
-      tap(data => console.log(data))
-    );
-  }
-  getMDEASSubCompByComp( idsubcomponente: number ): Observable<Subcomponente[]> {
-    const url = `${ this.baseUrl}/subcomponentes?parentid=${ idsubcomponente }`;
-     console.log(url);
-     return this._http.get<Subcomponente[]>(url)
-     .pipe(
-       tap(data => data)
-     );
-   }
-   getMDEASCompByProduct( id: number ): Observable<Mdea[]> {
-    const url = `${ this.baseUrl}/mdea?comp_mdea=${ id }`;
-     console.log(url);
-     return this._http.get<Mdea[]>(url)
-   }
-   getMDEASTopicoBySubcomp( idtopico: number ): Observable<Topico[]> {
-    const url = `${ this.baseUrl}/topicos?parentid=${ idtopico }`;
-     console.log(url);
-     console.log(idtopico)
+  topicoByParentid( id: number ): Observable<Topico[]> {
+    const url = `${ this.baseUrl}/topicos_ctrl?parentid=${ id }`;
      return this._http.get<Topico[]>(url)
-     .pipe(
-       tap(data => data)
-     );
-   }
-    getMDEASSubCompByProduct( id: number ): Observable<Mdea[]> {
-    const url = `${ this.baseUrl}/mdea?subcomp_mdea=${ id }`;
-     console.log(url);
-     return this._http.get<Mdea[]>(url)
-     .pipe(
-      tap(data => data)
-     );
-   }
-   getMDEASTopico( id: number ): Observable<Mdea[]> {
-    const url = `${ this.baseUrl}/mdea?topico_mdea=${ id }`;
-     console.log(url);
-     return this._http.get<Mdea[]>(url)
-     .pipe(
-      tap(data => data)
-     );
    }
 
 
 
 
+
+
+
+
+
+
+
+
+
+   //! PROGRAMAS DE INFORMACIÓN
+
+  prograInfo( id: string ): Observable<Pi[]> {
+    const url = `${ this.baseUrl}/pi_coll?interview__id=${ id }`;
+    return this._http.get<Pi[]>(url)
+  }
+  programasInformaName(){
+    return this._http.get<ProgInformacion[]>(`${ this.baseUrl}/prog_informacion_ctrl`)
+  }
+
+
+
+  //!VARIABLES
+  variableById( id: string ): Observable<SecuenciaVar[]> {
+    const url = `${ this.baseUrl}/variable_coll?interview__id=${ id }`;
+    return this._http.get<SecuenciaVar[]>(url)
+  }
+
+  //! Actividad Estadística Geográfica
+  actiEstaGeoById( id: string ): Observable<SecuenciaAeg[]> {
+    const url = `${ this.baseUrl}/aeg_coll?interview__id=${ id }`;
+   return this._http.get<SecuenciaAeg[]>(url)
+  }
+  dirGenProAEG(){
+    return this._http.get<DgaPprod[]>(`${ this.baseUrl}/dga_pprod_ctrl`)
+  }
+  actiEstaGeoName(){
+    return this._http.get<Aeg2[]>(`${ this.baseUrl}/aeg_name_ctrl`)
+  }
+  //? Dirección general adjunta responsable de la AEG
+  direAdjResAEG(){
+    return this._http.get<DgaProd[]>(`${ this.baseUrl}/dga_prod_ctrl`)
+  }
+
+
+
+  //!ODS
+
+  odsById( id: string ): Observable<SecuenciaOds[]> {
+    const url = `${ this.baseUrl}/ods_coll?interview__id=${ id }`;
+    return this._http.get<SecuenciaOds[]>(url)
+  }
+  objetivos(){
+    return this._http.get<Ods[]>(`${ this.baseUrl}/objetivo_ctrl`)
+  }
+  metas(){
+    return this._http.get<MetaODS[]>(`${ this.baseUrl}/meta_ctrl`)
+  }
+  metasByparentid( id: number ): Observable<MetaODS[]> {
+    const url = `${ this.baseUrl}/meta_ctrl?parentid=${ id }`;
+     return this._http.get<MetaODS[]>(url)
+   }
+  odsByObjetivo( id: number ): Observable<SecuenciaOds[]> {
+    const url = `${ this.baseUrl}/ods_coll?obj_ods=${ id }`;
+    return this._http.get<SecuenciaOds[]>(url)
+  }
+  odsByMeta( id: string ): Observable<SecuenciaOds[]> {
+    const url = `${ this.baseUrl}/ods_coll?meta_ods=${ id }`;
+    return this._http.get<SecuenciaOds[]>(url)
+  }
+
+
+
+
+
+
+
+
+
+
+
+  //! PROGRAMAS SECTORIALES
+  programaSectorialById( id: string ): Observable<SecuenciaPS[]> {
+    const url = `${ this.baseUrl}/ps_coll?interview__id=${ id }`;
+    return this._http.get<SecuenciaPS[]>(url);
+  }
+
+  // procesoProduccionPS(){
+  //   return this._http.get<ProcProduccion[]>(`${ this.baseUrl}/proc_produccion_ctrl`)
+  //! } no se usa revisar
+
+  ps2023(){
+    return this._http.get<PS2023[]>(`${ this.baseUrl}/PS_2023_ctrl`)
+  }
+  indicadoresPS2023(){
+    return this._http.get<IndicadoresPS2023[]>(`${ this.baseUrl}/indicadores_PS_2023_ctrl`)
+  }
+
+
+
+
+
+
+
+
+  suggestionByQuery( query: string ) : Observable<Products[]> {
+    if (query.trim() === '') {
+    return of([]);
+  }
+  return this._http.get<Products[]>(`${ this.baseUrl }/fuzzy-search?q=${ query }`)
 }
+}
+
+
+
+
+// .pipe(
+//       tap(data => console.log('DATA by Service',data))
+//     );

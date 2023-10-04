@@ -30,7 +30,7 @@ export class OdsPageComponent implements OnInit{
 
 
     scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' }); // Esto desplaza suavemente hacia arriba
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
 
@@ -50,7 +50,7 @@ export class OdsPageComponent implements OnInit{
     SelectorODS(event: any)  {
 
       const id = event.target.value;
-      this._direServices.getMetabyObjetivo(id)
+      this._direServices.metasByparentid(id)
       .subscribe( data => {
         this.meta = data;
 
@@ -61,7 +61,7 @@ export class OdsPageComponent implements OnInit{
 
 
       })
-      this._direServices.getODSObjetivo(id)
+      this._direServices.odsByObjetivo(id)
       .subscribe(data => {
         this.ods = data;
         this.odsByProducts()
@@ -73,7 +73,7 @@ export class OdsPageComponent implements OnInit{
       const id = event.target.value;
       console.log(id);
 
-      this._direServices.getODSMeta(id)
+      this._direServices.odsByMeta(id)
       .subscribe(data => {
         this.ods = data;
         this.odsByProducts()
@@ -85,13 +85,13 @@ export class OdsPageComponent implements OnInit{
 
   ngOnInit(): void{
 
-    this._direServices.getProducts()
+    this._direServices.productos()
     .subscribe(data => this.products = data )
 
-    this._direServices.getObjetivos()
+    this._direServices.objetivos()
   .subscribe( objetivoOds => this.objetivods = objetivoOds)
 
-  this._direServices.getMetas()
+  this._direServices.metas()
   .subscribe( metaOds => this.metaods = metaOds)
 
   }

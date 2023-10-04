@@ -17,12 +17,6 @@ interface CheckboxesState {
   [key: string]: boolean;
 }
 
-// Define un tipo que refleja la estructura real de la respuesta del servicio
-interface ServiceResponse {
-  item: any; // Debes definir las propiedades adecuadas aquí
-  refIndex: number;
-  score: number;
-}
 
 
 @Component({
@@ -202,7 +196,7 @@ export class ProductPageComponent implements OnInit{
 
 
     //! TODOS LOS PRODUCTOS
-    this._direServices.getProducts()
+    this._direServices.productos()
       .subscribe(data => {
         this.products = data;
 
@@ -215,51 +209,51 @@ export class ProductPageComponent implements OnInit{
       });
 
     //! ESCALAS
-    this._direServices.getEscalas()
+    this._direServices.escalas()
     .subscribe( escala => this.escalas = escala);
 
     //! PRODUCTOS DE INFORMACIÓN
-    this._direServices.getProdInfo()
+    this._direServices.programasInformaName()
     .subscribe( pInfo => { this.proInfo = pInfo; });
 
     //! DIRECCIONES
-    this._direServices.getDG()
+    this._direServices.direccionesGenerales()
     .subscribe( dgs => this.dgs = dgs );
 
     //!direcciones en AEG
-    this._direServices.getDgaPprod()
+    this._direServices.dirGenProAEG()
     .subscribe( dga_pprod => this.dga_Pprod = dga_pprod);
 
     //!AEG nombre del AEG
-    this._direServices.getAEG_2()
+    this._direServices.actiEstaGeoName()
     .subscribe( aeg_2 => this.aeg_2 = aeg_2)
 
     //!DIRECCIÓN GENERAL ADJUNTA RESPONSABLE
-    this._direServices.getAEG_prod()
+    this._direServices.direAdjResAEG()
     .subscribe( aeg_prod => this.aeg_Prod = aeg_prod )
 
     //! TODOS LOS COMPONENTES DEL MDEA
-    this._direServices.getComponentes()
+    this._direServices.componentes()
     .subscribe( componentes => this.componentesMDEA = componentes)
 
     //! todos los sub componentes del MDEA
-    this._direServices.getSubcomponentes()
+    this._direServices.subcomponentes()
     .subscribe( subcomponente => this.subComponentesMDEA = subcomponente)
 
     //! todos los tópicos
-    this._direServices.getTopicos()
+    this._direServices.topicos()
     .subscribe( topicomdea => this.topicoMDEA = topicomdea)
 
     //! todos los OBJETIVOS del ods
-    this._direServices.getObjetivos()
+    this._direServices.objetivos()
     .subscribe( objetivos => this.objetivODS = objetivos)
 
     //! todas las metas de los ODS
-    this._direServices.getMetas()
+    this._direServices.metas()
     .subscribe( metas => this.metasODS = metas )
 
     //? COMPONENTES
-    this._direServices.getComponentes().
+    this._direServices.componentes().
     subscribe(data => {this.componentes = data;})
 
   }
@@ -320,11 +314,11 @@ export class ProductPageComponent implements OnInit{
   //* aquí lo del sub componente
   onChangeComp(event: any) {
     const id = event.target.value;
-    this._direServices.subCompbyId(id).
+    this._direServices.subcomponenteByParentid(id).
     subscribe(data => {this.subcomponente = data;});
 
     //!por componente
-    this._direServices.MdeaByCompId(id).subscribe(data => {this.mdeasbyCompo = data; this.productByCompont();})
+    this._direServices.mdeaByComponenteId(id).subscribe(data => {this.mdeasbyCompo = data; this.productByCompont();})
 
   }
   productByCompont(){
@@ -333,7 +327,7 @@ export class ProductPageComponent implements OnInit{
   }
   onChangeSubComp(event:any){
     const id = event.target.value;
-    this._direServices.TopicbyId(id).
+    this._direServices.topicoByParentid(id).
     subscribe(data => {this.topicos = data;})
   }
 
@@ -359,38 +353,38 @@ export class ProductPageComponent implements OnInit{
     this.elementoSeleccionado = elemento;
 
     //! VARIABLES
-    this._direServices.getSecuenciaVARBy(this.elementoSeleccionado.interview__id)
+    this._direServices.variableById(this.elementoSeleccionado.interview__id)
     .subscribe( data => { this.secuenciaVAR = data});
 
     //! Programas de Información
-    this._direServices.getPIById(this.elementoSeleccionado.interview__id)
+    this._direServices.prograInfo(this.elementoSeleccionado.interview__id)
     .subscribe(data => { this.pi = data; });
 
     //! Actividad Estadística o Geográfica
-    this._direServices.getAEGById(this.elementoSeleccionado.interview__id)
+    this._direServices.actiEstaGeoById(this.elementoSeleccionado.interview__id)
     .subscribe(data => { this.aegSecuencia = data;
     console.log(this.aegSecuencia)});
 
     //!secuencia MDEA by id del producto
-    this._direServices.getMDEASById(this.elementoSeleccionado.interview__id)
+    this._direServices.mdeaById(this.elementoSeleccionado.interview__id)
     .subscribe(data => { this.mdeas = data; });
 
     //!secuencia de los ODS
-    this._direServices.getODSById(this.elementoSeleccionado.interview__id)
+    this._direServices.odsById(this.elementoSeleccionado.interview__id)
     .subscribe( data => { this.ODSes = data; });
 
     //!secuencia de PS
-    this._direServices.getSecuenciaPSBy(this.elementoSeleccionado.interview__id)
+    this._direServices.programaSectorialById(this.elementoSeleccionado.interview__id)
     .subscribe( data => {
       this.PSes = data;
     });
 
     //! primer parámetro de texto del PS
-    this._direServices.getPS2023()
+    this._direServices.ps2023()
     .subscribe(ps2023 => this.ps2023 = ps2023)
 
     //! segundo parámetro de texto del ps
-    this._direServices.getIndicadoresPS2023()
+    this._direServices.indicadoresPS2023()
     .subscribe( indiPS2023 => this.indicadoresPS2023 = indiPS2023)
   }
 
@@ -804,7 +798,7 @@ if (this.pU_selectedYearHasta != null) {
   }
 
   allProducts(){
-    this._direServices.getProducts()
+    this._direServices.productos()
       .subscribe(data => {
         this.products = data;
 
@@ -836,7 +830,7 @@ if (this.pU_selectedYearHasta != null) {
   funcionParaBuscarByQuery() {
     const inputValue = this.terminoBusqueda !== null && this.terminoBusqueda !== undefined ? this.terminoBusqueda : '';
     if (inputValue) {
-      this._direServices.getByQuery(inputValue).subscribe(result => {
+      this._direServices.suggestionByQuery(inputValue).subscribe(result => {
         this.filteredProducts = result;
         this.displayedProductCount = this.filteredProducts.length;
         this.showFilteredProducts = true;

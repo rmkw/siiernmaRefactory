@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DGService } from '../../services/dg.service';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 interface CheckboxesState {
@@ -14,17 +12,12 @@ interface CheckboxesState {
 })
 export class DgComponent implements OnInit{
 
-
   public isINEGISelected : boolean = true
   public isMDEASelected : boolean = true
   public isODSSelected : boolean = true
   public isINDSelected : boolean = true
 
-
-
   constructor(
-    private _direServices: DGService,
-    private route: ActivatedRoute,
     private router: Router
   ){}
 
@@ -61,12 +54,9 @@ export class DgComponent implements OnInit{
   }
   navigateWithParam() {
 
-
     this.checkboxesState['direGeogrAmbiente'] = true;
 
-
-  // Luego, navegamos a la ruta con el parámetro
-  this.router.navigate(['/dg/products'], { queryParams: this.checkboxesState });
+  this.router.navigate(['/dg/products']);
 }
 
 
