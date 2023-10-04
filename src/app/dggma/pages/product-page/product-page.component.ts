@@ -166,6 +166,21 @@ export class ProductPageComponent implements OnInit{
   selectedOptionsTopico: { [key: string]: boolean } = {};
 
   loading = true;
+  cardsData = [
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+    { title1: 'Título 1', title2: 'Título 2' },
+  ];
 
 
   constructor( private _direServices: DGService, private route: ActivatedRoute){}

@@ -289,7 +289,7 @@
 
       </div>
 
-      <div *ngIf="!showFilteredProducts">
+      <div *ngIf="!showFilteredProducts && products.length > 1">
         <div *ngFor="let item of products">
           <div class="card shadow-on-hover" style="margin: 1rem;">
             <div class="row card-body">
@@ -327,6 +327,37 @@
           </div>
         </div>
 
+      </div>
+
+      <div *ngIf="!showFilteredProducts && products.length == 0" style="margin-bottom: 100vh;">
+        <div class="row mt-2 mt-2"  *ngFor="let card of cardsData">
+          <div class="col">
+            <div class="card shadow-on-hover" aria-hidden="true">
+              <div class="row card-body">
+                <div class="col-2">
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </h5>
+                </div>
+                <div class="col">
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder" style="width: 100%;"></span>
+                  </h5>
+
+                </div>
+                <div class="col-2  text-end d-flex align-items-center">
+                  <div class="ms-auto">
+                    <button type="button btn-moreInfo" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;
+                          --bs-btn-font-size: .75rem; background-color: #113250; color: #113250;">
+                      Mas Información
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
