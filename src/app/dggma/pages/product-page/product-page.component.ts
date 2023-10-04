@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { DGService } from '../../services/dg.service';
+import { ActivatedRoute } from '@angular/router';
+
 import { Products, Escalas, SecuenciaVar } from '../../interfaces/product.interface';
 import { DgaPprod, Pi, ProgInformacion } from '../../interfaces/pi.interface';
 import { UAdmin } from '../../interfaces/u_admin.interface';
@@ -8,8 +9,7 @@ import { Componente, Mdea, Subcomponente, Topico } from '../../interfaces/mdea.i
 import { MetaODS, Ods, SecuenciaOds } from '../../interfaces/ods.interface';
 import { IndicadoresPS2023, PS2023, SecuenciaPS } from '../../interfaces/ps.interface';
 
-import { ActivatedRoute } from '@angular/router';
-
+import { DGService } from '../../services/dg.service';
 
 
 //! Interface de los checkbox
@@ -25,7 +25,6 @@ interface CheckboxesState {
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit{
-
 
   //*PRODUCTOS
   public products: Products[] = [];
@@ -93,6 +92,7 @@ export class ProductPageComponent implements OnInit{
   flagHidden : boolean = true;
   flagFilter : boolean = false;
   flagOther : boolean = true;
+
   //! elementoSeleccionado es una variable para tomar el objeto del array de productos y poder sacar la info de uno solo
   elementoSeleccionado: any;
 
@@ -124,17 +124,11 @@ export class ProductPageComponent implements OnInit{
   displayedProductCount: number = 0;
   displayedProductCountAll: number = 0;
 
-
   //! términos de búsqueda
   terminoBusqueda: string = '';
 
   //! otro elemento para filtrar
   selectedRadioValue: string = '';
-
-
-
-
-
 
   //! FECHAS SELECT referencia
   allYears: number[] = [];
@@ -165,8 +159,6 @@ export class ProductPageComponent implements OnInit{
   mdeasbyCompo: Mdea[]=[]
 
 
-
-
   selectedOptions: { [key: string]: boolean } = {};
 
   selectedOptionsSub_componente: { [key: string]: boolean } = {};
@@ -176,15 +168,12 @@ export class ProductPageComponent implements OnInit{
   loading = true;
 
 
-
-
-
   constructor( private _direServices: DGService, private route: ActivatedRoute){}
 
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
 
+    this.route.queryParams.subscribe(params => {
       this.checkboxesState['direGeogrAmbiente'] = params['direGeogrAmbiente'] === 'true';
       this.checkboxesState['direEstaSocio'] = params['direEstaSocio'] === 'true';
       this.checkboxesState['direEstaEconomicas'] = params['direEstaEconomicas'] === 'true';
@@ -330,8 +319,6 @@ export class ProductPageComponent implements OnInit{
     this._direServices.topicoByParentid(id).
     subscribe(data => {this.topicos = data;})
   }
-
-
 
 
   //!bandera para filtros para que mostrar
@@ -611,7 +598,6 @@ export class ProductPageComponent implements OnInit{
 
   console.log(this.selectedOptionsSub_componente);
 
-
 }
 
   handleSelectChangeTopico(event: Event): void {
@@ -623,11 +609,7 @@ export class ProductPageComponent implements OnInit{
 
   console.log(this.selectedOptionsTopico);
 
-
 }
-
-
-
 
   //TODO FILTROS
 
@@ -809,21 +791,6 @@ if (this.pU_selectedYearHasta != null) {
         this.pU_extractAndSortYearsHasta();
       });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   //! función para búsqueda difusa
