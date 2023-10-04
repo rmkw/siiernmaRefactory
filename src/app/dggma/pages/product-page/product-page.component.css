@@ -23,3 +23,12 @@
   overflow-y: visible;
   max-height: 97vh;
 }
+
+.badgewrap{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 90%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

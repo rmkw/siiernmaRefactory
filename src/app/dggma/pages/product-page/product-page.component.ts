@@ -206,7 +206,7 @@ export class ProductPageComponent implements OnInit{
     .subscribe( pInfo => { this.proInfo = pInfo; });
 
     //! DIRECCIONES
-    this._direServices.direccionesGenerales()
+    this._direServices.direccionesGeneralesPI()
     .subscribe( dgs => this.dgs = dgs );
 
     //!direcciones en AEG

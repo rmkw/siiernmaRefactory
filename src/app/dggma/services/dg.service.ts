@@ -22,6 +22,9 @@ export class DGService {
   direccionesGenerales(){
     return this._http.get<UAdmin[]>(`${ this.baseUrl}/direcciones_ctrl`)
   }
+  direccionesGeneralesPI(){
+    return this._http.get<UAdmin[]>(`${ this.baseUrl}/direcciones_ctrl_PI`)
+  }
   //! get productos
   productos(){
     return this._http.get<Products[]>(`${ this.baseUrl}/producto_coll`)

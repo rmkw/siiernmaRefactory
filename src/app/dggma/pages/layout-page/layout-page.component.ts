@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout-page.component.css']
 })
 export class LayoutPageComponent {
+
   getLogoClass(): string {
   return window.innerWidth <= 768 ? 'logo-mobile' : 'logo-desktop';
 }

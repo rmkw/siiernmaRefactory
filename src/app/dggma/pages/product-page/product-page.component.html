@@ -59,77 +59,98 @@
           </div>
 
           <hr>
-          <h6 style="color: #113250;">Productos de tipo:</h6>
 
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico" value="option1"
-              (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option1'">
-            <label class="form-check-label" for="proGeografico">Geográfico</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proEstadistico" value="option2"
-            (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option2'">
-            <label class="form-check-label" for="proEstadistico">Estadístico</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico&proEstadistico" value="option3"
-              (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option3'">
-            <label class="form-check-label" for="proGeografico&proEstadistico">Geográfico y Estadístico</label>
-          </div>
-
-
-
-          <hr>
 
         </div>
 
         <div class="col-12">
+          <h6 style="color: #113250;">Productos de tipo:</h6>
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico" value="option1"
+                  (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option1'">
+                <label class="form-check-label" for="proGeografico">Geográfico</label>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proEstadistico" value="option2"
+                  (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option2'">
+                <label class="form-check-label" for="proEstadistico">Estadístico</label>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="proGeografico&proEstadistico"
+                  value="option3" (change)="handleRadioChange($event)" [checked]="selectedRadioValue === 'option3'">
+                <label class="form-check-label" for="proGeografico&proEstadistico">Geográfico y Estadístico</label>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="col-12">
           <h6 style=" color: #113250;">Por cobertura:</h6>
-          <div class="form-check form-check-inline" style="margin-right: 2rem;">
-            <input class="form-check-input " type="checkbox" value="" id="cobeNacional"
-              [checked]="checkboxesCobe['cobeNacional']" (change)="handleCheckboxCobe($event)">
-            <label class="form-check-label" for="cobeNacional">Nacional</label>
-          </div>
-
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="cobeEstatal"
-              [checked]="checkboxesCobe['cobeEstatal']" (change)="handleCheckboxCobe($event)">
-            <label class="form-check-label" for="cobeEstatal">Estatal</label>
-          </div>
-
-          <div class="form-check form-check-inline" style="margin-right: 1.5rem;">
-            <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
-              [checked]="checkboxesCobe['cobeMunicipal']" (change)="handleCheckboxCobe($event)">
-            <label class="form-check-label" for="cobeMunicipal">Municipal</label>
-          </div>
-
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="cobRegional"
-              [checked]="checkboxesCobe['cobRegional']" (change)="handleCheckboxCobe($event)">
-            <label class="form-check-label" for="cobRegional">Regional</label>
+          <div class="row">
+            <div class="col-md-3 col-sm-12">
+              <div class="form-check form-check-inline" style="margin-right: 2rem;">
+                <input class="form-check-input " type="checkbox" value="" id="cobeNacional" [checked]="checkboxesCobe['cobeNacional']"
+                  (change)="handleCheckboxCobe($event)">
+                <label class="form-check-label" for="cobeNacional">Nacional</label>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="" id="cobeEstatal" [checked]="checkboxesCobe['cobeEstatal']"
+                  (change)="handleCheckboxCobe($event)">
+                <label class="form-check-label" for="cobeEstatal">Estatal</label>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <div class="form-check form-check-inline" style="margin-right: 1.5rem;">
+                <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
+                  [checked]="checkboxesCobe['cobeMunicipal']" (change)="handleCheckboxCobe($event)">
+                <label class="form-check-label" for="cobeMunicipal">Municipal</label>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="" id="cobRegional" [checked]="checkboxesCobe['cobRegional']"
+                  (change)="handleCheckboxCobe($event)">
+                <label class="form-check-label" for="cobRegional">Regional</label>
+              </div>
+            </div>
           </div>
 
           <hr>
 
+
+        </div>
+        <div class="col-12">
           <h6 style="margin-top: 1rem; color: #113250;">Tipos de soporte:</h6>
 
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo"
-              [checked]="checkboxesType['typeDatoGeo']" (change)="handleCheckboxType($event)">
-            <label class="form-check-label" for="typeDatoGeo">Datos Geográficos</label>
-          </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo" [checked]="checkboxesType['typeDatoGeo']"
+                  (change)="handleCheckboxType($event)">
+                <label class="form-check-label" for="typeDatoGeo">Datos Geográficos</label>
+              </div>
 
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="typeTabulado"
-              [checked]="checkboxesType['typeTabulado']" (change)="handleCheckboxType($event)">
-            <label class="form-check-label" for="typeTabulado">Tabulado</label>
-          </div>
 
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
-              [checked]="checkboxesType['typePublicacion']" (change)="handleCheckboxType($event)">
-            <label class="form-check-label" for="typePublicacion">Publicaciones</label>
-          </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="" id="typeTabulado" [checked]="checkboxesType['typeTabulado']"
+                  (change)="handleCheckboxType($event)">
+                <label class="form-check-label" for="typeTabulado">Tabulado</label>
+              </div>
+
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
+                  [checked]="checkboxesType['typePublicacion']" (change)="handleCheckboxType($event)">
+                <label class="form-check-label" for="typePublicacion">Publicaciones</label>
+              </div>
+
 
           <hr>
         </div>
@@ -141,11 +162,11 @@
             <div class="col-md-6 mt-2 mt-md-0">
               <div class="row g-2 align-items-center">
 
-                <div class="col-4 col-md-auto">
+                <div class="col-12">
                   <label for="inputPassword6" class="col-form-label ms-1">Desde:</label>
                 </div>
 
-                <div class="col-8 col-md-auto">
+                <div class="col-12">
                   <select class="form-select form-select-sm" id="desdePubli" (change)="onChangeDesdePubli($event)">
                     <option selected>Selecciona Fecha</option>
                     <option *ngFor="let item of pU_uniqueYears" [value]="item">{{item}}</option>
@@ -157,10 +178,10 @@
 
             <div class="col-md-6 mt-2 mt-md-0">
               <div class="row g-2 align-items-center">
-                <div class="col-4 col-md-auto">
+                <div class="col-12">
                   <label for="inputPassword6" class="col-form-label ms-1">Hasta:</label>
                 </div>
-                <div class="col-8 col-md-auto">
+                <div class="col-12">
                   <select class="form-select form-select-sm" id="hastaPubli" (change)="onChangeHastaPubli($event)">
                     <option selected>Selecciona Fecha</option>
                     <option *ngFor="let item of pU_uniqueYearsHasta" [value]="item">{{item}}</option>
@@ -179,10 +200,10 @@
           <div class="row mt-1">
             <div class="col-md-6 mt-2 mt-md-0">
               <div class="row g-2 align-items-center">
-                <div class="col-4 col-md-auto">
+                <div class="col-12 ">
                   <label for="inputPassword6" class="col-form-label ms-1">Desde:</label>
                 </div>
-                <div class="col-8 col-md-auto">
+                <div class="col-12 ">
                   <select class="form-select form-select-sm" id="desdeRefe" (change)="onChangeDesdeRefe($event)">
                     <option selected>Selecciona Fecha</option>
                     <option *ngFor="let item of uniqueYears" [value]="item">{{item}}</option>
@@ -194,10 +215,10 @@
 
             <div class="col-md-6 mt-2 mt-md-0">
               <div class="row g-2 align-items-center">
-                <div class="col-4 col-md-auto">
+                <div class="col-12 ">
                   <label for="inputPassword6" class="col-form-label ms-1">Hasta:</label>
                 </div>
-                <div class="col-8 col-md-auto">
+                <div class="col-12">
                   <select class="form-select form-select-sm" id="hastaRefe" (change)="onChangeHastaRefe($event)">
                     <option selected>Selecciona Fecha</option>
                     <option *ngFor="let item of uniqueYearsHasta" [value]="item">{{item}}</option>
@@ -461,7 +482,7 @@
             <span *ngIf="elementoSeleccionado?.actualizacion == 1">
               <span>Se actualiza: </span>
               <br>
-              <span class="badge" >
+              <span class="badge badgewrap" [title]="elementoSeleccionado?.p_actualizacion == 7 ? ''+ elementoSeleccionado?.o_periodo : ''">
                 {{
                 elementoSeleccionado?.p_actualizacion == 1 ? 'Mensual' : (
                 elementoSeleccionado?.p_actualizacion == 2 ? 'Anual' : '') }}
@@ -713,7 +734,9 @@
                                       <div class="col-md-12 col-12">
                                         <strong style="color: #113250;">Proceso de Producción:</strong>
                                         <span > {{getProgInfoText(item.pp_pi)}}.</span>
+                                        <hr class="mt-2">
                                       </div>
+
                                     </div>
                                   </div>
                                 </div>
@@ -752,6 +775,7 @@
                                 <div class="col-md-12 col-12">
                                   <strong style="color: #113250;">Dirección General Adjunta Responsable : </strong>
                                   <span> {{getAEG_ProdText(item.dga_aeg)}}.</span>
+
                                 </div>
                               </div>
                             </div>
