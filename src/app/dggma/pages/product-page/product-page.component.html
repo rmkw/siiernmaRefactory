@@ -3,7 +3,7 @@
 
     <!--* FILTROS -->
     <div [hidden]="flagHidden" class="col-3" style="background-color: #f8f9fa; border-top: solid 1px; border-color: #113250;">
-      <div class="row">
+      <div class="row" style="margin-bottom: 60vh;">
 
         <div class="d-flex justify-content-between mt-2">
           <div><i class="bi bi-funnel-fill"></i> <strong><span>Filtros</span></strong></div>
@@ -128,6 +128,7 @@
 
 
         </div>
+
         <div class="col-12">
           <h6 style="margin-top: 1rem; color: #113250;">Tipos de soporte:</h6>
 
@@ -286,7 +287,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <div *ngIf="!showFilteredProducts && products.length > 1">
@@ -326,7 +326,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <div *ngIf="!showFilteredProducts && products.length == 0" style="margin-bottom: 100vh;">
@@ -764,7 +763,7 @@
                                       </div>
                                       <div class="col-md-12 col-12">
                                         <strong style="color: #113250;">Proceso de Producción:</strong>
-                                        <span > {{getProgInfoText(item.pp_pi)}}.</span>
+                                        <span > {{getDga_PprodText(item.pp_pi)}}.</span>
                                         <hr class="mt-2">
                                       </div>
 

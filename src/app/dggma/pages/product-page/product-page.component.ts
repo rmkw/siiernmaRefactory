@@ -723,47 +723,38 @@ if (this.pU_selectedYearHasta != null) {
 
   this.displayedProductCount = this.filteredProducts.length;
 
-  if (this.filteredProducts.length === 0) {
-    console.log('entre al infierno')
-    console.log(this.filteredProducts)
-    this.showFilteredProducts = true;
-    //! Aquí puedes manejar cómo mostrar un mensaje o tomar alguna acción cuando no hay resultados.
-    //! Por ejemplo, puedes mostrar un mensaje en la interfaz de usuario.
-    //! this.showNoResultsMessage = true;
-  } else {
-    console.log('entre al cielo')
-    console.log(this.filteredProducts)
-    this.showFilteredProducts = true;
-  }
+
+  this.showFilteredProducts = true;
+
 }
 
   deleteFilter(){
+    this.terminoBusqueda= '';
+
     this.checkboxesState = {
-    direGeogrAmbiente: false,
-    direEstaSocio: false,
-    direEstaEconomicas: false,
-    direEstaGobSegPubJus: false,
-    direInteAnaInv: false,
-  };
+      direGeogrAmbiente: false,
+      direEstaSocio: false,
+      direEstaEconomicas: false,
+      direEstaGobSegPubJus: false,
+      direInteAnaInv: false,
+    };
 
-  this.checkboxesCobe = {
-    cobeNacional: false,
-    cobeEstatal: false,
-    cobeMunicipal: false,
-    cobRegional: false
-  };
+   this.checkboxesCobe = {
+      cobeNacional: false,
+      cobeEstatal: false,
+      cobeMunicipal: false,
+      cobRegional: false
+    };
 
-  this.checkboxesType = {
-    typeDatoGeo: false,
-    typeTabulado: false,
-    typePublicacion: false
-  };
+    this.checkboxesType = {
+      typeDatoGeo: false,
+      typeTabulado: false,
+      typePublicacion: false
+    };
 
-  this.selectedRadioValue = '';
+    this.selectedRadioValue = '';
 
-
-  this.showFilteredProducts = false;
-
+    this.showFilteredProducts = false;
 
 
   //! FECHAS SELECT referencia

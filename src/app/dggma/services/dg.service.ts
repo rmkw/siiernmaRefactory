@@ -35,9 +35,6 @@ export class DGService {
 
 
 
-
-
-
   //! get secuencia MDEA
   mdeaById( id: string ): Observable<Mdea[]> {
     const url = `${ this.baseUrl}/mdea_coll?interview__id=${ id }`;
@@ -75,16 +72,6 @@ export class DGService {
     const url = `${ this.baseUrl}/topicos_ctrl?parentid=${ id }`;
      return this._http.get<Topico[]>(url)
    }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -153,12 +140,6 @@ export class DGService {
 
 
 
-
-
-
-
-
-
   //! PROGRAMAS SECTORIALES
   programaSectorialById( id: string ): Observable<SecuenciaPS[]> {
     const url = `${ this.baseUrl}/ps_coll?interview__id=${ id }`;
@@ -175,13 +156,6 @@ export class DGService {
   indicadoresPS2023(){
     return this._http.get<IndicadoresPS2023[]>(`${ this.baseUrl}/indicadores_PS_2023_ctrl`)
   }
-
-
-
-
-
-
-
 
   suggestionByQuery( query: string ) : Observable<Products[]> {
     if (query.trim() === '') {
