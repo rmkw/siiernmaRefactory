@@ -167,19 +167,19 @@ export class ProductPageComponent implements OnInit{
 
   loading = true;
   cardsData = [
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
-    { title1: 'Título 1', title2: 'Título 2' },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
+    { title: '', },
   ];
 
 
